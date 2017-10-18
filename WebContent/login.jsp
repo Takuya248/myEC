@@ -15,9 +15,28 @@
 
 <link href="main.css" rel="stylesheet" type="text/css">
 </head>
-	<body>
 
-		login
+<body>
 
-	</body>
+	<header>
+		header
+	</header>
+
+	<div id="main">
+		<div id="loginform">
+
+			<s:form action="LoginAction">
+						<s:textfield name="loginId" label="id" />
+						<s:password name="loginPassword" label="pass"/>
+						<s:submit value="login" />
+			</s:form>
+
+		</div>
+	</div>
+
+	<footer>
+		footer
+	</footer>
+
+</body>
 </html>

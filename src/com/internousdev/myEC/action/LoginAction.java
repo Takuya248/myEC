@@ -22,11 +22,36 @@ public class LoginAction extends ActionSupport implements SessionAware{
 
 	public String execute(){
 
-		String result = ERROR;
+		String result;
 
 		loginDTO = loginDAO.getLoginUserInfo(loginId,loginPassword);
 
-		if((LoginDTO)session.)
+		session.put("loginUser",loginDTO);
+
+		if(((LoginDTO)session.get("loginUser")).getLoginFlg()){
+			result = SUCCESS;
+
+		}else{
+			result = ERROR;
+		}
+
+		return result;
+	}
+
+	public String getLoginId() {
+		return loginId;
+	}
+
+	public void setLoginId(String loginId) {
+		this.loginId = loginId;
+	}
+
+	public String getLoginPassword() {
+		return loginPassword;
+	}
+
+	public void setLoginPassword(String loginPassword) {
+		this.loginPassword = loginPassword;
 	}
 
 	public void setSession(Map<String,Object> session){

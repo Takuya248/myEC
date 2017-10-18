@@ -14,10 +14,10 @@ body {
 }
 
 
-#header{
+header{
 	color: white;
     width: 100%;
-	height: 100px;
+	height: 50px;
     background-color: black;
     display: flex;
 }
@@ -32,27 +32,22 @@ body {
     width: 200px;
 }
 
-#login ul{
-    text-align: left;
-    width: 200px;
 
-    position: absolute;
-    list-style: none;
+#loginform{
+
+
 }
 
-
-#main{
-
-    flex-grow: 1;
+#main {
+	display: flex;
+	flex-grow: 1;
+	justify-content: center;
+	align-items: center;
 }
 
-#footer{
+footer{
 	color: white;
     width: 100%;
-	height: 100px;
+	height: 50px;
     background-color: black;
-}
-
-.content{
-
 }

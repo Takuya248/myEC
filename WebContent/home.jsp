@@ -23,34 +23,36 @@
 <body>
 	<!--------------  ヘッダ  -------------->
 
-	<div id="header">
+	<header>
 
 		<div id="logo">header</div>
 
 		<div id="login">
 			<s:if test="#session.id != null">
-				<p><a href='<s:url action="MypageAction" />' >マイページ</a></p>
+				<p><a href='<s:url action="MypageAction" />'>マイページ</a></p>
 			</s:if>
 			<s:else>
-				<a href='<s:url action="HomeAction" />'>Login</a>
+				<a href='<s:url action="LoginAction" />'>Login</a>
 			</s:else>
 
 		</div>
-	</div>
+	</header>
 
 
 	<!--------------  メイン  -------------->
 
 
-	<div id="main">メインコンテンツ</div>
+	<div id="main">
+		メインコンテンツ
+	</div>
 
 
 	<!--------------  フッタ  -------------->
 
 
-	<div id="footer">
+	<footer>
 		<p>footer</p>
-	</div>
+    </footer>
 
 
 	<!--------------  jsファイル  -------------->
