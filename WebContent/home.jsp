@@ -43,7 +43,9 @@
 
 
 	<div id="main">
+	<s:property value="#session.loginId"/>
 		メインコンテンツ
+		<%= session.getAttribute("id")%>
 	</div>
 
 

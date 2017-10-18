@@ -7,13 +7,15 @@
 	<constant name="struts.devMode" value="true" />
 	<package name="com.internousdev.myEC.action" extends="struts-default">
 
-		<action name="HomeAction" class="com.internousdev.myEC.action.HomeAction" method="execute">
-			<result name="success">home.jsp</result>
-			<result name="login">login.jsp</result>
-		</action>
+
 
 		<action name="LoginAction" class="com.internousdev.myEC.action.LoginAction" method="execute">
 			<result name="success">home.jsp</result>
+			<result name="error">login.jsp</result>
+		</action>
+
+		<action name="MypageAction" class="com.internousdev.myEC.action.MypageAction" method="execute">
+			<result name="success">mypage.jsp</result>
 			<result name="error">login.jsp</result>
 		</action>
 

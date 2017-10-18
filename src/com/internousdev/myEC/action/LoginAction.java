@@ -31,10 +31,10 @@ public class LoginAction extends ActionSupport implements SessionAware{
 		if(((LoginDTO)session.get("loginUser")).getLoginFlg()){
 			result = SUCCESS;
 
+
 		}else{
 			result = ERROR;
 		}
-
 		return result;
 	}
 
