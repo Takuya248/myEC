@@ -12,7 +12,7 @@ public class MypageAction extends ActionSupport implements SessionAware{
 
 	public String execute(){
 
-		String result = (String)session.get("flag");
+		String result = (String)session.get("result");
 
 		return result;
 	}

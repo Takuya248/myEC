@@ -13,7 +13,7 @@
 <meta name="keywords" content="" />
 <title>Mypage画面</title>
 
-<link href="/css/main.css" rel="stylesheet" type="text/css">
+<link href="css/main.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 
@@ -29,28 +29,20 @@
 
 	<!--------------  メイン  -------------->
 
-
 	<div id="main">
-		<table>
-			<tr>
-				<td>
-					ユーザー名：<s:property value='session.get("loginId")' />
-				</td>
-				<td>
-					<s:property value='session.get("loginId")' />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					パスワード：
-				</td>
-				<td>
-					<s:property value='session.get("loginPassword")' />
-				</td>
-			</tr>
+		<div id="mypageUserInfo">
+			<table>
+				<tr>
+					<th>ユーザー名：</th>
+					<td><s:property value='session.get("loginId")' /></td>
+				</tr>
+				<tr>
+					<th>パスワード：</th>
+					<td><s:property value='session.get("loginPass")' /></td>
+				</tr>
 
-		</table>
-
+			</table>
+		</div>
 
 	</div>
 

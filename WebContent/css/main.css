@@ -22,16 +22,23 @@ header{
     display: flex;
 }
 
-#main table{
-    width: 200px;
-    border-collapse: collapse;
+#mypageUserInfo table{
+
+    font-size: 11px;
+    width: 300px;
 }
 
-#main table tr{
+#mypageUserInfo table th{
+    background-color: lightgrey;
+	width: 70px;
     border: solid 1px black;
 }
 
-#main table td{
+#mypageUserInfo table tr{
+    border: solid 1px black;
+}
+
+#mypageUserInfo table td{
     border: solid 1px black;
 }
 
@@ -47,10 +54,6 @@ header{
 }
 
 
-#loginform{
-
-
-}
 
 #main {
 	display: flex;

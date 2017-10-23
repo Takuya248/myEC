@@ -17,7 +17,7 @@
 <meta name="keywords" content="" />
 <title>Home画面</title>
 
-<link href="/css/main.css" rel="stylesheet" type="text/css">
+<link href="css/main.css" rel="stylesheet" type="text/css">
 
 </head>
 
