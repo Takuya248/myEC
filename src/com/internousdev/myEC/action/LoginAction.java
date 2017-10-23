@@ -1,6 +1,5 @@
 package com.internousdev.myEC.action;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
@@ -11,7 +10,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class LoginAction extends ActionSupport implements SessionAware{
 
-	public Map<String,Object> session = new HashMap<>();
+	public Map<String,Object> session;
 
 	private LoginDTO loginDTO = new LoginDTO();
 	public LoginDAO loginDAO = new LoginDAO();
@@ -22,19 +21,21 @@ public class LoginAction extends ActionSupport implements SessionAware{
 
 	public String execute(){
 
-		String result;
+		String result = (String)session.get("flag");
 
 		loginDTO = loginDAO.getLoginUserInfo(loginId,loginPassword);
 
 		session.put("loginUser",loginDTO);
 
-		if(((LoginDTO)session.get("loginUser")).getLoginFlg()){
+		if(((LoginDTO)session.get("loginUser")).getLoginFlg() || session.get("login") == SUCCESS){
 			result = SUCCESS;
-
+			session.put("loginId", loginId);
 
 		}else{
 			result = ERROR;
 		}
+
+		session.put("flag", result);
 		return result;
 	}
 
@@ -58,7 +59,5 @@ public class LoginAction extends ActionSupport implements SessionAware{
 		this.session = session;
 	}
 
-	public Map<String,Object> getSession(){
-		return session;
-	}
+
 }

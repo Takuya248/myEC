@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 
+
 <!DOCTYPE html>
 
 <html>
@@ -16,7 +17,7 @@
 <meta name="keywords" content="" />
 <title>Home画面</title>
 
-<link href="main.css" rel="stylesheet" type="text/css">
+<link href="/css/main.css" rel="stylesheet" type="text/css">
 
 </head>
 
@@ -28,13 +29,7 @@
 		<div id="logo">header</div>
 
 		<div id="login">
-			<s:if test="#session.id != null">
-				<p><a href='<s:url action="MypageAction" />'>マイページ</a></p>
-			</s:if>
-			<s:else>
-				<a href='<s:url action="LoginAction" />'>Login</a>
-			</s:else>
-
+			<a href='<s:url action="LoginAction" />'>Login</a>
 		</div>
 	</header>
 
@@ -43,9 +38,9 @@
 
 
 	<div id="main">
-	<s:property value="#session.loginId"/>
-		メインコンテンツ
-		<%= session.getAttribute("id")%>
+		<table>
+			<tr><td>メインコンテンツ</td></tr>
+		</table>
 	</div>
 
 

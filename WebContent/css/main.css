@@ -22,6 +22,19 @@ header{
     display: flex;
 }
 
+#main table{
+    width: 200px;
+    border-collapse: collapse;
+}
+
+#main table tr{
+    border: solid 1px black;
+}
+
+#main table td{
+    border: solid 1px black;
+}
+
 #logo{
 	width: 50px;
 

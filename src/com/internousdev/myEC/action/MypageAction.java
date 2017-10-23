@@ -1,6 +1,5 @@
 package com.internousdev.myEC.action;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
@@ -9,11 +8,11 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class MypageAction extends ActionSupport implements SessionAware{
 
-	private Map<String, Object> session = new HashMap<>();
+	private Map<String, Object> session;
 
 	public String execute(){
 
-		String result = SUCCESS;
+		String result = (String)session.get("flag");
 
 		return result;
 	}
