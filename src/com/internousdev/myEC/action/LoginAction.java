@@ -24,12 +24,16 @@ public class LoginAction extends ActionSupport implements SessionAware{
 		String result = (String)session.get("result");
 		loginDTO = loginDAO.getLoginUserInfo(loginId,loginPassword);
 
+		session.put("loginId", loginId);
+		session.put("loginPassword", loginPassword);
+
 		session.put("loginUser",loginDTO);
 
 		if(((LoginDTO)session.get("loginUser")).getLoginFlg() || session.get("result") == SUCCESS){
 			result = SUCCESS;
-			session.put("loginId", loginId);
-			session.put("loginPass", loginPassword);
+			String loginPasswordSc = loginPassword.replaceAll(".","*");
+			session.put("loginPassSc", loginPasswordSc);
+
 		}else{
 			result = ERROR;
 		}

@@ -22,23 +22,23 @@ header{
     display: flex;
 }
 
-#mypageUserInfo table{
+#UserInfo table{
 
     font-size: 11px;
     width: 300px;
 }
 
-#mypageUserInfo table th{
+#UserInfo table th{
     background-color: lightgrey;
 	width: 70px;
     border: solid 1px black;
 }
 
-#mypageUserInfo table tr{
+#UserInfo table tr{
     border: solid 1px black;
 }
 
-#mypageUserInfo table td{
+#UserInfo table td{
     border: solid 1px black;
 }
 

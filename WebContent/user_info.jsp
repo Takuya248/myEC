@@ -11,26 +11,32 @@
 <meta http-equiv="imagetoolbar" content="no" />
 <meta name="description" content="" />
 <meta name="keywords" content="" />
-<title>Mypage画面</title>
+<title>UserInfo画面</title>
 
 <link href="css/main.css" rel="stylesheet" type="text/css">
+
 </head>
+
+
 <body>
 
-
+<!--------------  ヘッダ  -------------->
 
 	<header>
 
 		<div id="logo">header</div>
 
-
+		<div id="login">
+			<a href='<s:url action="LoginAction" />'>Login</a>
+		</div>
 	</header>
 
 
 	<!--------------  メイン  -------------->
 
+
 	<div id="main">
-		<div id="mypageUserInfo">
+		<div id="UserInfo">
 			<table>
 				<tr>
 					<th>ユーザー名：</th>
@@ -38,14 +44,13 @@
 				</tr>
 				<tr>
 					<th>パスワード：</th>
-					<td><s:property value='session.get("loginPassSc")' /></td>
+					<td><s:property value='session.get("loginPass")' /></td>
 				</tr>
 
 
 
 			</table>
 		</div>
-
 	</div>
 
 
@@ -54,7 +59,9 @@
 
 	<footer>
 		<p>footer</p>
-	</footer>
+    </footer>
+
+
 
 </body>
 </html>

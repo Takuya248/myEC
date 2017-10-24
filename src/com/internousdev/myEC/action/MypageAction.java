@@ -8,9 +8,11 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class MypageAction extends ActionSupport implements SessionAware{
 
+
 	private Map<String, Object> session;
 
 	public String execute(){
+
 
 		String result = (String)session.get("result");
 
