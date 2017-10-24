@@ -46,6 +46,13 @@
 			</table>
 		</div>
 
+		<div id="mypageMenu">
+			<ul>
+                <li><a href='<s:url action="UserInfoAction" />'>ユーザー登録情報</a></li>
+                <li>購入履歴</li>
+			</ul>
+		</div>
+
 	</div>
 
 

@@ -18,13 +18,13 @@ public class BuyItemDAO {
 		String sql = "SELECT Id, item_name,item_price FROM item_info";
 
 		try{
-			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-			ResultSet resultSet = preparedStatement.executeQuery();
+			PreparedStatement ps = connection.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
 
-			if(resultSet.next()){
-				buyItemDTO.setId(resultSet.getInt("Id"));
-				buyItemDTO.setItemName(resultSet.getString("item_name"));
-				buyItemDTO.setItemPrice(resultSet.getString("item_price"));
+			if(rs.next()){
+				buyItemDTO.setId(rs.getInt("Id"));
+				buyItemDTO.setItemName(rs.getString("item_name"));
+				buyItemDTO.setItemPrice(rs.getString("item_price"));
 			}
 
 		}catch(Exception e){
