@@ -28,6 +28,9 @@
 
 		<div id="logo">header</div>
 
+
+		<div class="space"><!-- スペース --></div>
+
 		<div id="login">
 			<a href='<s:url action="LoginAction" />'>Login</a>
 		</div>

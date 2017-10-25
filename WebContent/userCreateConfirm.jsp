@@ -1,9 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="s" uri="/struts-tags" %>
+    <%@ taglib prefix="s" uri="/struts-tags"%>
+
 
 <!DOCTYPE html>
+
 <html>
+
 <head>
 <meta charset="utf-8">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -12,24 +15,22 @@
 <meta http-equiv="imagetoolbar" content="no" />
 <meta name="description" content="" />
 <meta name="keywords" content="" />
-<title>UserInfo画面</title>
+<title>登録内容画面</title>
 
 <link href="css/main.css" rel="stylesheet" type="text/css">
 
 </head>
 
-
 <body>
-
-<!--------------  ヘッダ  -------------->
+	<!--------------  ヘッダ  -------------->
 
 	<header>
 
 		<div id="logo">header</div>
 
-		<div id="login">
-			<a href='<s:url action="LoginAction" />'>Login</a>
-		</div>
+		<div class="space"><!-- 余白 --></div>
+
+
 	</header>
 
 
@@ -37,27 +38,27 @@
 
 
 	<div id="main">
-		<div id="UserInfo">
+		<div id="userInfo">
 			<table>
 				<tr>
 					<th>ユーザー名：</th>
-					<td><s:property value='session.get("loginId")' /></td>
+					<td><s:property value='session.get("newLoginId_session")' /></td>
 				</tr>
 				<tr>
 					<th>パスワード：</th>
-					<td><s:property value='session.get("loginPassSc")' /></td>
+					<td><s:property value='session.get("newPassword")' /></td>
 				</tr>
 				<tr>
 					<th>名前：</th>
-					<td><s:property value='session.get("userName")' /></td>
+					<td><s:property value='session.get("newUserName")' /></td>
+				</tr>
+				<tr>
+					<th>電話番号：</th>
+					<td><s:property value='session.get("newPhoneNumber")' /></td>
 				</tr>
 				<tr>
 					<th>メールアドレス：</th>
-					<td><s:property value='session.get("MailAddress")' /></td>
-				</tr>
-				<tr>
-					<th>登録日：</th>
-					<td><s:property value='session.get("RegistrationDate")' /></td>
+					<td><s:property value='session.get("newMailAddress")' /></td>
 				</tr>
 
 
@@ -75,6 +76,7 @@
     </footer>
 
 
-
+	<!--------------  jsファイル  -------------->
+	<script type="text/javascript" src="script.js"></script>
 </body>
 </html>

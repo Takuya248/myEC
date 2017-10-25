@@ -17,7 +17,6 @@ public class LoginAction extends ActionSupport implements SessionAware{
 
 	public String loginId;
 	public String loginPassword;
-
 	public String userName;
 
 	public String execute(){
@@ -25,7 +24,7 @@ public class LoginAction extends ActionSupport implements SessionAware{
 		loginDTO = loginDAO.getLoginUserInfo(loginId,loginPassword);
 		userName = loginDTO.getUserName();
 
-		session.put("login_ID", loginId);
+		session.put("loginId", loginId);
 		session.put("loginPassword", loginPassword);
 		session.put("userName", userName);
 
