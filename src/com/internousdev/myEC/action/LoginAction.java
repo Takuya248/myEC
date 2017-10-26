@@ -25,6 +25,7 @@ public class LoginAction extends ActionSupport implements SessionAware{
 	public String execute(){
 		String result = (String)session.get("result");
 		loginDTO = loginDAO.getLoginUserInfo(loginId,loginPassword);
+		
 		userName = loginDTO.getUserName();
 		mailAddress = loginDTO.getMailAddress();
 		phoneNumber = loginDTO.getPhoneNumber();

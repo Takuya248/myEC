@@ -3,18 +3,6 @@ package com.internousdev.myEC.dto;
 public class LoginDTO {
 
 	private String Id;
-	public String getId() {
-		return Id;
-	}
-
-	public void setId(String id) {
-		Id = id;
-	}
-
-	public String getLoginPassword() {
-		return loginPassword;
-	}
-
 	private String loginId;
 	private String loginPassword;
 	private String userName;
@@ -43,10 +31,18 @@ public class LoginDTO {
 	public void setLoginPassword(String loginPassword){
 		this.loginPassword = loginPassword;
 	}
+	public String getId() {
+		return Id;
+	}
 
-	public String getLoginPassWord(){
+	public void setId(String id) {
+		Id = id;
+	}
+
+	public String getLoginPassword() {
 		return loginPassword;
 	}
+
 
 	public void setUserName(String userName){
 		this.userName = userName;

@@ -14,8 +14,6 @@ public class MypageAction extends ActionSupport implements SessionAware{
 
 
 	public String execute(){
-		String namae = session.get("userName").toString();
-		System.out.println(namae);
 		String result = (String)session.get("result");
 
 

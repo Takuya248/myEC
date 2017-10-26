@@ -16,7 +16,6 @@ public class UserInfoAction extends ActionSupport implements SessionAware{
 		String result = ERROR;
 
 		if(((LoginDTO)session.get("loginUser")).getLoginFlg()){
-			System.out.println(session.get("login_ID"));
 			result = SUCCESS;
 
 		}
