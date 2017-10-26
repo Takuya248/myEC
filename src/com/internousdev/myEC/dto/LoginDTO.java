@@ -18,8 +18,19 @@ public class LoginDTO {
 	private String loginId;
 	private String loginPassword;
 	private String userName;
+	private String mailAddress;
+	private String phoneNumber;
+	private String regiDate;
 	private boolean loginFlg;
 
+
+	public String getRegiDate() {
+		return regiDate;
+	}
+
+	public void setRegiDate(String regiDate) {
+		this.regiDate = regiDate;
+	}
 
 	public void setLoginId(String loginId){
 		this.loginId = loginId;
@@ -51,6 +62,22 @@ public class LoginDTO {
 
 	public boolean getLoginFlg(){
 		return loginFlg;
+	}
+
+	public String getMailAddress() {
+		return mailAddress;
+	}
+
+	public void setMailAddress(String mailAddress) {
+		this.mailAddress = mailAddress;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 
 }

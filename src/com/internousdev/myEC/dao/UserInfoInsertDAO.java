@@ -7,9 +7,9 @@ import java.sql.SQLException;
 import com.internousdev.myEC.util.DBConnector;
 import com.internousdev.myEC.util.DateUtil;
 
-public class UserCreateDAO {
+public class UserInfoInsertDAO {
 
-	public void userCreate(String newLoginId, String newPassword, String newUserName, String newPhoneNumber, String newMailAddress) throws SQLException{
+	public void infoInsert(String newLoginId, String newPassword, String newUserName, String newPhoneNumber, String newMailAddress){
 
 		DBConnector dbConnector = new DBConnector();
 		Connection conn = dbConnector.getConnection();
@@ -26,10 +26,16 @@ public class UserCreateDAO {
 			ps.setString(5, newMailAddress);
 			ps.setString(6, dateUtil.getDate());
 
+			ps.execute();
+
 		}catch(Exception e){
 			e.printStackTrace();
-		}finally{
+		}
+
+		try{
 			conn.close();
+		}catch(SQLException e){
+			e.printStackTrace();
 		}
 	}
 }

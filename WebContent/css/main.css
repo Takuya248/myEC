@@ -73,30 +73,26 @@ header #login{
 	padding: 0;
 }
 
-#UserInfo table{
-
+#userInfo table{
+	border: solid 1px black;
     font-size: 11px;
     width: 300px;
 }
 
-#UserInfo table th{
+#userInfo th{
     background-color: lightgrey;
 	width: 100px;
     border: solid 1px black;
 }
 
-#UserInfo table tr{
+#userInfo table tr{
     border: solid 1px black;
 }
 
-#UserInfo table td{
+#userInfo table td{
     border: solid 1px black;
 }
 
-
-#userInfo table{
-	border: solid 1px black;
-}
 
 
 

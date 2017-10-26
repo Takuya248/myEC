@@ -53,11 +53,15 @@
 				</tr>
 				<tr>
 					<th>メールアドレス：</th>
-					<td><s:property value='session.get("MailAddress")' /></td>
+					<td><s:property value='session.get("mailAddress")' /></td>
+				</tr>
+				<tr>
+					<th>電話番号：</th>
+					<td><s:property value='session.get("phoneNumber")' /></td>
 				</tr>
 				<tr>
 					<th>登録日：</th>
-					<td><s:property value='session.get("RegistrationDate")' /></td>
+					<td><s:property value='session.get("regiDate")' /></td>
 				</tr>
 
 

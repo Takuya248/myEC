@@ -38,35 +38,39 @@
 
 
 	<div id="main">
-		<div id="userInfo">
-			<table>
-				<tr>
-					<th>ユーザー名：</th>
-					<td><s:property value='session.get("newLoginId_session")' /></td>
-				</tr>
-				<tr>
-					<th>パスワード：</th>
-					<td><s:property value='session.get("newPassword")' /></td>
-				</tr>
-				<tr>
-					<th>名前：</th>
-					<td><s:property value='session.get("newUserName")' /></td>
-				</tr>
-				<tr>
-					<th>電話番号：</th>
-					<td><s:property value='session.get("newPhoneNumber")' /></td>
-				</tr>
-				<tr>
-					<th>メールアドレス：</th>
-					<td><s:property value='session.get("newMailAddress")' /></td>
-				</tr>
+		<div id="confirm">
+			<div id="userInfo">
+				<table>
+					<tr>
+						<th>ユーザー名：</th>
+						<td><s:property value='session.get("newLoginId")' /></td>
+					</tr>
+					<tr>
+						<th>パスワード：</th>
+						<td><s:property value='session.get("newPassword")' /></td>
+					</tr>
+					<tr>
+						<th>名前：</th>
+						<td><s:property value='session.get("newUserName")' /></td>
+					</tr>
+					<tr>
+						<th>メールアドレス：</th>
+						<td><s:property value='session.get("newMailAddress")' /></td>
+					</tr>
+					<tr>
+						<th>電話番号：</th>
+						<td><s:property value='session.get("newPhoneNumber")' /></td>
+					</tr>
+				</table>
+			</div>
 
 
-
-			</table>
+			<div class="confirm">
+			<a href='<s:url action="UserInfoInsertAction" />'><button type="submit" value="confirm">登録</button></a>
+				<a href='<s:url action="UserCreateAction" />'><button type="submit" value="return">再入力</button></a>
+			</div>
 		</div>
 	</div>
-
 
 	<!--------------  フッタ  -------------->
 

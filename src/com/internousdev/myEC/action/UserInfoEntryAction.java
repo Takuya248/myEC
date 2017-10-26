@@ -22,7 +22,7 @@ public class UserInfoEntryAction extends ActionSupport implements SessionAware{
 
 		String result = ERROR;
 
-		session.put("newLoginId_session", newLoginId);
+		session.put("newLoginId", newLoginId);
 		session.put("newPassword", newPassword);
 		session.put("newUserName", newUserName);
 		session.put("newPhoneNumber", newPhoneNumber);
@@ -30,7 +30,6 @@ public class UserInfoEntryAction extends ActionSupport implements SessionAware{
 
 		if(!(newLoginId.equals("")) && !(newPassword.equals("")) && !(newUserName.equals("")) && !(newPhoneNumber.equals("")) && !(newMailAddress.equals(""))){
 			result = SUCCESS;
-			System.out.println(session.get("newLoginId"));
 		}else{
 			result = ERROR;
 		}

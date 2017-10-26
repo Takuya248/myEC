@@ -28,6 +28,9 @@ public class LoginDAO {
 				loginDTO.setLoginId(rs.getString("login_id"));
 				loginDTO.setLoginPassword(rs.getString("login_pass"));
 				loginDTO.setUserName(rs.getString("user_name"));
+				loginDTO.setMailAddress(rs.getString("mail_add"));
+				loginDTO.setPhoneNumber(rs.getString("phone_number"));
+				loginDTO.setRegiDate(rs.getString("insert_date"));
 				loginDTO.setLoginFlg(true);
 			}
 		}catch(Exception e){
