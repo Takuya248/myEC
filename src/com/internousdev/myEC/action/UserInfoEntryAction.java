@@ -4,6 +4,7 @@ import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
 
+import com.internousdev.myEC.util.DoubleCheck;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class UserInfoEntryAction extends ActionSupport implements SessionAware{
@@ -16,22 +17,34 @@ public class UserInfoEntryAction extends ActionSupport implements SessionAware{
 
 	public Map<String, Object> session;
 
+	private DoubleCheck doubleCheck = new DoubleCheck();
+
+	public boolean checkFlg;
 
 
 	public String execute(){
 
-		String result = ERROR;
+		checkFlg = doubleCheck.idDoubleCheck(newLoginId);
 
-		session.put("newLoginId", newLoginId);
-		session.put("newPassword", newPassword);
-		session.put("newUserName", newUserName);
-		session.put("newPhoneNumber", newPhoneNumber);
-		session.put("newMailAddress", newMailAddress);
+		String result;
 
-		if(!(newLoginId.equals("")) && !(newPassword.equals("")) && !(newUserName.equals("")) && !(newPhoneNumber.equals("")) && !(newMailAddress.equals(""))){
-			result = SUCCESS;
-		}else{
+		if(checkFlg){
+
 			result = ERROR;
+
+		}else{
+
+			session.put("newLoginId", newLoginId);
+			session.put("newPassword", newPassword);
+			session.put("newUserName", newUserName);
+			session.put("newPhoneNumber", newPhoneNumber);
+			session.put("newMailAddress", newMailAddress);
+
+			if(!(newLoginId.equals("")) && !(newPassword.equals("")) && !(newUserName.equals("")) && !(newPhoneNumber.equals("")) && !(newMailAddress.equals(""))){
+				result = SUCCESS;
+			}else{
+				result = ERROR;
+			}
 		}
 		return result;
 	}
@@ -69,6 +82,16 @@ public class UserInfoEntryAction extends ActionSupport implements SessionAware{
 	}
 	public void setNewMailAddress(String newMailAddress) {
 		this.newMailAddress = newMailAddress;
+	}
+
+
+	public boolean getCheckFlg() {
+		return checkFlg;
+	}
+
+
+	public void setCheckFlg(boolean checkFlg) {
+		this.checkFlg = checkFlg;
 	}
 
 

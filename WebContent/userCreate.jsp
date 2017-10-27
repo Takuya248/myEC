@@ -27,21 +27,33 @@
 
 
 		<div id="form">
-			<ul>
-				<s:form action="UserInfoEntryAction">
-					<li>ログインID</li>
-					<li><s:textfield name="newLoginId" /></li>
-					<li>パスワード</li>
-					<li><s:password name="newPassword" /></li>
-					<li>名前</li>
-					<li><s:textfield name="newUserName" /></li>
-					<li>メールアドレス</li>
-					<li><s:textfield name="newMailAddress" /></li>
-					<li>電話番号</li>
-					<li><s:textfield name="newPhoneNumber" /></li>
-					<li><s:submit value="入力内容確認" /></li>
-				</s:form>
-			</ul>
+
+			<s:form action="UserInfoEntryAction">
+				<table>
+					<tr>
+						<td>ログインID</td>
+						<td><input type="text" name="newLoginId" /><s:if test="checkFlg">使用されています</s:if></td>
+					</tr>
+					<tr>
+						<td>パスワード</td>
+						<td><s:password name="newPassword" /></td>
+					</tr>
+					<tr>
+						<td>名前</td>
+						<td><s:textfield name="newUserName" /></td>
+					</tr>
+					<tr>
+						<td>メールアドレス</td>
+						<td><s:textfield name="newMailAddress" /></td>
+					</tr>
+					<tr>
+						<td>電話番号</td>
+						<td><s:textfield name="newPhoneNumber" /></td>
+					</tr>
+				</table>
+				<s:submit value="入力内容確認" />
+
+			</s:form>
 		</div>
 
 

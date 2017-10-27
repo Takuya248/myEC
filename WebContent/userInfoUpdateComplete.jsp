@@ -39,7 +39,7 @@
 
 	<div id="main">
 		<table>
-			<tr><td>メインコンテンツ</td></tr>
+			<tr><td><s:property value='session.get("newValue")' /></td></tr>
 		</table>
 	</div>
 

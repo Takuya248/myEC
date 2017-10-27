@@ -9,6 +9,8 @@ import com.internousdev.myEC.util.DateUtil;
 
 public class UserInfoInsertDAO {
 
+
+
 	public void infoInsert(String newLoginId, String newPassword, String newUserName, String newPhoneNumber, String newMailAddress){
 
 		DBConnector dbConnector = new DBConnector();

@@ -63,15 +63,20 @@ header #login{
 
 }
 
+
+
 #login form{
     flex-direction: column;
 }
+
 
 #form ul{
 	list-style: none;
 	margin: 0;
 	padding: 0;
 }
+
+
 
 #userInfo table{
 	border: solid 1px black;
@@ -92,8 +97,6 @@ header #login{
 #userInfo table td{
     border: solid 1px black;
 }
-
-
 
 
 

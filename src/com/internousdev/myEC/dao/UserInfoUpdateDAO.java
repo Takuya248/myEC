@@ -14,21 +14,21 @@ public class UserInfoUpdateDAO {
 	private Connection conn = db.getConnection();
 	public int num = 0;
 
-	public String sql = "UPDATE user_info SET ? = ? WHERE ? = ?";
 
-	public int userInfoUpdate(String dbUpdateField, String dbUpdateValue, String setValue){
+	public int userInfoUpdate(String dbUpdateField, String newValue, String oldValue){
 
+		System.out.println(dbUpdateField+newValue+oldValue);
 		try{
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, dbUpdateField);
-			ps.setString(2, setValue);
-			ps.setString(3, dbUpdateField);
-			ps.setString(4, dbUpdateValue);
-			num = ps.executeUpdate();
-
-			System.out.println(num);
 
 
+				String sql = "UPDATE user_info SET " + dbUpdateField + " = ? WHERE " + dbUpdateField + " = ?";
+
+				PreparedStatement ps = conn.prepareStatement(sql);
+				ps.setString(1, newValue);
+				ps.setString(2, oldValue);
+				num = ps.executeUpdate();
+
+				System.out.println(num);
 
 		}catch(SQLException e){
 			e.printStackTrace();

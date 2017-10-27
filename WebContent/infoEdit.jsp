@@ -38,11 +38,12 @@
 
 
 	<div id="main">
-	<s:form action="UserInfoInsertAction">
+	<s:form action="UserInfoUpdateCompleteAction">
 		<table>
 			<tr><td>登録中の<s:property value="fieldName" /></td><td><s:property value='session.get("oldValue")' /></td></tr>
-			<tr><td>変更後の<s:property value="fieldName" /></td><td><s:form action="UserInfoInsertAction"><s:textfield name="value" /></s:form></td></tr>
+			<tr><td>変更後の<s:property value="fieldName" /></td><td><s:textfield name="newValue" /></td></tr>
 		</table>
+		<s:submit value="決定" />
 		</s:form>
 	</div>
 

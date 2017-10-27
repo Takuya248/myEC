@@ -32,7 +32,7 @@
 		<div class="space"><!-- スペース --></div>
 
 		<div id="login">
-			<a href='<s:url action="LoginAction" />'>Login</a>
+			<a href='<s:url action="LoginPageAction" />'>Login</a>
 		</div>
 	</header>
 
