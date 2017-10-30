@@ -32,8 +32,14 @@
 				<table>
 					<tr>
 						<td>ログインID</td>
-						<td><input type="text" name="newLoginId" /><s:if test="checkFlg">使用されています</s:if></td>
+						<td><input type="text" name="newLoginId" /></td>
 					</tr>
+					<s:if test="checkFlg">
+					<tr>
+						<td></td>
+						<td><div id="idCheck">※使用されています</div></td>
+					</tr>
+					</s:if>
 					<tr>
 						<td>パスワード</td>
 						<td><s:password name="newPassword" /></td>

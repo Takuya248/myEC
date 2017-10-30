@@ -13,6 +13,7 @@ public class UserInfoSelectAction extends ActionSupport implements SessionAware{
 	public String updateField;
 	public Map<String, Object> session;
 
+	public String oldValue;
 	public String fieldName;
 
 
@@ -22,16 +23,35 @@ public class UserInfoSelectAction extends ActionSupport implements SessionAware{
 		loginDTO = (LoginDTO)session.get("loginUser");
 
 		switch(updateField){
+
 		case "login_id":
 			fieldName = "ログインID";
-			session.put("oldValue", loginDTO.getLoginId());
+			oldValue = loginDTO.getLoginId();
 			break;
 
 		case "login_pass":
-			session.put("oldValue", loginDTO.getLoginPassword());
+			fieldName = "ログインパスワード";
+			oldValue = loginDTO.getLoginPassword();
+			break;
+
+		case "user_name":
+			fieldName = "名前";
+			oldValue = loginDTO.getUserName();
+			break;
+
+		case "mail_add":
+			fieldName = "メールアドレス";
+			oldValue = loginDTO.getMailAddress();
+			break;
+
+		case "phone_number":
+			fieldName = "電話番号";
+			oldValue = loginDTO.getPhoneNumber();
 			break;
 
 		}
+
+		session.put("oldValue", oldValue);
 		session.put("updateField", updateField);
 
 		return result;
@@ -59,6 +79,16 @@ public class UserInfoSelectAction extends ActionSupport implements SessionAware{
 
 	public void setFieldName(String fieldName) {
 		this.fieldName = fieldName;
+	}
+
+
+	public String getOldValue() {
+		return oldValue;
+	}
+
+
+	public void setOldValue(String oldValue) {
+		this.oldValue = oldValue;
 	}
 
 

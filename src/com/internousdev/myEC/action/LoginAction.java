@@ -17,33 +17,27 @@ public class LoginAction extends ActionSupport implements SessionAware{
 
 	public String loginId;
 	public String loginPassword;
-	public String userName;
-	public String mailAddress;
-	public String phoneNumber;
-	public String regiDate;
+	public String loginPasswordSc;
 
 	public String execute(){
-		String result = (String)session.get("result");
 		loginDTO = loginDAO.getLoginUserInfo(loginId,loginPassword);
-		
-		userName = loginDTO.getUserName();
-		mailAddress = loginDTO.getMailAddress();
-		phoneNumber = loginDTO.getPhoneNumber();
-		regiDate = loginDTO.getRegiDate();
 
-		session.put("loginId", loginId);
-		session.put("loginPassword", loginPassword);
-		session.put("userName", userName);
-		session.put("mailAddress", mailAddress);
-		session.put("phoneNumber", phoneNumber);
-		session.put("regiDate", regiDate);
+		String result;
+
+		session.put("loginId", loginDTO.getLoginId());
+		session.put("loginPassword", loginDTO.getLoginPassword());
+		session.put("userName", loginDTO.getUserName());
+		session.put("mailAddress", loginDTO.getMailAddress());
+		session.put("phoneNumber", loginDTO.getPhoneNumber());
+		session.put("regiDate", loginDTO.getRegiDate());
 
 		session.put("loginUser",loginDTO);
 
-		if(((LoginDTO)session.get("loginUser")).getLoginFlg() || session.get("result") == SUCCESS){
+
+		if(((LoginDTO)session.get("loginUser")).getLoginFlg()){
 			result = SUCCESS;
-			String loginPasswordSc = loginPassword.replaceAll(".","*");
-			session.put("loginPassSc", loginPasswordSc);
+			loginPasswordSc = ((String)session.get("loginPassword")).replaceAll(".","*");
+
 
 		}else{
 			result = ERROR;
@@ -75,6 +69,14 @@ public class LoginAction extends ActionSupport implements SessionAware{
 
 	public void setSession(Map<String,Object> session){
 		this.session = session;
+	}
+
+	public String getLoginPasswordSc() {
+		return loginPasswordSc;
+	}
+
+	public void setLoginPasswordSc(String loginPasswordSc) {
+		this.loginPasswordSc = loginPasswordSc;
 	}
 
 

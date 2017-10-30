@@ -38,31 +38,32 @@
 
 	<div id="main">
 		<div id="UserInfo">
+		<s:form action="UserInfoSelectAction">
 			<table>
 				<tr>
 					<th>ユーザーID：</th>
 					<td><s:property value='session.get("loginId")' /></td>
-                    <td><s:form action="UserInfoSelectAction"><button type="submit" name="updateField" value="login_id">編集</button></s:form></td>
+                    <td><button type="submit" name="updateField" value="login_id">編集</button></td>
 				</tr>
 				<tr>
 					<th>パスワード：</th>
-					<td><s:property value='session.get("loginPassSc")' /></td>
-					<td><a href='<s:url action="UserInfoSelectAction" />'><button type="submit" name="updateField" value="login_pass">編集</button></a></td>
+					<td><s:property value='session.get("loginPassword")' /></td>
+					<td><button type="submit" name="updateField" value="login_pass">編集</button></td>
 				</tr>
 				<tr>
 					<th>名前：</th>
 					<td><s:property value='session.get("userName")' /></td>
-					<td><a href='<s:url action="UserInfoSelectAction" />'><button type="submit" name="updateField" value="user_name">編集</button></a></td>
+					<td><button type="submit" name="updateField" value="user_name">編集</button></td>
 				</tr>
 				<tr>
 					<th>メールアドレス：</th>
 					<td><s:property value='session.get("mailAddress")' /></td>
-					<td><a href='<s:url action="UserInfoSelectAction" />'><button type="submit" name="updateField" value="mail_add">編集</button></a></td>
+					<td><button type="submit" name="updateField" value="mail_add">編集</button></td>
 				</tr>
 				<tr>
 					<th>電話番号：</th>
 					<td><s:property value='session.get("phoneNumber")' /></td>
-					<td><a href='<s:url action="UserInfoSelectAction" />'><button type="submit" name="updateField" value="phone_number">編集</button></a></td>
+					<td><button type="submit" name="updateField" value="phone_number">編集</button></td>
 				</tr>
 				<tr>
 					<th>登録日：</th>
@@ -70,6 +71,7 @@
 				</tr>
 
 			</table>
+			</s:form>
 		</div>
 	</div>
 

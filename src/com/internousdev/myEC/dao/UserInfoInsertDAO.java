@@ -17,7 +17,7 @@ public class UserInfoInsertDAO {
 		Connection conn = dbConnector.getConnection();
 		DateUtil dateUtil = new DateUtil();
 
-		String sql = "INSERT INTO user_info(login_id, login_pass, user_name, phone_number, mail_add, insert_date)VALUES(?,?,?,?,?,?)";
+		String sql = "INSERT INTO user_info(login_id, login_pass, user_name, phone_number, mail_add, insert_date, updeted_date)VALUES(?,?,?,?,?,?,?)";
 
 		try{
 			PreparedStatement ps = conn.prepareStatement(sql);
@@ -27,6 +27,7 @@ public class UserInfoInsertDAO {
 			ps.setString(4, newPhoneNumber);
 			ps.setString(5, newMailAddress);
 			ps.setString(6, dateUtil.getDate());
+			ps.setString(7, dateUtil.getDate());
 
 			ps.execute();
 

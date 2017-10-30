@@ -40,8 +40,9 @@
 	<div id="main">
 	<s:form action="UserInfoUpdateCompleteAction">
 		<table>
-			<tr><td>登録中の<s:property value="fieldName" /></td><td><s:property value='session.get("oldValue")' /></td></tr>
+			<tr><td>登録中の<s:property value="fieldName" /></td><td><s:property value="oldValue" /></td></tr>
 			<tr><td>変更後の<s:property value="fieldName" /></td><td><s:textfield name="newValue" /></td></tr>
+			<s:if test="checkFlg"><tr><td></td><td><div id="idCheck">※使用されています</div></td></tr></s:if>
 		</table>
 		<s:submit value="決定" />
 		</s:form>

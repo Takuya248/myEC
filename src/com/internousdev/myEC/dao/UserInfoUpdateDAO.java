@@ -6,29 +6,36 @@ import java.sql.SQLException;
 
 import com.internousdev.myEC.dto.UserInfoDTO;
 import com.internousdev.myEC.util.DBConnector;
+import com.internousdev.myEC.util.DateUtil;
 
 public class UserInfoUpdateDAO {
 
 	public UserInfoDTO userInfoDTO = new UserInfoDTO();
 	private DBConnector db = new DBConnector();
 	private Connection conn = db.getConnection();
+
 	public int num = 0;
 
 
-	public int userInfoUpdate(String dbUpdateField, String newValue, String oldValue){
+	public int userInfoUpdate(String dbUpdateField, String newValue, String loginId, String loginPassword){
 
-		System.out.println(dbUpdateField+newValue+oldValue);
+		System.out.println(dbUpdateField+newValue);
 		try{
 
+			DateUtil dateUtil = new DateUtil();
 
-				String sql = "UPDATE user_info SET " + dbUpdateField + " = ? WHERE " + dbUpdateField + " = ?";
+			String sql = "UPDATE user_info SET " + dbUpdateField + " = ? AND updeted_date = ? WHERE login_id = ? AND login_pass = ?";
 
-				PreparedStatement ps = conn.prepareStatement(sql);
-				ps.setString(1, newValue);
-				ps.setString(2, oldValue);
-				num = ps.executeUpdate();
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, newValue);
+			ps.setString(2, dateUtil.getDate());
+			ps.setString(3, loginId);
+			ps.setString(4, loginPassword);
 
-				System.out.println(num);
+			num = ps.executeUpdate();
+
+			System.out.println(num);
+
 
 		}catch(SQLException e){
 			e.printStackTrace();
