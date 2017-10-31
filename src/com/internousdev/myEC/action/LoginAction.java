@@ -19,7 +19,17 @@ public class LoginAction extends ActionSupport implements SessionAware{
 	public String loginPassword;
 	public String loginPasswordSc;
 
+
+
 	public String execute(){
+
+		if(session.containsKey("loginFlg")){
+
+			loginId = (String)session.get("loginId");
+			loginPassword = (String)session.get("loginPassword");
+
+		}
+
 		loginDTO = loginDAO.getLoginUserInfo(loginId,loginPassword);
 
 		String result;
@@ -30,11 +40,12 @@ public class LoginAction extends ActionSupport implements SessionAware{
 		session.put("mailAddress", loginDTO.getMailAddress());
 		session.put("phoneNumber", loginDTO.getPhoneNumber());
 		session.put("regiDate", loginDTO.getRegiDate());
+		session.put("loginFlg", loginDTO.getLoginFlg());
 
 		session.put("loginUser",loginDTO);
 
 
-		if(((LoginDTO)session.get("loginUser")).getLoginFlg()){
+		if((boolean)session.get("loginFlg")){
 			result = SUCCESS;
 			loginPasswordSc = ((String)session.get("loginPassword")).replaceAll(".","*");
 
@@ -43,8 +54,7 @@ public class LoginAction extends ActionSupport implements SessionAware{
 			result = ERROR;
 		}
 
-
-		session.put("result", result);
+		System.out.println(session.get("loginFlg"));
 		return result;
 	}
 

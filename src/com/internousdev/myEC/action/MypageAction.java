@@ -24,7 +24,7 @@ public class MypageAction extends ActionSupport implements SessionAware{
 		loginDTO = (LoginDTO)session.get("loginUser");
 
 
-		if(((LoginDTO)session.get("loginUser")).getLoginFlg()){
+		if((boolean)session.get("loginFlg")){
 			result = SUCCESS;
 
 			session.put("loginId", loginDTO.getLoginId());

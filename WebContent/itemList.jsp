@@ -1,7 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="s" uri="/struts-tags"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 
 <!DOCTYPE html>
 
@@ -15,14 +13,14 @@
 <meta http-equiv="imagetoolbar" content="no" />
 <meta name="description" content="" />
 <meta name="keywords" content="" />
-<title>Home画面</title>
+<title>itemList画面</title>
 
 <link href="css/main.css" rel="stylesheet" type="text/css">
 
 </head>
-
 <body>
-	<!--------------  ヘッダ  -------------->
+
+<!--------------  ヘッダ  -------------->
 
 	<header>
 
@@ -49,7 +47,8 @@
 
 	<div id="main">
 		<table>
-			<tr><td><a href='<s:url action="ItemListPageAction" />'>商品一覧へ</a></td></tr>
+
+			<tr><td>メインコンテンツ</td></tr>
 		</table>
 	</div>
 
@@ -62,7 +61,5 @@
     </footer>
 
 
-	<!--------------  jsファイル  -------------->
-	<script type="text/javascript" src="script.js"></script>
 </body>
 </html>

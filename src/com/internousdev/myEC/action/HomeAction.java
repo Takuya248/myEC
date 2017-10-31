@@ -6,23 +6,14 @@ import org.apache.struts2.interceptor.SessionAware;
 
 import com.opensymphony.xwork2.ActionSupport;
 
-public class LoginPageAction extends ActionSupport implements SessionAware{
-
+public class HomeAction extends ActionSupport implements SessionAware{
 
 	public Map<String, Object> session;
 
-
 	public String execute(){
 
-		String result;
+		String result = SUCCESS;;
 
-		if(session.containsKey("loginFlg")){
-			result = ERROR;
-
-		}else{
-			result = SUCCESS;
-
-		}
 		return result;
 
 	}

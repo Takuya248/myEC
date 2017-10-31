@@ -13,6 +13,7 @@ public class UserInfoUpdateDAO {
 	public UserInfoDTO userInfoDTO = new UserInfoDTO();
 	private DBConnector db = new DBConnector();
 	private Connection conn = db.getConnection();
+	public DateUtil dateUtil = new DateUtil();
 
 	public int num = 0;
 
@@ -20,11 +21,10 @@ public class UserInfoUpdateDAO {
 	public int userInfoUpdate(String dbUpdateField, String newValue, String loginId, String loginPassword){
 
 		System.out.println(dbUpdateField+newValue);
+
 		try{
 
-			DateUtil dateUtil = new DateUtil();
-
-			String sql = "UPDATE user_info SET " + dbUpdateField + " = ? AND updeted_date = ? WHERE login_id = ? AND login_pass = ?";
+			String sql = "UPDATE user_info SET " + dbUpdateField + " = ? , updeted_date = ? WHERE login_id = ? AND login_pass = ?";
 
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, newValue);
