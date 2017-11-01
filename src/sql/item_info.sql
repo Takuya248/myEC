@@ -14,5 +14,9 @@ update_date datetime
 insert into item_info(
 category_id,item_name,item_price,item_stock
 )value(
-"rod","テストロッド","5000","9"
+"rod","安いロッド","5000","20"
+),(
+"rod","並みのロッド","10000","9"
+),(
+"rod","高いロッド","20000","5"
 );

@@ -12,31 +12,29 @@ import com.internousdev.myEC.util.DBConnector;
 
 public class ItemListDAO{
 
-	public ItemInfoDTO getItemInfo(String category){
+	public List<ItemInfoDTO> getItemInfo(String category){
 
 		DBConnector dbConnector = new DBConnector();
 		Connection conn = dbConnector.getConnection();
-		ItemInfoDTO itemInfoDTO = new ItemInfoDTO();
 		List<ItemInfoDTO> itemList = new ArrayList<ItemInfoDTO>();
 
 		try{
-
-
-			String sql = "SELECT * FROM item_info category_id = ?";
+			String sql = "SELECT * FROM item_info WHERE category_id = ?";
 
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, category);
 			ResultSet rs = ps.executeQuery();
 
-			if(rs.next()){
-				itemInfoDTO.get
-
+			while(rs.next()){
+				itemList.add(new ItemInfoDTO(rs.getString("category_id"),rs.getString("item_name"),rs.getString("item_price"),rs.getString("item_price")));
 			}
 
 		}catch(SQLException e){
 			e.printStackTrace();
 
 		}
+		return itemList;
+
 	}
 
 

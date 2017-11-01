@@ -4,8 +4,19 @@ public class ItemInfoDTO {
 
 	private String categoryId;
 	private String itemName;
-	private int itemPrice;
-	private int itemStock;
+	private String itemPrice;
+	private String itemStock;
+
+
+	public ItemInfoDTO(){}
+
+	public ItemInfoDTO(String categoryId, String itemName, String itemPrice, String itemStock){
+		this.categoryId = categoryId;
+		this.itemName = itemName;
+		this.itemPrice = itemPrice;
+		this.itemStock = itemStock;
+	}
+
 
 
 	public String getCategoryId() {
@@ -20,16 +31,16 @@ public class ItemInfoDTO {
 	public void setItemName(String itemName) {
 		this.itemName = itemName;
 	}
-	public int getItemPrice() {
+	public String getItemPrice() {
 		return itemPrice;
 	}
-	public void setItemPrice(int itemPrice) {
+	public void setItemPrice(String itemPrice) {
 		this.itemPrice = itemPrice;
 	}
-	public int getItemStock() {
+	public String getItemStock() {
 		return itemStock;
 	}
-	public void setItemStock(int itemStock) {
+	public void setItemStock(String itemStock) {
 		this.itemStock = itemStock;
 	}
 
