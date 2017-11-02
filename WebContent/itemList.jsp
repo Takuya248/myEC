@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
-<%@ page import = "com.internousdev.myEC.dto.ItemInfoDTO" %>
 
 <!DOCTYPE html>
 
@@ -41,15 +40,53 @@
 			</s:else>
 		</div>
 	</header>
-
+　
 
 	<!--------------  メイン  -------------->
 
 
 	<div id="main">
-		<table>
-			<tr><td>${itemInfo[0]}</td></tr>
-		</table>
+<div id="itemList">
+
+
+		<s:iterator value="itemInfoList" status="itemInfoListSt">
+
+			<s:if test="#itemInfoListSt.odd">
+				<div id="itemInfoValueOdd">
+					<table>
+						<tr>
+							<th>商品名</th>
+							<td><s:property value="itemName" /></td>
+							<th>価格</th>
+							<td><s:property value="itemPrice" /></td>
+							<th>在庫数</th>
+							<td><s:property value="itemStock" /></td>
+							<td><s:form action="ItemCartAction"><s:hidden name="buyItemId" value="%{itemId}" /><s:submit value="カートに入れる" /></s:form></td>
+						</tr>
+					</table>
+				</div>
+			</s:if>
+
+			<s:else>
+				<div id="itemInfoValue">
+					<table>
+						<tr>
+							<th>商品名</th>
+							<td><s:property value="itemName" /></td>
+							<th>価格</th>
+							<td><s:property value="itemPrice" /></td>
+							<th>在庫数</th>
+							<td><s:property value="itemStock" /></td>
+							<td><s:form action="ItemCartAction"><s:hidden name="buyItemId" value="%{itemId}" /><s:submit value="カートに入れる" /></s:form></td>
+						</tr>
+					</table>
+				</div>
+			</s:else>
+
+		</s:iterator>
+
+</div>
+
 	</div>
 
 

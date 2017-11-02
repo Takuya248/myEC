@@ -103,5 +103,17 @@ header #login{
 	color: red;
 }
 
+#itemList{
+	 flex-direction: column;
+}
+
+#itemInfoValue{
+	background-color: gray;
+}
+
+#itemInfoValueOdd{
+
+}
+
 
 

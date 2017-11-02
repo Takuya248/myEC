@@ -4,39 +4,31 @@ package com.internousdev.myEC.action;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
+import org.apache.struts2.interceptor.SessionAware;
 
 import com.internousdev.myEC.dao.ItemListDAO;
 import com.internousdev.myEC.dto.ItemInfoDTO;
 import com.opensymphony.xwork2.ActionSupport;
 
-public class ItemListPageAction extends ActionSupport{
+public class ItemListPageAction extends ActionSupport implements SessionAware{
 
-	public List<String[]> itemInfoList = new ArrayList<String[]>();
-
+	public Map<String, Object> session;
+	public ArrayList<ItemInfoDTO> itemInfoList = new ArrayList<>();
 
 	public String execute(){
 
 		ItemListDAO itemListDAO = new ItemListDAO();
 
-		String[] itemInfoValue = new String[2];
-
-		List<ItemInfoDTO> itemDTOList = new ArrayList<>();
+		List<ItemInfoDTO> itemDTOList = new ArrayList<ItemInfoDTO>();
 
 		itemDTOList = itemListDAO.getItemInfo("rod");
 
 		for(ItemInfoDTO  itemInfoDTO : itemDTOList){
-			itemInfoDTO = new ItemInfoDTO();
-			int listCount = 0;
-			int arrayCount = 0;
+			itemInfoList.add(itemInfoDTO);
 
-			itemInfoValue[0] = itemInfoDTO.getItemName();
-			itemInfoValue[1] = itemInfoDTO.getItemPrice();
-			itemInfoValue[2] = itemInfoDTO.getItemStock();
 		}
-
-
-
-	System.out.println((itemDTOList.get(1)).getItemName());
 
 	String result = SUCCESS;
 
@@ -44,13 +36,25 @@ public class ItemListPageAction extends ActionSupport{
 }
 
 
-	public List<String[]> getItemInfoList() {
+	public ArrayList<ItemInfoDTO> getItemInfoList() {
 		return itemInfoList;
 	}
 
 
-	public void setItemInfoList(List<String[]> itemInfoList) {
+	public void setItemInfoList(ArrayList<ItemInfoDTO> itemInfoList) {
 		this.itemInfoList = itemInfoList;
 	}
+
+
+	public Map<String, Object> getSession() {
+		return session;
+	}
+
+
+	public void setSession(Map<String, Object> session) {
+		this.session = session;
+	}
+
+
 
 }

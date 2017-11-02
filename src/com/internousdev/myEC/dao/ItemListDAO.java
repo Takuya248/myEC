@@ -26,7 +26,17 @@ public class ItemListDAO{
 			ResultSet rs = ps.executeQuery();
 
 			while(rs.next()){
-				itemList.add(new ItemInfoDTO(rs.getString("category_id"),rs.getString("item_name"),rs.getString("item_price"),rs.getString("item_price")));
+				ItemInfoDTO itemInfoDTO = new ItemInfoDTO();
+
+
+
+				itemInfoDTO.setItemId(rs.getString("id"));
+				itemInfoDTO.setCategoryId(rs.getString("category_id"));
+				itemInfoDTO.setItemName(rs.getString("item_name"));
+				itemInfoDTO.setItemPrice(rs.getString("item_price"));
+				itemInfoDTO.setItemStock(rs.getString("item_stock"));
+
+				itemList.add(itemInfoDTO);
 			}
 
 		}catch(SQLException e){

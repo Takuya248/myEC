@@ -2,21 +2,11 @@ package com.internousdev.myEC.dto;
 
 public class ItemInfoDTO {
 
+	private String itemId;
 	private String categoryId;
 	private String itemName;
 	private String itemPrice;
 	private String itemStock;
-
-
-	public ItemInfoDTO(){}
-
-	public ItemInfoDTO(String categoryId, String itemName, String itemPrice, String itemStock){
-		this.categoryId = categoryId;
-		this.itemName = itemName;
-		this.itemPrice = itemPrice;
-		this.itemStock = itemStock;
-	}
-
 
 
 	public String getCategoryId() {
@@ -42,6 +32,12 @@ public class ItemInfoDTO {
 	}
 	public void setItemStock(String itemStock) {
 		this.itemStock = itemStock;
+	}
+	public String getItemId() {
+		return itemId;
+	}
+	public void setItemId(String itemId) {
+		this.itemId = itemId;
 	}
 
 
