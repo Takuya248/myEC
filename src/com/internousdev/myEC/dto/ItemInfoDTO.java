@@ -7,6 +7,7 @@ public class ItemInfoDTO {
 	private String itemName;
 	private String itemPrice;
 	private String itemStock;
+	private int cartItemStack;
 
 
 	public String getCategoryId() {
@@ -39,6 +40,14 @@ public class ItemInfoDTO {
 	public void setItemId(String itemId) {
 		this.itemId = itemId;
 	}
+	public int getCartItemStack() {
+		return cartItemStack;
+	}
+	public void setCartItemStack(int cartItemStack) {
+		this.cartItemStack = cartItemStack;
+	}
+
+
 
 
 

@@ -3,7 +3,6 @@ package com.internousdev.myEC.action;
 
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
@@ -21,7 +20,7 @@ public class ItemListPageAction extends ActionSupport implements SessionAware{
 
 		ItemListDAO itemListDAO = new ItemListDAO();
 
-		List<ItemInfoDTO> itemDTOList = new ArrayList<ItemInfoDTO>();
+		ArrayList<ItemInfoDTO> itemDTOList = new ArrayList<ItemInfoDTO>();
 
 		itemDTOList = itemListDAO.getItemInfo("rod");
 

@@ -4,45 +4,38 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 import com.internousdev.myEC.dto.ItemInfoDTO;
 import com.internousdev.myEC.util.DBConnector;
 
-public class ItemListDAO{
+public class CartItemListDAO {
 
-	public ArrayList<ItemInfoDTO> getItemInfo(String category){
+	public ItemInfoDTO getItemInfo(String buyItemId){
 
 		DBConnector dbConnector = new DBConnector();
 		Connection conn = dbConnector.getConnection();
-		ArrayList<ItemInfoDTO> itemList = new ArrayList<ItemInfoDTO>();
+		ItemInfoDTO itemInfoDTO = new ItemInfoDTO();
 
 		try{
-			String sql = "SELECT * FROM item_info WHERE category_id = ?";
+			String sql = "SELECT * FROM item_info WHERE id = ?";
 
 			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, category);
+			ps.setString(1, buyItemId);
 			ResultSet rs = ps.executeQuery();
 
-			while(rs.next()){
-				ItemInfoDTO itemInfoDTO = new ItemInfoDTO();
-
-
+			if(rs.next()){
 
 				itemInfoDTO.setItemId(rs.getString("id"));
 				itemInfoDTO.setCategoryId(rs.getString("category_id"));
 				itemInfoDTO.setItemName(rs.getString("item_name"));
 				itemInfoDTO.setItemPrice(rs.getString("item_price"));
 				itemInfoDTO.setItemStock(rs.getString("item_stock"));
-
-				itemList.add(itemInfoDTO);
 			}
-
 		}catch(SQLException e){
 			e.printStackTrace();
 
 		}
-		return itemList;
+		return itemInfoDTO;
 
 	}
 

@@ -67,8 +67,8 @@
 			<result name="success">itemList.jsp</result>
 		</action>
 
-		<action name="ItemCartAction" class="com.internousdev.myEC.action.ItemCartAction" method="execute">
-			<result name="success">itemCart.jsp</result>
+		<action name="CartAction" class="com.internousdev.myEC.action.CartAction" method="execute">
+			<result name="success">cart.jsp</result>
 		</action>
 
 	</package>

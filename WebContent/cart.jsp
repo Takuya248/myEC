@@ -13,13 +13,12 @@
 <meta http-equiv="imagetoolbar" content="no" />
 <meta name="description" content="" />
 <meta name="keywords" content="" />
-<title>itemList画面</title>
+<title>Cart画面</title>
 
 <link href="css/main.css" rel="stylesheet" type="text/css">
 
 </head>
 <body>
-
 <!--------------  ヘッダ  -------------->
 
 	<header>
@@ -46,13 +45,13 @@
 
 
 	<div id="main">
-<div id="itemList">
+<div id="cartItemList">
+
+カートの中身
+
+		<s:iterator value="cartItemInfoList">
 
 
-		<s:iterator value="itemInfoList" status="itemInfoListSt">
-
-			<s:if test="#itemInfoListSt.odd">
-				<div id="itemInfoValueOdd">
 					<table>
 						<tr>
 							<th>商品名</th>
@@ -61,30 +60,15 @@
 							<td><s:property value="itemPrice" /></td>
 							<th>在庫数</th>
 							<td><s:property value="itemStock" /></td>
-							<td><s:form action="CartAction"><s:hidden name="buyItemId" value="%{itemId}" /><s:submit value="カートに入れる" /></s:form></td>
+							<th>注文数</th>
+							<td><s:property value="cartItemStack" /></td>
 						</tr>
 					</table>
-				</div>
-			</s:if>
 
-			<s:else>
-				<div id="itemInfoValue">
-					<table>
-						<tr>
-							<th>商品名</th>
-							<td><s:property value="itemName" /></td>
-							<th>価格</th>
-							<td><s:property value="itemPrice" /></td>
-							<th>在庫数</th>
-							<td><s:property value="itemStock" /></td>
-							<td><s:form action="CartAction"><s:hidden name="buyItemId" value="%{itemId}" /><s:submit value="カートに入れる" /></s:form></td>
-						</tr>
-					</table>
-				</div>
-			</s:else>
+
 
 		</s:iterator>
-
+	<s:form action="ItemListPageAction"><s:submit value="商品一覧" /></s:form>
 </div>
 
 	</div>
