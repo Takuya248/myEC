@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 
+
+
 <!DOCTYPE html>
 
 <html>
@@ -23,7 +25,7 @@
 
 	<header>
 
-		<div id="logo">header</div>
+		<div id="logo"><a href='<s:url action="HomeAction" />'>logo</a></div>
 
 
 		<div class="space">
@@ -47,28 +49,37 @@
 	<div id="main">
 <div id="cartItemList">
 
-カートの中身
+			<table>
+				<tr>
+					<td>カートの中身</td>
+					<td>
+						<s:iterator value="cartItemInfoList">
+							<s:property value="itemPrice*"/>
+						</s:iterator>
+					</td>
+				</tr>
+			</table>
 
-		<s:iterator value="cartItemInfoList">
-
-
-					<table>
-						<tr>
-							<th>商品名</th>
-							<td><s:property value="itemName" /></td>
-							<th>価格</th>
-							<td><s:property value="itemPrice" /></td>
-							<th>在庫数</th>
-							<td><s:property value="itemStock" /></td>
-							<th>注文数</th>
-							<td><s:property value="cartItemStack" /></td>
-						</tr>
-					</table>
+			<s:iterator value="cartItemInfoList">
 
 
+				<table>
+					<tr>
+						<th>商品名</th>
+						<td><s:property value="itemName" /></td>
+						<th>価格</th>
+						<td><s:property value="itemPrice" /></td>
+						<th>在庫数</th>
+						<td><s:property value="itemStock" /></td>
+						<th>注文数</th>
+						<td><s:property value="cartItemStack" /></td>
+					</tr>
+				</table>
 
-		</s:iterator>
-	<s:form action="ItemListPageAction"><s:submit value="商品一覧" /></s:form>
+
+
+			</s:iterator>
+			<s:form action="ItemListPageAction"><s:submit value="商品一覧" /></s:form>
 </div>
 
 	</div>

@@ -19,7 +19,9 @@
 
 <body>
 
-	<header> header </header>
+	<header>
+		<div id="logo"><a href='<s:url action="HomeAction" />'>logo</a></div>
+	</header>
 
 	<div id="main">
 

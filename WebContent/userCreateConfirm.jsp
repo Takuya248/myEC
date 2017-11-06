@@ -26,7 +26,7 @@
 
 	<header>
 
-		<div id="logo">header</div>
+		<div id="logo"><a href='<s:url action="HomeAction" />'>logo</a></div>
 
 		<div class="space"><!-- 余白 --></div>
 

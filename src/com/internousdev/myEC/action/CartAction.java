@@ -31,8 +31,7 @@ public class CartAction extends ActionSupport implements SessionAware{
 			//セッションにカート情報があればリストに入れる
 			if(session.containsKey("cartItemInfoList")){
 				cartValue = (ArrayList<String>)session.get("cartValue");
-				//cartItemInfoList = (ArrayList<ItemInfoDTO>)session.get("cartItemInfoList");
-			}
+				}
 
 			cartValue.add(buyItemId);
 
