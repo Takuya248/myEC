@@ -8,14 +8,16 @@ import java.util.Map.Entry;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.internousdev.myEC.dao.CartItemListDAO;
+import com.internousdev.myEC.dto.CartItemDTO;
 import com.internousdev.myEC.dto.ItemInfoDTO;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class CartAction extends ActionSupport implements SessionAware{
 
+	public CartItemListDAO cartItemListDAO = new CartItemListDAO();
+	public CartItemDTO cartItemDTO = new CartItemDTO();
 	public Map<String, Object> session;
 	public String buyItemId;
-	public CartItemListDAO cartItemListDAO = new CartItemListDAO();
 	public ArrayList<ItemInfoDTO> cartItemInfoList = new ArrayList<>();
 
 
@@ -57,11 +59,16 @@ public class CartAction extends ActionSupport implements SessionAware{
 				itemInfoDTO.setCartItemStack(entry.getValue());
 
 				cartItemInfoList.add(itemInfoDTO);
+
+				int itemPrice = Integer.parseInt(itemInfoDTO.getItemPrice());
+				cartItemDTO.setItemPrice(cartItemDTO.getItemPrice()+ itemPrice * entry.getValue());
+				cartItemDTO.setItemStack(cartItemDTO.getItemStack() + entry.getValue());
+
 			}
 
+			session.put("cartItemDTO", cartItemDTO);
 			session.put("cartValue", cartValue);
 			session.put("cartItemInfoList", cartItemInfoList);
-
 
 
 		String result = SUCCESS;
@@ -98,6 +105,8 @@ public class CartAction extends ActionSupport implements SessionAware{
 	public void setCartItemInfoList(ArrayList<ItemInfoDTO> cartItemInfoList) {
 		this.cartItemInfoList = cartItemInfoList;
 	}
+
+
 
 
 

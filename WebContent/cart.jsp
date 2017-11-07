@@ -1,5 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
+<%@
+page import="com.internousdev.myEC.dto.ItemInfoDTO"
+import="java.util.ArrayList"
+import="java.util.Map.Entry"
+ %>
+
+<%
+
+int price = 0;
+
+%>
 
 
 
@@ -51,12 +62,9 @@
 
 			<table>
 				<tr>
-					<td>カートの中身</td>
-					<td>
-						<s:iterator value="cartItemInfoList">
-							<s:property value="itemPrice*"/>
-						</s:iterator>
-					</td>
+					<th>カートの中身</th>
+					<td>合計<s:property value="cartItemDTO.itemPrice" />円</td>
+					<td>アイテム数<s:property value="cartItemDTO.itemStack" /></td>
 				</tr>
 			</table>
 
