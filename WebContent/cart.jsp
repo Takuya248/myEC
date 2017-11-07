@@ -68,7 +68,7 @@ int price = 0;
 				</tr>
 			</table>
 
-			<s:iterator value="cartItemInfoList">
+			<s:iterator value="session.cartItemInfoList" status="idx">
 
 
 				<table>
@@ -81,6 +81,8 @@ int price = 0;
 						<td><s:property value="itemStock" /></td>
 						<th>注文数</th>
 						<td><s:property value="cartItemStack" /></td>
+						<td><s:form action="CartUpdateAction"><s:hidden name="listIndex" value="%{#idx.index}" /><s:textfield type="number" name="stackCountUpdate" value="%{cartItemStack}" min="0" max="20" /><s:submit value="更新" /></s:form></td>
+						<td></td>
 					</tr>
 				</table>
 

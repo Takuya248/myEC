@@ -2,12 +2,12 @@ package com.internousdev.myEC.dto;
 
 public class ItemInfoDTO {
 
-	private String itemId;
+	private String itemId = "";
 	private String categoryId;
 	private String itemName;
 	private String itemPrice;
 	private String itemStock;
-	private int cartItemStack;
+	private int cartItemStack = 1;
 
 
 	public String getCategoryId() {

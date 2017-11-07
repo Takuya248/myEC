@@ -1,9 +1,7 @@
 package com.internousdev.myEC.action;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import org.apache.struts2.interceptor.SessionAware;
 
@@ -26,18 +24,26 @@ public class CartAction extends ActionSupport implements SessionAware{
 
 
 
-			ArrayList<String> cartValue = new ArrayList<>();
-			Map<String, Integer> cartItemList = new HashMap<>();
-			int itemCount = 0;
-
 			//セッションにカート情報があればリストに入れる
 			if(session.containsKey("cartItemInfoList")){
-				cartValue = (ArrayList<String>)session.get("cartValue");
+				cartItemInfoList = (ArrayList<ItemInfoDTO>)session.get("cartItemInfoList");
+			}else{
+				cartItemInfoList.add(cartItemListDAO.getItemInfo(buyItemId));
+			}
+
+
+			for(ItemInfoDTO itemInfoDTO: cartItemInfoList){
+				if(itemInfoDTO.getItemId().equals(buyItemId)){
+					itemInfoDTO.setCartItemStack(itemInfoDTO.getCartItemStack() + 1);
+
 				}
+			}
+			cartItemDTO.setItemPrice(cartItemDTO.getItemPrice() + Integer.parseInt(itemInfoDTO.getItemPrice()) * itemInfoDTO.getCartItemStack());
+			cartItemDTO.setItemStack(cartItemDTO.getItemStack() + itemInfoDTO.getCartItemStack());
 
-			cartValue.add(buyItemId);
 
 
+/*
 			for(String s: cartValue){
 
 				if(cartItemList.containsKey(s)){
@@ -49,6 +55,7 @@ public class CartAction extends ActionSupport implements SessionAware{
 				cartItemList.put(s, itemCount);
 
 			}
+
 
 
 
@@ -65,9 +72,8 @@ public class CartAction extends ActionSupport implements SessionAware{
 				cartItemDTO.setItemStack(cartItemDTO.getItemStack() + entry.getValue());
 
 			}
-
+*/
 			session.put("cartItemDTO", cartItemDTO);
-			session.put("cartValue", cartValue);
 			session.put("cartItemInfoList", cartItemInfoList);
 
 
@@ -95,19 +101,6 @@ public class CartAction extends ActionSupport implements SessionAware{
 	public void setBuyItemId(String buyItemId) {
 		this.buyItemId = buyItemId;
 	}
-
-
-	public ArrayList<ItemInfoDTO> getCartItemInfoList() {
-		return cartItemInfoList;
-	}
-
-
-	public void setCartItemInfoList(ArrayList<ItemInfoDTO> cartItemInfoList) {
-		this.cartItemInfoList = cartItemInfoList;
-	}
-
-
-
 
 
 }
