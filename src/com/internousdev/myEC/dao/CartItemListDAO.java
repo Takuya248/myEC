@@ -10,7 +10,7 @@ import com.internousdev.myEC.util.DBConnector;
 
 public class CartItemListDAO {
 
-	public ItemInfoDTO getItemInfo(String buyItemId){
+	public ItemInfoDTO getItemInfo(int buyItemId){
 
 		DBConnector dbConnector = new DBConnector();
 		Connection conn = dbConnector.getConnection();
@@ -20,12 +20,12 @@ public class CartItemListDAO {
 			String sql = "SELECT * FROM item_info WHERE id = ?";
 
 			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, buyItemId);
+			ps.setInt(1, buyItemId);
 			ResultSet rs = ps.executeQuery();
 
 			if(rs.next()){
 
-				itemInfoDTO.setItemId(rs.getString("id"));
+				itemInfoDTO.setItemId(rs.getInt("id"));
 				itemInfoDTO.setCategoryId(rs.getString("category_id"));
 				itemInfoDTO.setItemName(rs.getString("item_name"));
 				itemInfoDTO.setItemPrice(rs.getString("item_price"));

@@ -29,7 +29,7 @@ public class ItemListDAO{
 
 
 
-				itemInfoDTO.setItemId(rs.getString("id"));
+				itemInfoDTO.setItemId(rs.getInt("id"));
 				itemInfoDTO.setCategoryId(rs.getString("category_id"));
 				itemInfoDTO.setItemName(rs.getString("item_name"));
 				itemInfoDTO.setItemPrice(rs.getString("item_price"));

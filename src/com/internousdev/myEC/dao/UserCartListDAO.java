@@ -2,6 +2,7 @@ package com.internousdev.myEC.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Map;
@@ -14,6 +15,8 @@ import com.internousdev.myEC.util.DBConnector;
 
 public class UserCartListDAO implements SessionAware{
 
+	public DBConnector dbConnector = new DBConnector();
+	public Connection connection = dbConnector.getConnection();
 	public Map<String, Object> session;
 
 	public void cartDBInsert(ArrayList<ItemInfoDTO> cartItemInfoList){
@@ -21,8 +24,7 @@ public class UserCartListDAO implements SessionAware{
 		try{
 
 
-			DBConnector dbConnector = new DBConnector();
-			Connection connection = dbConnector.getConnection();
+
 
 
 			for(ItemInfoDTO itemInfoDTO: cartItemInfoList){
@@ -31,8 +33,8 @@ public class UserCartListDAO implements SessionAware{
 				PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
 				preparedStatement.setInt(1, ((LoginDTO)session.get("loginDTO")).getId());
-				preparedStatement.setInt(2, Integer.parseInt(itemInfoDTO.getItemId()));
-				preparedStatement.setInt(3, Integer.parseInt(itemInfoDTO.getItemId()));
+				preparedStatement.setInt(2, itemInfoDTO.getItemId());
+				preparedStatement.setInt(3, itemInfoDTO.getItemId());
 
 				preparedStatement.execute();
 			}
@@ -43,6 +45,30 @@ public class UserCartListDAO implements SessionAware{
 
 
 
+	}
+
+	public ArrayList<ItemInfoDTO> cartItemSelect(String loginId){
+
+		ArrayList<ItemInfoDTO> cartItemInfoList = new ArrayList<>();
+
+		try{
+			String sql ="SELECT * FROM user_cart_info WHERE user_id = ?";
+
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1, ((LoginDTO)session.get("loginDTO")).getId());
+			ResultSet resultSet = preparedStatement.executeQuery();
+
+			while(resultSet.next()){
+				ItemInfoDTO itemInfoDTO = new ItemInfoDTO();
+
+				itemInfoDTO.setItemId(resultSet.getInt("item_id"));
+				itemInfoDTO.setCartItemStack(resultSet.getInt("item_stack"));
+			}
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+
+		return cartItemInfoList;
 	}
 
 

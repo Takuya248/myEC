@@ -16,7 +16,7 @@ public class CartAction extends ActionSupport implements SessionAware{
 	public CartItemListDAO cartItemListDAO = new CartItemListDAO();
 	public CartItemDTO cartItemDTO = new CartItemDTO();
 	public Map<String, Object> session;
-	public String buyItemId;
+	public int buyItemId;
 	public ArrayList<ItemInfoDTO> cartItemInfoList = new ArrayList<>();
 
 
@@ -34,7 +34,7 @@ public class CartAction extends ActionSupport implements SessionAware{
 				for(Iterator<ItemInfoDTO> iterator = cartItemInfoList.listIterator(); iterator.hasNext();){
 					ItemInfoDTO itemInfoDTO = iterator.next();
 
-					if(itemInfoDTO.getItemId().equals(buyItemId)){
+					if(itemInfoDTO.getItemId() == buyItemId){
 						itemInfoDTO.setCartItemStack(itemInfoDTO.getCartItemStack() + 1);
 
 						incrementSuccess = true;
@@ -87,12 +87,12 @@ public class CartAction extends ActionSupport implements SessionAware{
 	}
 
 
-	public String getBuyItemId() {
+	public int getBuyItemId() {
 		return buyItemId;
 	}
 
 
-	public void setBuyItemId(String buyItemId) {
+	public void setBuyItemId(int buyItemId) {
 		this.buyItemId = buyItemId;
 	}
 
