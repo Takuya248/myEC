@@ -75,5 +75,10 @@
 			<result name="success">cart.jsp</result>
 		</action>
 
+		<action name="CartRemoveAction" class="com.internousdev.myEC.action.CartRemoveAction" method="execute">
+			<result name="success">cart.jsp</result>
+		</action>
+
+
 	</package>
 </struts>

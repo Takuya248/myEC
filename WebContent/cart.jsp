@@ -81,8 +81,18 @@ int price = 0;
 						<td><s:property value="itemStock" /></td>
 						<th>注文数</th>
 						<td><s:property value="cartItemStack" /></td>
-						<td><s:form action="CartUpdateAction"><s:hidden name="listIndex" value="%{#idx.index}" /><s:textfield type="number" name="stackCountUpdate" value="%{cartItemStack}" min="0" max="20" /><s:submit value="更新" /></s:form></td>
-						<td></td>
+						<td>
+							<s:form action="CartUpdateAction">
+								<s:hidden name="listIndex" value="%{#idx.index}" />
+								<s:textfield type="number" name="stackCountUpdate" value="%{cartItemStack}" min="0" max="20" />
+								<s:submit value="更新" />
+							</s:form>
+						</td>
+						<td>
+							<s:form action="CartRemoveAction">
+								<s:hidden name="removeIndex" value="%{#idx.index}" /><s:submit value="商品を削除" />
+							</s:form>
+						</td>
 					</tr>
 				</table>
 

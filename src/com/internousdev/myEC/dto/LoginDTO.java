@@ -2,7 +2,7 @@ package com.internousdev.myEC.dto;
 
 public class LoginDTO {
 
-	private String Id;
+	private int Id;
 	private String loginId;
 	private String loginPassword;
 	private String userName;
@@ -31,11 +31,11 @@ public class LoginDTO {
 	public void setLoginPassword(String loginPassword){
 		this.loginPassword = loginPassword;
 	}
-	public String getId() {
+	public int getId() {
 		return Id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		Id = id;
 	}
 
