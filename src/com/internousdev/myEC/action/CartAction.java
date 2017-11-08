@@ -1,6 +1,7 @@
 package com.internousdev.myEC.action;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
@@ -24,55 +25,48 @@ public class CartAction extends ActionSupport implements SessionAware{
 
 
 
-			//セッションにカート情報があればリストに入れる
+
 			if(session.containsKey("cartItemInfoList")){
 				cartItemInfoList = (ArrayList<ItemInfoDTO>)session.get("cartItemInfoList");
+
+				boolean incrementSuccess = false;
+
+				for(Iterator<ItemInfoDTO> iterator = cartItemInfoList.listIterator(); iterator.hasNext();){
+					ItemInfoDTO itemInfoDTO = iterator.next();
+
+					if(itemInfoDTO.getItemId().equals(buyItemId)){
+						itemInfoDTO.setCartItemStack(itemInfoDTO.getCartItemStack() + 1);
+
+						incrementSuccess = true;
+
+
+					}else if(!iterator.hasNext() && !incrementSuccess){
+						//cartItemInfoList.add(cartItemListDAO.getItemInfo(buyItemId));
+						incrementSuccess = false;
+					}
+
+				}
+
+				if(!incrementSuccess){
+					cartItemInfoList.add(cartItemListDAO.getItemInfo(buyItemId));
+				}
+
+				for(ItemInfoDTO itemInfoDTO: cartItemInfoList){
+
+					cartItemDTO.setItemPrice(cartItemDTO.getItemPrice() + Integer.parseInt(itemInfoDTO.getItemPrice()) * itemInfoDTO.getCartItemStack());
+					cartItemDTO.setItemStack(cartItemDTO.getItemStack() + itemInfoDTO.getCartItemStack());
+				}
+
 			}else{
 				cartItemInfoList.add(cartItemListDAO.getItemInfo(buyItemId));
-			}
 
-
-			for(ItemInfoDTO itemInfoDTO: cartItemInfoList){
-				if(itemInfoDTO.getItemId().equals(buyItemId)){
-					itemInfoDTO.setCartItemStack(itemInfoDTO.getCartItemStack() + 1);
-
-				}
-			}
-			cartItemDTO.setItemPrice(cartItemDTO.getItemPrice() + Integer.parseInt(itemInfoDTO.getItemPrice()) * itemInfoDTO.getCartItemStack());
-			cartItemDTO.setItemStack(cartItemDTO.getItemStack() + itemInfoDTO.getCartItemStack());
-
-
-
-/*
-			for(String s: cartValue){
-
-				if(cartItemList.containsKey(s)){
-					itemCount = cartItemList.get(s) + 1;
-				}else{
-					itemCount = 1;
-				}
-
-				cartItemList.put(s, itemCount);
+				cartItemDTO.setItemPrice(Integer.parseInt(cartItemInfoList.get(0).getItemPrice())* cartItemInfoList.get(0).getCartItemStack());
+				cartItemDTO.setItemStack(cartItemInfoList.get(0).getCartItemStack());
 
 			}
 
 
 
-
-			for(Entry<String, Integer> entry: cartItemList.entrySet()){
-				ItemInfoDTO itemInfoDTO = new ItemInfoDTO();
-
-				itemInfoDTO = cartItemListDAO.getItemInfo(entry.getKey());
-				itemInfoDTO.setCartItemStack(entry.getValue());
-
-				cartItemInfoList.add(itemInfoDTO);
-
-				int itemPrice = Integer.parseInt(itemInfoDTO.getItemPrice());
-				cartItemDTO.setItemPrice(cartItemDTO.getItemPrice()+ itemPrice * entry.getValue());
-				cartItemDTO.setItemStack(cartItemDTO.getItemStack() + entry.getValue());
-
-			}
-*/
 			session.put("cartItemDTO", cartItemDTO);
 			session.put("cartItemInfoList", cartItemInfoList);
 

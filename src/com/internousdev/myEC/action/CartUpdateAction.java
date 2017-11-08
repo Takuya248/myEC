@@ -11,7 +11,8 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class CartUpdateAction extends ActionSupport implements SessionAware{
 
-	public CartItemDTO cartItemDTO;
+	public CartItemDTO cartItemDTO = new CartItemDTO();
+	public ItemInfoDTO itemInfoDTO = new ItemInfoDTO();
 	public String listIndex;
 	public int stackCountUpdate = 0;
 
@@ -24,12 +25,22 @@ public class CartUpdateAction extends ActionSupport implements SessionAware{
 	@SuppressWarnings("unchecked")
 	public String execute(){
 
+
 		ArrayList<ItemInfoDTO> cartItemInfoList = new ArrayList<>();
 		int listIndexInt = Integer.parseInt(listIndex);
 
 		cartItemInfoList = (ArrayList<ItemInfoDTO>)session.get("cartItemInfoList");
 		cartItemInfoList.get(listIndexInt).setCartItemStack(stackCountUpdate);
 
+
+		for(ItemInfoDTO itemInfoDTO: cartItemInfoList){
+
+			cartItemDTO.setItemPrice(cartItemDTO.getItemPrice() + Integer.parseInt(itemInfoDTO.getItemPrice()) * itemInfoDTO.getCartItemStack());
+			cartItemDTO.setItemStack(cartItemDTO.getItemStack() + itemInfoDTO.getCartItemStack());
+		}
+
+
+		session.put("cartItemDTO", cartItemDTO);
 		session.put("cartItemInfoList", cartItemInfoList);
 
 		String result = SUCCESS;
