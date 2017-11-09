@@ -1,8 +1,8 @@
 package com.internousdev.myEC.dao;
 
+import java.io.ByteArrayInputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Map;
@@ -10,65 +10,39 @@ import java.util.Map;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.internousdev.myEC.dto.ItemInfoDTO;
-import com.internousdev.myEC.dto.LoginDTO;
+import com.internousdev.myEC.util.CartDataConvert;
 import com.internousdev.myEC.util.DBConnector;
 
 public class UserCartListDAO implements SessionAware{
 
 	public DBConnector dbConnector = new DBConnector();
 	public Connection connection = dbConnector.getConnection();
+	public CartDataConvert cartDataConvert = new CartDataConvert();
 	public Map<String, Object> session;
 
+	@SuppressWarnings("static-access")
 	public void cartDBInsert(ArrayList<ItemInfoDTO> cartItemInfoList){
 
 		try{
 
+			byte[] cartItemInfoListBytes = null;
+			cartItemInfoListBytes = cartDataConvert.getByte(cartItemInfoList);
 
-
-
-
-			for(ItemInfoDTO itemInfoDTO: cartItemInfoList){
-				String sql = "INSERT INTO user_cart_info ( user_id , item_id , item_stack ) VALUE ( ? , ? , ? )";
-
-				PreparedStatement preparedStatement = connection.prepareStatement(sql);
-
-				preparedStatement.setInt(1, ((LoginDTO)session.get("loginDTO")).getId());
-				preparedStatement.setInt(2, itemInfoDTO.getItemId());
-				preparedStatement.setInt(3, itemInfoDTO.getItemId());
-
-				preparedStatement.execute();
-			}
-
-		}catch(SQLException e){
-			e.printStackTrace();
-		}
-
-
-
-	}
-
-	public ArrayList<ItemInfoDTO> cartItemSelect(String loginId){
-
-		ArrayList<ItemInfoDTO> cartItemInfoList = new ArrayList<>();
-
-		try{
-			String sql ="SELECT * FROM user_cart_info WHERE user_id = ?";
+			String sql = "INSERT INTO usercart_data ( user_id , cart_data ) VALUE ( ? , ? )";
 
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setInt(1, ((LoginDTO)session.get("loginDTO")).getId());
-			ResultSet resultSet = preparedStatement.executeQuery();
 
-			while(resultSet.next()){
-				ItemInfoDTO itemInfoDTO = new ItemInfoDTO();
+			preparedStatement.setInt(1, 1);
+			preparedStatement.setBinaryStream(2, new ByteArrayInputStream(cartItemInfoListBytes),cartItemInfoListBytes.length);
 
-				itemInfoDTO.setItemId(resultSet.getInt("item_id"));
-				itemInfoDTO.setCartItemStack(resultSet.getInt("item_stack"));
-			}
+			preparedStatement.execute();
+
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
 
-		return cartItemInfoList;
+
+
 	}
 
 

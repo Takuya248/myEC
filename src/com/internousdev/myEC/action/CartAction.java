@@ -7,6 +7,7 @@ import java.util.Map;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.internousdev.myEC.dao.CartItemListDAO;
+import com.internousdev.myEC.dao.UserCartListDAO;
 import com.internousdev.myEC.dto.CartItemDTO;
 import com.internousdev.myEC.dto.ItemInfoDTO;
 import com.opensymphony.xwork2.ActionSupport;
@@ -14,6 +15,7 @@ import com.opensymphony.xwork2.ActionSupport;
 public class CartAction extends ActionSupport implements SessionAware{
 
 	public CartItemListDAO cartItemListDAO = new CartItemListDAO();
+	public UserCartListDAO userCartListDAO = new UserCartListDAO();
 	public CartItemDTO cartItemDTO = new CartItemDTO();
 	public Map<String, Object> session;
 	public int buyItemId;
@@ -67,8 +69,27 @@ public class CartAction extends ActionSupport implements SessionAware{
 
 
 
+
+
+
+
+
+
+
+			userCartListDAO.cartDBInsert(cartItemInfoList);
+
+
+
+
+
+
+
+
+
+
 			session.put("cartItemDTO", cartItemDTO);
 			session.put("cartItemInfoList", cartItemInfoList);
+
 
 
 		String result = SUCCESS;
@@ -98,3 +119,5 @@ public class CartAction extends ActionSupport implements SessionAware{
 
 
 }
+
+
