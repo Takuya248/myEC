@@ -1,6 +1,8 @@
 package com.internousdev.myEC.dto;
 
-public class ItemInfoDTO {
+import java.io.Serializable;
+
+public class ItemInfoDTO implements Serializable{
 
 	private int itemId = 0;
 	private String categoryId;

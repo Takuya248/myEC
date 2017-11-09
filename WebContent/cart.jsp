@@ -63,8 +63,8 @@ int price = 0;
 			<table>
 				<tr>
 					<th>カートの中身</th>
-					<td>合計<s:property value="cartItemDTO.itemPrice" />円</td>
-					<td>アイテム数<s:property value="cartItemDTO.itemStack" /></td>
+					<td>合計<s:property value="session.cartItemDTO.itemPrice" />円</td>
+					<td>アイテム数<s:property value="session.cartItemDTO.itemStack" /></td>
 				</tr>
 			</table>
 

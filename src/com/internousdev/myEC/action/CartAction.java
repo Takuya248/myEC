@@ -7,6 +7,7 @@ import java.util.Map;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.internousdev.myEC.dao.CartItemListDAO;
+import com.internousdev.myEC.dao.DBUserCartListDAO;
 import com.internousdev.myEC.dao.UserCartListDAO;
 import com.internousdev.myEC.dto.CartItemDTO;
 import com.internousdev.myEC.dto.ItemInfoDTO;
@@ -15,20 +16,32 @@ import com.opensymphony.xwork2.ActionSupport;
 public class CartAction extends ActionSupport implements SessionAware{
 
 	public CartItemListDAO cartItemListDAO = new CartItemListDAO();
-	public UserCartListDAO userCartListDAO = new UserCartListDAO();
+
 	public CartItemDTO cartItemDTO = new CartItemDTO();
 	public Map<String, Object> session;
 	public int buyItemId;
 	public ArrayList<ItemInfoDTO> cartItemInfoList = new ArrayList<>();
 
 
-		@SuppressWarnings("unchecked")
-		public String execute(){
+	public DBUserCartListDAO dbUserCartListDAO = new DBUserCartListDAO();
+	public UserCartListDAO userCartListDAO = new UserCartListDAO();
 
 
+	@SuppressWarnings("unchecked")
+	public String execute(){
+
+
+
+		if(session.containsKey("loginUser")){
+
+			userCartListDAO.cartDBInsert(cartItemInfoList);
+
+
+		}else{
 
 
 			if(session.containsKey("cartItemInfoList")){
+
 				cartItemInfoList = (ArrayList<ItemInfoDTO>)session.get("cartItemInfoList");
 
 				boolean incrementSuccess = false;
@@ -42,10 +55,12 @@ public class CartAction extends ActionSupport implements SessionAware{
 						incrementSuccess = true;
 
 
-					}else if(!iterator.hasNext() && !incrementSuccess){
-						//cartItemInfoList.add(cartItemListDAO.getItemInfo(buyItemId));
-						incrementSuccess = false;
 					}
+
+					/*else if(!iterator.hasNext() && !incrementSuccess){
+
+						incrementSuccess = false;
+					}*/
 
 				}
 
@@ -53,42 +68,35 @@ public class CartAction extends ActionSupport implements SessionAware{
 					cartItemInfoList.add(cartItemListDAO.getItemInfo(buyItemId));
 				}
 
-				for(ItemInfoDTO itemInfoDTO: cartItemInfoList){
+				/*for(ItemInfoDTO itemInfoDTO: cartItemInfoList){
 
 					cartItemDTO.setItemPrice(cartItemDTO.getItemPrice() + Integer.parseInt(itemInfoDTO.getItemPrice()) * itemInfoDTO.getCartItemStack());
 					cartItemDTO.setItemStack(cartItemDTO.getItemStack() + itemInfoDTO.getCartItemStack());
-				}
+				}*/
 
 			}else{
 				cartItemInfoList.add(cartItemListDAO.getItemInfo(buyItemId));
 
-				cartItemDTO.setItemPrice(Integer.parseInt(cartItemInfoList.get(0).getItemPrice())* cartItemInfoList.get(0).getCartItemStack());
-				cartItemDTO.setItemStack(cartItemInfoList.get(0).getCartItemStack());
+				//cartItemDTO.setItemPrice(Integer.parseInt(cartItemInfoList.get(0).getItemPrice())* cartItemInfoList.get(0).getCartItemStack());
+				//cartItemDTO.setItemStack(cartItemInfoList.get(0).getCartItemStack());
 
 			}
 
+			for(ItemInfoDTO itemInfoDTO: cartItemInfoList){
+
+				cartItemDTO.setItemPrice(cartItemDTO.getItemPrice() + Integer.parseInt(itemInfoDTO.getItemPrice()) * itemInfoDTO.getCartItemStack());
+				cartItemDTO.setItemStack(cartItemDTO.getItemStack() + itemInfoDTO.getCartItemStack());
+			}
 
 
+		}
+
+		//userCartListDAO.cartDBInsert(cartItemInfoList);
+		//ArrayList<ItemInfoDTO> testList = dbUserCartListDAO.getCartData(1);
 
 
-
-
-
-
-
-			userCartListDAO.cartDBInsert(cartItemInfoList);
-
-
-
-
-
-
-
-
-
-
-			session.put("cartItemDTO", cartItemDTO);
-			session.put("cartItemInfoList", cartItemInfoList);
+		session.put("cartItemDTO", cartItemDTO);
+		session.put("cartItemInfoList", cartItemInfoList);
 
 
 
@@ -96,7 +104,7 @@ public class CartAction extends ActionSupport implements SessionAware{
 
 		return result;
 
-		}
+	}
 
 
 	public Map<String, Object> getSession() {

@@ -5,22 +5,17 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Map;
-
-import org.apache.struts2.interceptor.SessionAware;
 
 import com.internousdev.myEC.dto.ItemInfoDTO;
 import com.internousdev.myEC.util.CartDataConvert;
 import com.internousdev.myEC.util.DBConnector;
 
-public class UserCartListDAO implements SessionAware{
+public class UserCartListDAO{
 
 	public DBConnector dbConnector = new DBConnector();
 	public Connection connection = dbConnector.getConnection();
 	public CartDataConvert cartDataConvert = new CartDataConvert();
-	public Map<String, Object> session;
 
-	@SuppressWarnings("static-access")
 	public void cartDBInsert(ArrayList<ItemInfoDTO> cartItemInfoList){
 
 		try{
@@ -47,12 +42,5 @@ public class UserCartListDAO implements SessionAware{
 
 
 
-	public Map<String, Object> getSession() {
-		return session;
-	}
-
-	public void setSession(Map<String, Object> session) {
-		this.session = session;
-	}
 
 }
