@@ -1,10 +1,13 @@
 package com.internousdev.myEC.action;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
 
+import com.internousdev.myEC.dao.DBUserCartListDAO;
 import com.internousdev.myEC.dao.LoginDAO;
+import com.internousdev.myEC.dto.ItemInfoDTO;
 import com.internousdev.myEC.dto.LoginDTO;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -15,12 +18,15 @@ public class LoginAction extends ActionSupport implements SessionAware{
 	private LoginDTO loginDTO = new LoginDTO();
 	public LoginDAO loginDAO = new LoginDAO();
 
+	public DBUserCartListDAO dbUserCartList = new DBUserCartListDAO();
+
 	public String loginId;
 	public String loginPassword;
 	public String loginPasswordSc;
 
 
 
+	@SuppressWarnings("unchecked")
 	public String execute(){
 
 		if(session.containsKey("loginFlg")){
@@ -49,10 +55,48 @@ public class LoginAction extends ActionSupport implements SessionAware{
 			result = SUCCESS;
 			loginPasswordSc = ((String)session.get("loginPassword")).replaceAll(".","*");
 
+			if(session.containsKey("cartItemInfoList")){
+				ArrayList<ItemInfoDTO> sessionCartList = new ArrayList<ItemInfoDTO>();
+				ArrayList<ItemInfoDTO> dbCartList = null;
+
+				sessionCartList = (ArrayList<ItemInfoDTO>)session.get("cartItemInfoList");
+				dbCartList = dbUserCartList.getCartData(loginDTO.getId());
+
+
+				if(dbCartList == null){
+					dbUserCartList.newCartData(loginDTO.getId());
+					dbCartList = dbUserCartList.getCartData(loginDTO.getId());
+
+				}
+
+
+				for(ItemInfoDTO itemInfoDTO: sessionCartList){
+					dbCartList.add(itemInfoDTO);
+				}
+
+				dbUserCartList.updateCartData(dbCartList, loginDTO.getId());
+				session.put("cartItemInfoList", dbCartList);
+
+
+			}else{
+				ArrayList<ItemInfoDTO> dbCartList = dbUserCartList.getCartData(loginDTO.getId());
+
+				if(dbCartList == null){
+					dbUserCartList.newCartData(loginDTO.getId());
+					dbCartList = dbUserCartList.getCartData(loginDTO.getId());
+
+				}
+
+				session.put("cartItemInfoList", dbCartList);
+
+			}
+
 
 		}else{
 			result = ERROR;
 		}
+
+
 
 		System.out.println(session.get("loginFlg"));
 		return result;

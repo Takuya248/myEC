@@ -22,11 +22,17 @@ public class DBUserCartListDAO implements Serializable{
 	public void newCartData(int user_id){
 
 		try{
-			String sql = "INSERT INTO usercart_data ( user_id , cart_data ) VALUE ( ? , NULL )";
+			ArrayList<ItemInfoDTO> newArrayList = new ArrayList<ItemInfoDTO>();
+
+			byte[] newArrayListBytes = null;
+			newArrayListBytes = cartDataConvert.getByte(newArrayList);
+
+			String sql = "INSERT INTO usercart_data ( user_id , cart_data ) VALUE ( ? , ? )";
 
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
 			preparedStatement.setInt(1, user_id);
+			preparedStatement.setBinaryStream(2, new ByteArrayInputStream(newArrayListBytes),newArrayListBytes.length);
 			preparedStatement.execute();
 
 		}catch(SQLException e){
