@@ -14,18 +14,19 @@ import com.internousdev.myEC.util.DBConnector;
 
 public class DBUserCartListDAO implements Serializable{
 
-	DBConnector dbConnector = new DBConnector();
-	Connection connection = dbConnector.getConnection();
-	CartDataConvert cartDataConvert = new CartDataConvert();
+
 
 
 	public void newCartData(int user_id){
 
-		try{
-			ArrayList<ItemInfoDTO> newArrayList = new ArrayList<ItemInfoDTO>();
+		DBConnector dbConnector = new DBConnector();
+		Connection connection = dbConnector.getConnection();
+		CartDataConvert cartDataConvert = new CartDataConvert();
 
+		try{
 			byte[] newArrayListBytes = null;
-			newArrayListBytes = cartDataConvert.getByte(newArrayList);
+			newArrayListBytes = cartDataConvert.getByte(new ArrayList<ItemInfoDTO>());
+			//newArrayListBytes = cartDataConvert.getByte(newArrayList);
 
 			String sql = "INSERT INTO usercart_data ( user_id , cart_data ) VALUE ( ? , ? )";
 
@@ -38,12 +39,22 @@ public class DBUserCartListDAO implements Serializable{
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
+
+		try{
+		connection.close();
+
+		} catch(SQLException e) {
+			e.printStackTrace();
+        }
 	}
 
 
 	@SuppressWarnings("unchecked")
 	public ArrayList<ItemInfoDTO> getCartData(int user_id){
 		ArrayList<ItemInfoDTO> cartList = null;
+
+		DBConnector dbConnector = new DBConnector();
+		Connection connection = dbConnector.getConnection();
 
 		try{
 
@@ -68,12 +79,24 @@ public class DBUserCartListDAO implements Serializable{
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
+
+		try{
+			connection.close();
+
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+
 		return cartList;
 
 	}
 
 
 	public void updateCartData(ArrayList<ItemInfoDTO> cartItemInfoList, int user_id){
+
+		DBConnector dbConnector = new DBConnector();
+		Connection connection = dbConnector.getConnection();
+		CartDataConvert cartDataConvert = new CartDataConvert();
 
 		try{
 			byte[] cartItemInfoListBytes = null;
@@ -82,13 +105,18 @@ public class DBUserCartListDAO implements Serializable{
 			String sql = "UPDATE usercart_data SET cart_data = ? WHERE user_id = ?";
 
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-
 			preparedStatement.setBinaryStream(1, new ByteArrayInputStream(cartItemInfoListBytes),cartItemInfoListBytes.length);
 			preparedStatement.setInt(2, user_id);
-
 			preparedStatement.executeUpdate();
 
 		}catch(SQLException e){
+			e.printStackTrace();
+		}
+
+		try{
+			connection.close();
+
+		} catch(SQLException e) {
 			e.printStackTrace();
 		}
 	}

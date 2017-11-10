@@ -5,8 +5,10 @@ import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
 
+import com.internousdev.myEC.dao.DBUserCartListDAO;
 import com.internousdev.myEC.dto.CartItemDTO;
 import com.internousdev.myEC.dto.ItemInfoDTO;
+import com.internousdev.myEC.dto.LoginDTO;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class CartUpdateAction extends ActionSupport implements SessionAware{
@@ -16,29 +18,42 @@ public class CartUpdateAction extends ActionSupport implements SessionAware{
 	public String listIndex;
 	public int stackCountUpdate = 0;
 
+	public DBUserCartListDAO dbUserCartListDAO = new DBUserCartListDAO();
 
-	public ArrayList<ItemInfoDTO> cartItemInfoList = new ArrayList<>();
+
 
 	public Map<String, Object> session;
 
 
 	@SuppressWarnings("unchecked")
 	public String execute(){
-
-
 		ArrayList<ItemInfoDTO> cartItemInfoList = new ArrayList<>();
 		int listIndexInt = Integer.parseInt(listIndex);
 
-		cartItemInfoList = (ArrayList<ItemInfoDTO>)session.get("cartItemInfoList");
-		cartItemInfoList.get(listIndexInt).setCartItemStack(stackCountUpdate);
+		if(session.containsKey("loginUser")){
+
+			LoginDTO loginDTO = (LoginDTO)session.get("loginUser");
+			cartItemInfoList = dbUserCartListDAO.getCartData(loginDTO.getId());
+			cartItemInfoList.get(listIndexInt).setCartItemStack(stackCountUpdate);
+
+			dbUserCartListDAO.updateCartData(cartItemInfoList, loginDTO.getId());
+			session.put("cartItemInfoList", cartItemInfoList);
 
 
-		for(ItemInfoDTO itemInfoDTO: cartItemInfoList){
+			for(ItemInfoDTO itemInfoDTO: cartItemInfoList){
+				cartItemDTO.setItemPrice(cartItemDTO.getItemPrice() + Integer.parseInt(itemInfoDTO.getItemPrice()) * itemInfoDTO.getCartItemStack());
+				cartItemDTO.setItemStack(cartItemDTO.getItemStack() + itemInfoDTO.getCartItemStack());
+			}
 
-			cartItemDTO.setItemPrice(cartItemDTO.getItemPrice() + Integer.parseInt(itemInfoDTO.getItemPrice()) * itemInfoDTO.getCartItemStack());
-			cartItemDTO.setItemStack(cartItemDTO.getItemStack() + itemInfoDTO.getCartItemStack());
+		}else{
+			cartItemInfoList = (ArrayList<ItemInfoDTO>)session.get("cartItemInfoList");
+			cartItemInfoList.get(listIndexInt).setCartItemStack(stackCountUpdate);
+
+			for(ItemInfoDTO itemInfoDTO: cartItemInfoList){
+				cartItemDTO.setItemPrice(cartItemDTO.getItemPrice() + Integer.parseInt(itemInfoDTO.getItemPrice()) * itemInfoDTO.getCartItemStack());
+				cartItemDTO.setItemStack(cartItemDTO.getItemStack() + itemInfoDTO.getCartItemStack());
+			}
 		}
-
 
 		session.put("cartItemDTO", cartItemDTO);
 		session.put("cartItemInfoList", cartItemInfoList);
@@ -75,15 +90,6 @@ public class CartUpdateAction extends ActionSupport implements SessionAware{
 		this.listIndex = listIndex;
 	}
 
-
-	public ArrayList<ItemInfoDTO> getCartItemInfoList() {
-		return cartItemInfoList;
-	}
-
-
-	public void setCartItemInfoList(ArrayList<ItemInfoDTO> cartItemInfoList) {
-		this.cartItemInfoList = cartItemInfoList;
-	}
 
 
 }

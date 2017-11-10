@@ -8,38 +8,68 @@ import org.apache.struts2.interceptor.SessionAware;
 
 import com.internousdev.myEC.dao.CartItemListDAO;
 import com.internousdev.myEC.dao.DBUserCartListDAO;
-import com.internousdev.myEC.dao.UserCartListDAO;
 import com.internousdev.myEC.dto.CartItemDTO;
 import com.internousdev.myEC.dto.ItemInfoDTO;
+import com.internousdev.myEC.dto.LoginDTO;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class CartAction extends ActionSupport implements SessionAware{
 
 	public CartItemListDAO cartItemListDAO = new CartItemListDAO();
-
-	public CartItemDTO cartItemDTO = new CartItemDTO();
-	public Map<String, Object> session;
-	public int buyItemId;
-	public ArrayList<ItemInfoDTO> cartItemInfoList = new ArrayList<>();
-
-
 	public DBUserCartListDAO dbUserCartListDAO = new DBUserCartListDAO();
-	public UserCartListDAO userCartListDAO = new UserCartListDAO();
+	public CartItemDTO cartItemDTO = new CartItemDTO();
+
+	public Map<String, Object> session;
+	public int buyItemId = 0;
+
 
 
 	@SuppressWarnings("unchecked")
 	public String execute(){
 
+		ArrayList<ItemInfoDTO> cartItemInfoList = new ArrayList<>();
 
 
+		//ログイン状態確認
 		if(session.containsKey("loginUser")){
 
-			userCartListDAO.cartDBInsert(cartItemInfoList);
+			//ログイン中のカート内アイテム処理
 
+			//ログイン中ユーザーのカートをDBから取り出す
+			LoginDTO loginDTO = (LoginDTO)session.get("loginUser");
+			cartItemInfoList = dbUserCartListDAO.getCartData(loginDTO.getId());
+
+
+			//同じアイテムがカート内にあったらカートのアイテム数をカウント
+			boolean incrementSuccess = false;
+
+			for(Iterator<ItemInfoDTO> iterator = cartItemInfoList.listIterator(); iterator.hasNext();){
+				ItemInfoDTO itemInfoDTO = iterator.next();
+
+				if(itemInfoDTO.getItemId() == buyItemId){
+					itemInfoDTO.setCartItemStack(itemInfoDTO.getCartItemStack() + 1);
+
+					incrementSuccess = true;
+
+				}
+			}
+
+			if(!incrementSuccess && buyItemId == 0){
+				cartItemInfoList.add(cartItemListDAO.getItemInfo(buyItemId));
+			}
+
+			dbUserCartListDAO.updateCartData(cartItemInfoList, loginDTO.getId());
+			session.put("cartItemInfoList", cartItemInfoList);
+
+
+			for(ItemInfoDTO itemInfoDTO: cartItemInfoList){
+
+				cartItemDTO.setItemPrice(cartItemDTO.getItemPrice() + Integer.parseInt(itemInfoDTO.getItemPrice()) * itemInfoDTO.getCartItemStack());
+				cartItemDTO.setItemStack(cartItemDTO.getItemStack() + itemInfoDTO.getCartItemStack());
+
+			}
 
 		}else{
-
-
 			if(session.containsKey("cartItemInfoList")){
 
 				cartItemInfoList = (ArrayList<ItemInfoDTO>)session.get("cartItemInfoList");
@@ -54,32 +84,16 @@ public class CartAction extends ActionSupport implements SessionAware{
 
 						incrementSuccess = true;
 
-
 					}
-
-					/*else if(!iterator.hasNext() && !incrementSuccess){
-
-						incrementSuccess = false;
-					}*/
-
 				}
 
-				if(!incrementSuccess){
+				//0なとき追加しない
+				if(!incrementSuccess && buyItemId != 0){
 					cartItemInfoList.add(cartItemListDAO.getItemInfo(buyItemId));
 				}
 
-				/*for(ItemInfoDTO itemInfoDTO: cartItemInfoList){
-
-					cartItemDTO.setItemPrice(cartItemDTO.getItemPrice() + Integer.parseInt(itemInfoDTO.getItemPrice()) * itemInfoDTO.getCartItemStack());
-					cartItemDTO.setItemStack(cartItemDTO.getItemStack() + itemInfoDTO.getCartItemStack());
-				}*/
-
 			}else{
 				cartItemInfoList.add(cartItemListDAO.getItemInfo(buyItemId));
-
-				//cartItemDTO.setItemPrice(Integer.parseInt(cartItemInfoList.get(0).getItemPrice())* cartItemInfoList.get(0).getCartItemStack());
-				//cartItemDTO.setItemStack(cartItemInfoList.get(0).getCartItemStack());
-
 			}
 
 			for(ItemInfoDTO itemInfoDTO: cartItemInfoList){
@@ -90,10 +104,6 @@ public class CartAction extends ActionSupport implements SessionAware{
 
 
 		}
-
-		//userCartListDAO.cartDBInsert(cartItemInfoList);
-		//ArrayList<ItemInfoDTO> testList = dbUserCartListDAO.getCartData(1);
-
 
 		session.put("cartItemDTO", cartItemDTO);
 		session.put("cartItemInfoList", cartItemInfoList);

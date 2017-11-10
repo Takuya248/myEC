@@ -9,7 +9,7 @@ public class LoginDTO {
 	private String mailAddress;
 	private String phoneNumber;
 	private String regiDate;
-	private boolean loginFlg;
+	private boolean loginFlg = false;
 
 
 	public String getRegiDate() {

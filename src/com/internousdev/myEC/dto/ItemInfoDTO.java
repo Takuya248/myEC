@@ -5,10 +5,10 @@ import java.io.Serializable;
 public class ItemInfoDTO implements Serializable{
 
 	private int itemId = 0;
-	private String categoryId;
-	private String itemName;
-	private String itemPrice;
-	private String itemStock;
+	private String categoryId = null;
+	private String itemName = "";
+	private String itemPrice = "0";
+	private String itemStock = "0";
 	private int cartItemStack = 1;
 
 
