@@ -32,8 +32,8 @@ public class ItemListDAO{
 				itemInfoDTO.setItemId(rs.getInt("id"));
 				itemInfoDTO.setCategoryId(rs.getString("category_id"));
 				itemInfoDTO.setItemName(rs.getString("item_name"));
-				itemInfoDTO.setItemPrice(rs.getString("item_price"));
-				itemInfoDTO.setItemStock(rs.getString("item_stock"));
+				itemInfoDTO.setItemPrice(rs.getInt("item_price"));
+				itemInfoDTO.setItemStock(rs.getInt("item_stock"));
 
 				itemList.add(itemInfoDTO);
 			}

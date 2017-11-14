@@ -1,17 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="s" uri="/struts-tags" %>
-<%@
-page import="com.internousdev.myEC.dto.ItemInfoDTO"
-import="java.util.ArrayList"
-import="java.util.Map.Entry"
- %>
-
-<%
-
-int price = 0;
-
-%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
 
 
 <!DOCTYPE html>
@@ -26,12 +15,13 @@ int price = 0;
 <meta http-equiv="imagetoolbar" content="no" />
 <meta name="description" content="" />
 <meta name="keywords" content="" />
-<title>Cart画面</title>
+<title>Payment画面</title>
 
 <link href="css/main.css" rel="stylesheet" type="text/css">
 
 </head>
 <body>
+
 <!--------------  ヘッダ  -------------->
 
 	<header>
@@ -63,12 +53,12 @@ int price = 0;
 			<table>
 				<tr>
 					<th>カートの中身</th>
-					<td>合計<s:property value="cartInfoDTO.totalPrice" />円</td>
-					<td>アイテム数<s:property value="cartInfoDTO.totalItemStack" /></td>
+					<td>合計<s:property value="session.cartItemDTO.itemPrice" />円</td>
+					<td>アイテム数<s:property value="session.cartItemDTO.itemStack" /></td>
 				</tr>
 			</table>
 
-			<s:iterator value="itemInfoList" status="idx">
+			<s:iterator value="session.cartItemInfoList" status="idx">
 
 
 				<table>
@@ -81,25 +71,14 @@ int price = 0;
 						<td><s:property value="itemStock" /></td>
 						<th>注文数</th>
 						<td><s:property value="cartItemStack" /></td>
-						<td>
-							<s:form action="CartUpdateAction">
-								<s:hidden name="listIndex" value="%{#idx.index}" />
-								<s:textfield type="number" name="stackCountUpdate" value="%{cartItemStack}" min="0" max="20" />
-								<s:submit value="更新" />
-							</s:form>
-						</td>
-						<td>
-							<s:form action="CartRemoveAction">
-								<s:hidden name="removeIndex" value="%{#idx.index}" /><s:submit value="商品を削除" />
-							</s:form>
-						</td>
+
 					</tr>
 				</table>
 
 
 
 			</s:iterator>
-			<s:form action="ItemListPageAction"><s:submit value="商品一覧" /></s:form><s:form action="PaymentAction"><s:submit value="決済" /></s:form>
+			<s:form action="PaymentCompleteAction"><s:submit value="購入" /></s:form>
 </div>
 
 	</div>
@@ -111,6 +90,7 @@ int price = 0;
 	<footer>
 		<p>footer</p>
     </footer>
+
 
 
 </body>

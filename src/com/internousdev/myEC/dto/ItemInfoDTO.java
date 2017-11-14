@@ -1,15 +1,14 @@
 package com.internousdev.myEC.dto;
 
-import java.io.Serializable;
-
-public class ItemInfoDTO implements Serializable{
+public class ItemInfoDTO {
 
 	private int itemId = 0;
-	private String categoryId = null;
+	private String categoryId = "";
 	private String itemName = "";
-	private String itemPrice = "0";
-	private String itemStock = "0";
+	private int itemPrice = 0;
+	private int itemStock = 0;
 	private int cartItemStack = 1;
+
 
 
 	public String getCategoryId() {
@@ -24,16 +23,16 @@ public class ItemInfoDTO implements Serializable{
 	public void setItemName(String itemName) {
 		this.itemName = itemName;
 	}
-	public String getItemPrice() {
+	public int getItemPrice() {
 		return itemPrice;
 	}
-	public void setItemPrice(String itemPrice) {
+	public void setItemPrice(int itemPrice) {
 		this.itemPrice = itemPrice;
 	}
-	public String getItemStock() {
+	public int getItemStock() {
 		return itemStock;
 	}
-	public void setItemStock(String itemStock) {
+	public void setItemStock(int itemStock) {
 		this.itemStock = itemStock;
 	}
 	public int getItemId() {

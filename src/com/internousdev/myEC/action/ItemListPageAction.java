@@ -14,6 +14,7 @@ import com.opensymphony.xwork2.ActionSupport;
 public class ItemListPageAction extends ActionSupport implements SessionAware{
 
 	public Map<String, Object> session;
+	public String category = "all";
 	public ArrayList<ItemInfoDTO> itemInfoList = new ArrayList<>();
 
 	public String execute(){
@@ -22,7 +23,8 @@ public class ItemListPageAction extends ActionSupport implements SessionAware{
 
 		ArrayList<ItemInfoDTO> itemDTOList = new ArrayList<ItemInfoDTO>();
 
-		itemDTOList = itemListDAO.getItemInfo("rod");
+		category="rod";
+		itemDTOList = itemListDAO.getItemInfo(category);
 
 		for(ItemInfoDTO  itemInfoDTO : itemDTOList){
 			itemInfoList.add(itemInfoDTO);
@@ -52,6 +54,16 @@ public class ItemListPageAction extends ActionSupport implements SessionAware{
 
 	public void setSession(Map<String, Object> session) {
 		this.session = session;
+	}
+
+
+	public String getCategory() {
+		return category;
+	}
+
+
+	public void setCategory(String category) {
+		this.category = category;
 	}
 
 

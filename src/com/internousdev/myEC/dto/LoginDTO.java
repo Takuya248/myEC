@@ -2,12 +2,13 @@ package com.internousdev.myEC.dto;
 
 public class LoginDTO {
 
-	private int Id;
+	private int userId;
 	private String loginId;
 	private String loginPassword;
 	private String userName;
 	private String mailAddress;
 	private String phoneNumber;
+	private String address;
 	private String regiDate;
 	private boolean loginFlg = false;
 
@@ -32,11 +33,11 @@ public class LoginDTO {
 		this.loginPassword = loginPassword;
 	}
 	public int getId() {
-		return Id;
+		return userId;
 	}
 
-	public void setId(int id) {
-		Id = id;
+	public void setId(int userId) {
+		this.userId = userId;
 	}
 
 	public String getLoginPassword() {
@@ -74,6 +75,14 @@ public class LoginDTO {
 
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 }

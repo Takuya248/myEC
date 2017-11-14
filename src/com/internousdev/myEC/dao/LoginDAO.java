@@ -10,28 +10,31 @@ import com.internousdev.myEC.util.DBConnector;
 public class LoginDAO {
 
 	private LoginDTO loginDTO = new LoginDTO();
-	private DBConnector dbConn = new DBConnector();
-	private Connection conn = dbConn.getConnection();
+
 
 
 	public LoginDTO getLoginUserInfo(String loginId,String loginPassword){
 
+		DBConnector dbConnector = new DBConnector();
+		Connection connection = dbConnector.getConnection();
+
 		String sql = "SELECT * FROM user_info where login_id = ? AND login_pass = ?";
+		//String sql = "SELECT login_id , CONVERT(AES_DECRYPT(UNHEX(login_pass),'test') USING utf8) as login_pass FROM user_info where login_id = ? AND login_pass = HEX(AES_ENCRYPT( ? ,'test'))";
 
 		try{
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, loginId);
-			ps.setString(2, loginPassword);
-			ResultSet rs = ps.executeQuery();
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setString(1, loginId);
+			preparedStatement.setString(2, loginPassword);
+			ResultSet resultSet = preparedStatement.executeQuery();
 
-			if(rs.next()){
-				loginDTO.setId(rs.getInt("id"));
-				loginDTO.setLoginId(rs.getString("login_id"));
-				loginDTO.setLoginPassword(rs.getString("login_pass"));
-				loginDTO.setUserName(rs.getString("user_name"));
-				loginDTO.setMailAddress(rs.getString("mail_add"));
-				loginDTO.setPhoneNumber(rs.getString("phone_number"));
-				loginDTO.setRegiDate(rs.getString("insert_date"));
+			if(resultSet.next()){
+				loginDTO.setId(resultSet.getInt("user_id"));
+				loginDTO.setLoginId(resultSet.getString("login_id"));
+				loginDTO.setLoginPassword(resultSet.getString("login_pass"));
+				loginDTO.setUserName(resultSet.getString("user_name"));
+				loginDTO.setMailAddress(resultSet.getString("mail_add"));
+				loginDTO.setPhoneNumber(resultSet.getString("phone_number"));
+				loginDTO.setRegiDate(resultSet.getString("insert_date"));
 				loginDTO.setLoginFlg(true);
 			}
 		}catch(Exception e){

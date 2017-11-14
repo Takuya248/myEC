@@ -1,33 +1,39 @@
 package com.internousdev.myEC.action;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
 
-import com.internousdev.myEC.dao.CartItemListDAO;
 import com.internousdev.myEC.dao.DBUserCartListDAO;
+import com.internousdev.myEC.dao.GetCartItemInfoList;
+import com.internousdev.myEC.dto.CartInfoDTO;
 import com.internousdev.myEC.dto.CartItemDTO;
 import com.internousdev.myEC.dto.ItemInfoDTO;
 import com.internousdev.myEC.dto.LoginDTO;
+import com.internousdev.myEC.util.CartItemCount;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class CartAction extends ActionSupport implements SessionAware{
 
-	public CartItemListDAO cartItemListDAO = new CartItemListDAO();
 	public DBUserCartListDAO dbUserCartListDAO = new DBUserCartListDAO();
 	public CartItemDTO cartItemDTO = new CartItemDTO();
+	public CartInfoDTO cartInfoDTO = new CartInfoDTO();
+	public ItemInfoDTO itemInfoDTO = new ItemInfoDTO();
+	public CartItemCount cartItemCount = new CartItemCount();
+	public GetCartItemInfoList getCartItemInfoList = new GetCartItemInfoList();
 
 	public Map<String, Object> session;
-	public int buyItemId = 0;
 
+	public int buyItemId = 0;
+	public ArrayList<CartItemDTO> cart = new ArrayList<>();
+	public ArrayList<ItemInfoDTO> itemInfoList = new ArrayList<ItemInfoDTO>();
 
 
 	@SuppressWarnings("unchecked")
 	public String execute(){
 
-		ArrayList<ItemInfoDTO> cartItemInfoList = new ArrayList<>();
+
 
 
 		//ログイン状態確認
@@ -37,81 +43,70 @@ public class CartAction extends ActionSupport implements SessionAware{
 
 			//ログイン中ユーザーのカートをDBから取り出す
 			LoginDTO loginDTO = (LoginDTO)session.get("loginUser");
-			cartItemInfoList = dbUserCartListDAO.getCartData(loginDTO.getId());
+			cart = dbUserCartListDAO.getDBCartList(loginDTO.getId());
 
 
 			//同じアイテムがカート内にあったらカートのアイテム数をカウント
 			boolean incrementSuccess = false;
 
-			for(Iterator<ItemInfoDTO> iterator = cartItemInfoList.listIterator(); iterator.hasNext();){
-				ItemInfoDTO itemInfoDTO = iterator.next();
 
-				if(itemInfoDTO.getItemId() == buyItemId){
-					itemInfoDTO.setCartItemStack(itemInfoDTO.getCartItemStack() + 1);
+			for(CartItemDTO cartItemDTO : cart){
+				if(cartItemDTO.getItemId() == buyItemId){
+					cartItemDTO.setItemCount(cartItemDTO.getItemCount() + 1);
+
 
 					incrementSuccess = true;
-
 				}
 			}
 
-			if(!incrementSuccess && buyItemId == 0){
-				cartItemInfoList.add(cartItemListDAO.getItemInfo(buyItemId));
-			}
+			dbUserCartListDAO.updateCartData(cart, loginDTO.getId());
 
-			dbUserCartListDAO.updateCartData(cartItemInfoList, loginDTO.getId());
-			session.put("cartItemInfoList", cartItemInfoList);
+			if(!incrementSuccess && buyItemId != 0){
+				CartItemDTO cartItemDTO = new CartItemDTO();
+				cartItemDTO.setItemId(buyItemId);
+				cart.add(cartItemDTO);
 
-
-			for(ItemInfoDTO itemInfoDTO: cartItemInfoList){
-
-				cartItemDTO.setItemPrice(cartItemDTO.getItemPrice() + Integer.parseInt(itemInfoDTO.getItemPrice()) * itemInfoDTO.getCartItemStack());
-				cartItemDTO.setItemStack(cartItemDTO.getItemStack() + itemInfoDTO.getCartItemStack());
-
+				itemInfoList = getCartItemInfoList.getItemInfo(cart);
+				cartInfoDTO = cartItemCount.itemCount(itemInfoList);
 			}
 
 		}else{
-			if(session.containsKey("cartItemInfoList")){
+			if(session.containsKey("cart")){
 
-				cartItemInfoList = (ArrayList<ItemInfoDTO>)session.get("cartItemInfoList");
+				cart = (ArrayList<CartItemDTO>)session.get("cart");
 
 				boolean incrementSuccess = false;
 
-				for(Iterator<ItemInfoDTO> iterator = cartItemInfoList.listIterator(); iterator.hasNext();){
-					ItemInfoDTO itemInfoDTO = iterator.next();
-
-					if(itemInfoDTO.getItemId() == buyItemId){
-						itemInfoDTO.setCartItemStack(itemInfoDTO.getCartItemStack() + 1);
+				for(CartItemDTO cartItemDTO : cart){
+					if(cartItemDTO.getItemId() == buyItemId){
+						cartItemDTO.setItemCount(cartItemDTO.getItemCount() + 1);
 
 						incrementSuccess = true;
-
 					}
 				}
 
-				//0なとき追加しない
 				if(!incrementSuccess && buyItemId != 0){
-					cartItemInfoList.add(cartItemListDAO.getItemInfo(buyItemId));
+					CartItemDTO cartItemDTO = new CartItemDTO();
+					cartItemDTO.setItemId(buyItemId);
+					cart.add(cartItemDTO);
 				}
 
 			}else{
-				cartItemInfoList.add(cartItemListDAO.getItemInfo(buyItemId));
+				CartItemDTO cartItemDTO = new CartItemDTO();
+				cartItemDTO.setItemId(buyItemId);
+				cart.add(cartItemDTO);
 			}
 
-			for(ItemInfoDTO itemInfoDTO: cartItemInfoList){
 
-				cartItemDTO.setItemPrice(cartItemDTO.getItemPrice() + Integer.parseInt(itemInfoDTO.getItemPrice()) * itemInfoDTO.getCartItemStack());
-				cartItemDTO.setItemStack(cartItemDTO.getItemStack() + itemInfoDTO.getCartItemStack());
-			}
 
+			session.put("cart", cart);
 
 		}
 
-		session.put("cartItemDTO", cartItemDTO);
-		session.put("cartItemInfoList", cartItemInfoList);
-
-
+		itemInfoList = getCartItemInfoList.getItemInfo(cart);
+		cartInfoDTO = cartItemCount.itemCount(itemInfoList);
 
 		String result = SUCCESS;
-
 		return result;
 
 	}
@@ -133,6 +128,36 @@ public class CartAction extends ActionSupport implements SessionAware{
 
 	public void setBuyItemId(int buyItemId) {
 		this.buyItemId = buyItemId;
+	}
+
+
+	public CartInfoDTO getCartInfoDTO() {
+		return cartInfoDTO;
+	}
+
+
+	public void setCartInfoDTO(CartInfoDTO cartInfoDTO) {
+		this.cartInfoDTO = cartInfoDTO;
+	}
+
+
+	public ArrayList<CartItemDTO> getCart() {
+		return cart;
+	}
+
+
+	public void setCart(ArrayList<CartItemDTO> cart) {
+		this.cart = cart;
+	}
+
+
+	public ArrayList<ItemInfoDTO> getItemInfoList() {
+		return itemInfoList;
+	}
+
+
+	public void setItemInfoList(ArrayList<ItemInfoDTO> itemInfoList) {
+		this.itemInfoList = itemInfoList;
 	}
 
 

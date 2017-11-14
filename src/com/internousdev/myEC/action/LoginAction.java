@@ -7,7 +7,7 @@ import org.apache.struts2.interceptor.SessionAware;
 
 import com.internousdev.myEC.dao.DBUserCartListDAO;
 import com.internousdev.myEC.dao.LoginDAO;
-import com.internousdev.myEC.dto.ItemInfoDTO;
+import com.internousdev.myEC.dto.CartItemDTO;
 import com.internousdev.myEC.dto.LoginDTO;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -38,7 +38,9 @@ public class LoginAction extends ActionSupport implements SessionAware{
 
 		loginDTO = loginDAO.getLoginUserInfo(loginId,loginPassword);
 
-		String result;
+		String result = SUCCESS;
+
+
 
 		session.put("loginId", loginDTO.getLoginId());
 		session.put("loginPassword", loginDTO.getLoginPassword());
@@ -52,45 +54,21 @@ public class LoginAction extends ActionSupport implements SessionAware{
 
 
 		if((boolean)session.get("loginFlg")){
-			result = SUCCESS;
-			loginPasswordSc = ((String)session.get("loginPassword")).replaceAll(".","*");
 
-			if(session.containsKey("cartItemInfoList")){
-				ArrayList<ItemInfoDTO> sessionCartList = new ArrayList<ItemInfoDTO>();
-				ArrayList<ItemInfoDTO> dbCartList = null;
+			//loginPasswordSc = ((String)session.get("loginPassword")).replaceAll(".","*");
 
-				sessionCartList = (ArrayList<ItemInfoDTO>)session.get("cartItemInfoList");
-				dbCartList = dbUserCartList.getCartData(loginDTO.getId());
+			if(session.containsKey("cart")){
+				ArrayList<CartItemDTO> sessionCart = new ArrayList<CartItemDTO>();
+				ArrayList<CartItemDTO> dbCartList = null;
 
-
-				if(dbCartList == null){
-					dbUserCartList.newCartData(loginDTO.getId());
-					dbCartList = dbUserCartList.getCartData(loginDTO.getId());
-
-				}
-
-
-				for(ItemInfoDTO itemInfoDTO: sessionCartList){
-					dbCartList.add(itemInfoDTO);
-				}
-
-				dbUserCartList.updateCartData(dbCartList, loginDTO.getId());
-				session.put("cartItemInfoList", dbCartList);
-
-
-			}else{
-				ArrayList<ItemInfoDTO> dbCartList = dbUserCartList.getCartData(loginDTO.getId());
+				sessionCart = (ArrayList<CartItemDTO>)session.get("cart");
+				dbCartList = dbUserCartList.getDBCartList(loginDTO.getId());
 
 				if(dbCartList == null){
-					dbUserCartList.newCartData(loginDTO.getId());
-					dbCartList = dbUserCartList.getCartData(loginDTO.getId());
+					dbUserCartList.insertCartData(sessionCart,loginDTO.getId());
 
 				}
-
-				session.put("cartItemInfoList", dbCartList);
-
 			}
-
 
 		}else{
 			result = ERROR;

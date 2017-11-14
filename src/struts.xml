@@ -79,6 +79,14 @@
 			<result name="success">cart.jsp</result>
 		</action>
 
+		<action name="PaymentAction" class="com.internousdev.myEC.action.PaymentAction" method="execute">
+			<result name="success">payment.jsp</result>
+		</action>
+
+		<action name="PaymentCompleteAction" class="com.internousdev.myEC.action.PaymentCompleteAction" method="execute">
+			<result name="success">mypage.jsp</result>
+		</action>
+
 
 	</package>
 </struts>
