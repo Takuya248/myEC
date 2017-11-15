@@ -18,7 +18,8 @@ public class LoginAction extends ActionSupport implements SessionAware{
 	private LoginDTO loginDTO = new LoginDTO();
 	public LoginDAO loginDAO = new LoginDAO();
 
-	public DBUserCartListDAO dbUserCartList = new DBUserCartListDAO();
+	public DBUserCartListDAO dbUserCartListDAO = new DBUserCartListDAO();
+
 
 	public String loginId;
 	public String loginPassword;
@@ -62,16 +63,30 @@ public class LoginAction extends ActionSupport implements SessionAware{
 				ArrayList<CartItemDTO> dbCartList = null;
 
 				sessionCart = (ArrayList<CartItemDTO>)session.get("cart");
-				dbCartList = dbUserCartList.getDBCartList(loginDTO.getId());
+				dbCartList = dbUserCartListDAO.getDBCartList(loginDTO.getId());
 
-				if(dbCartList == null){
-					dbUserCartList.insertCartData(sessionCart,loginDTO.getId());
+				for(CartItemDTO sessionCartItemDTO : sessionCart){
+					boolean addResult = false;
 
+					for(CartItemDTO dbCartItemDTO : dbCartList){
+						if(sessionCartItemDTO.getItemId() == dbCartItemDTO.getItemId()){
+
+							dbCartItemDTO.setItemCount(dbCartItemDTO.getItemCount() + sessionCartItemDTO.getItemCount());
+							dbUserCartListDAO.updateCartData(dbCartItemDTO, loginDTO.getId());
+
+							addResult = true;
+						}
+					}
+
+					if(!addResult){
+						dbUserCartListDAO.insertCartData(sessionCartItemDTO, loginDTO.getId());
+
+					}
 				}
 			}
-
 		}else{
 			result = ERROR;
+
 		}
 
 

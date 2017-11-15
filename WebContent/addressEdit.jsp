@@ -12,7 +12,7 @@
 <meta http-equiv="imagetoolbar" content="no" />
 <meta name="description" content="" />
 <meta name="keywords" content="" />
-<title>登録画面</title>
+<title>住所登録画面</title>
 
 <link href="css/main.css" rel="stylesheet" type="text/css">
 </head>
@@ -33,30 +33,24 @@
 			<s:form action="UserInfoEntryAction">
 				<table>
 					<tr>
-						<td>ログインID</td>
-						<td><input type="text" name="newLoginId" /></td>
-					</tr>
-					<s:if test="checkFlg">
-					<tr>
-						<td></td>
-						<td><div id="idCheck">※使用されています</div></td>
-					</tr>
-					</s:if>
-					<tr>
-						<td>パスワード</td>
-						<td><s:password name="newPassword" /></td>
+						<td>都道府県</td>
+						<td><input type="text" name="state" /></td>
 					</tr>
 					<tr>
-						<td>名前</td>
-						<td><s:textfield name="newUserName" /></td>
+						<td>市区町村</td>
+						<td><s:password name="city" /></td>
 					</tr>
 					<tr>
-						<td>メールアドレス</td>
-						<td><s:textfield name="newMailAddress" /></td>
+						<td>番地</td>
+						<td><s:textfield name="street" /></td>
 					</tr>
 					<tr>
-						<td>電話番号</td>
-						<td><s:textfield name="newPhoneNumber" /></td>
+						<td>建物</td>
+						<td><s:textfield name="building" /></td>
+					</tr>
+					<tr>
+						<td>郵便番号</td>
+						<td><s:textfield name="zipFront" /></td>
 					</tr>
 
 				</table>

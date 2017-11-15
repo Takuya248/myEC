@@ -99,8 +99,25 @@ int price = 0;
 
 
 			</s:iterator>
-			<s:form action="ItemListPageAction"><s:submit value="商品一覧" /></s:form><s:form action="PaymentAction"><s:submit value="決済" /></s:form>
-</div>
+
+
+				<table>
+				<tr><td><a href='<s:url action="ItemListPageAction" />'>商品リスト</a></td></tr>
+			<s:if test="session.loginFlg">
+					<tr>
+						<s:form action="HowToBuyAction"><s:submit value="購入" /></s:form>
+					</tr>
+			</s:if>
+			<s:else>
+				<tr>
+					<s:form action="HowToBuyAction">
+						<td><button type="submit" name="select" value="regi">登録して購入</button></td>
+						<td><button type="submit" name="select" value="notregi">登録せず購入</button></td>
+					</s:form>
+					</tr>
+			</s:else>
+			</table>
+			</div>
 
 	</div>
 

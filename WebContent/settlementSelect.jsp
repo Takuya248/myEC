@@ -1,10 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
-<%@ taglib prefix="s" uri="/struts-tags" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
 
 
 <!DOCTYPE html>
+
 <html>
+
 <head>
 <meta charset="utf-8">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -13,13 +15,14 @@
 <meta http-equiv="imagetoolbar" content="no" />
 <meta name="description" content="" />
 <meta name="keywords" content="" />
-<title>Mypage画面</title>
+<title>Payment画面</title>
 
 <link href="css/main.css" rel="stylesheet" type="text/css">
+
 </head>
 <body>
 
-
+<!--------------  ヘッダ  -------------->
 
 	<header>
 
@@ -33,38 +36,54 @@
 		<div id="login">
 			<s:if test='session.get("loginFlg") == true'>
 				<a href='<s:url action="MypageAction" />'>マイページ</a>
-				<a href='<s:url action="CartAction" />'>カート</a>
 			</s:if>
 			<s:else>
 				<a href='<s:url action="LoginPageAction" />'>Login</a>
 			</s:else>
 		</div>
 	</header>
+　
 
 	<!--------------  メイン  -------------->
 
+
 	<div id="main">
-		<div id="mypageUserInfo">
+
+<div id="cartItemList">
+
 			<table>
 				<tr>
-					<th>ユーザー名：</th>
-					<td><s:property value='session.get("loginId")' />さんのマイページ</td>
+					<th>カートの中身</th>
+					<td>合計<s:property value="cartInfoDTO.totalPrice" />円</td>
+					<td>アイテム数<s:property value="cartInfoDTO.totalItemStack" /></td>
 				</tr>
-
-
-
-
 			</table>
-		</div>
 
-		<div id="mypageMenu">
-			<ul>
-                <li><a href='<s:url action="UserInfoAction" />'>ユーザー登録情報</a></li>
-                <li>購入履歴</li>
-			</ul>
-		</div>
+			<s:iterator value="itemInfoList" status="idx">
+
+
+				<table>
+					<tr>
+						<th>商品名</th>
+						<td><s:property value="itemName" /></td>
+						<th>価格</th>
+						<td><s:property value="itemPrice" /></td>
+						<th>在庫数</th>
+						<td><s:property value="itemStock" /></td>
+						<th>注文数</th>
+						<td><s:property value="cartItemStack" /></td>
+					</tr>
+				</table>
+
+
+
+			</s:iterator>
+
+			</div>
 
 	</div>
+
+
 
 
 	<!--------------  フッタ  -------------->
@@ -72,7 +91,9 @@
 
 	<footer>
 		<p>footer</p>
-	</footer>
+    </footer>
+
+
 
 </body>
 </html>

@@ -14,8 +14,7 @@ import com.internousdev.myEC.dto.LoginDTO;
 import com.internousdev.myEC.util.CartItemCount;
 import com.opensymphony.xwork2.ActionSupport;
 
-public class CartAction extends ActionSupport implements SessionAware{
-
+public class SettlementAction extends ActionSupport implements SessionAware{
 	public DBUserCartListDAO dbUserCartListDAO = new DBUserCartListDAO();
 	public CartItemDTO cartItemDTO = new CartItemDTO();
 	public CartInfoDTO cartInfoDTO = new CartInfoDTO();
@@ -25,81 +24,23 @@ public class CartAction extends ActionSupport implements SessionAware{
 
 	public Map<String, Object> session;
 
-	public int buyItemId = 0;
 	public ArrayList<CartItemDTO> cart = new ArrayList<CartItemDTO>();
 	public ArrayList<ItemInfoDTO> itemInfoList = new ArrayList<ItemInfoDTO>();
+
+
 
 
 	@SuppressWarnings("unchecked")
 	public String execute(){
 
-
-
-
-		//ログイン状態確認
 		if(session.containsKey("loginUser")){
 
-			//ログイン中のカート内アイテム処理
-
-			//ログイン中ユーザーのカートをDBから取り出す
 			LoginDTO loginDTO = (LoginDTO)session.get("loginUser");
 			cart = dbUserCartListDAO.getDBCartList(loginDTO.getId());
 
-
-			//同じアイテムがカート内にあったらカートのアイテム数をカウント
-			boolean incrementSuccess = false;
-
-
-			for(CartItemDTO cartItemDTO : cart){
-				if(cartItemDTO.getItemId() == buyItemId){
-					cartItemDTO.setItemCount(cartItemDTO.getItemCount() + 1);
-					dbUserCartListDAO.updateCartData(cartItemDTO, loginDTO.getId());
-
-					incrementSuccess = true;
-				}
-			}
-
-			if(!incrementSuccess && buyItemId != 0){
-				CartItemDTO cartItemDTO = new CartItemDTO();
-				cartItemDTO.setItemId(buyItemId);
-				cart.add(cartItemDTO);
-
-				dbUserCartListDAO.insertCartData(cartItemDTO, loginDTO.getId());
-			}
-
-
-
-
 		}else{
-			if(session.containsKey("cart")){
 
 				cart = (ArrayList<CartItemDTO>)session.get("cart");
-
-				boolean incrementSuccess = false;
-
-				for(CartItemDTO cartItemDTO : cart){
-					if(cartItemDTO.getItemId() == buyItemId){
-						cartItemDTO.setItemCount(cartItemDTO.getItemCount() + 1);
-
-						incrementSuccess = true;
-					}
-				}
-
-				if(!incrementSuccess && buyItemId != 0){
-					CartItemDTO cartItemDTO = new CartItemDTO();
-					cartItemDTO.setItemId(buyItemId);
-					cart.add(cartItemDTO);
-				}
-
-			}else{
-				CartItemDTO cartItemDTO = new CartItemDTO();
-				cartItemDTO.setItemId(buyItemId);
-				cart.add(cartItemDTO);
-			}
-
-
-
-			session.put("cart", cart);
 
 		}
 
@@ -113,9 +54,6 @@ public class CartAction extends ActionSupport implements SessionAware{
 
 
 
-
-
-
 	public Map<String, Object> getSession() {
 		return session;
 	}
@@ -125,19 +63,11 @@ public class CartAction extends ActionSupport implements SessionAware{
 	}
 
 
-	public int getBuyItemId() {
-		return buyItemId;
-	}
-
-
-	public void setBuyItemId(int buyItemId) {
-		this.buyItemId = buyItemId;
-	}
-
 
 	public CartInfoDTO getCartInfoDTO() {
 		return cartInfoDTO;
 	}
+
 
 
 	public void setCartInfoDTO(CartInfoDTO cartInfoDTO) {
@@ -145,19 +75,11 @@ public class CartAction extends ActionSupport implements SessionAware{
 	}
 
 
-	public ArrayList<CartItemDTO> getCart() {
-		return cart;
-	}
-
-
-	public void setCart(ArrayList<CartItemDTO> cart) {
-		this.cart = cart;
-	}
-
 
 	public ArrayList<ItemInfoDTO> getItemInfoList() {
 		return itemInfoList;
 	}
+
 
 
 	public void setItemInfoList(ArrayList<ItemInfoDTO> itemInfoList) {
@@ -165,6 +87,5 @@ public class CartAction extends ActionSupport implements SessionAware{
 	}
 
 
+
 }
-
-

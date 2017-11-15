@@ -48,38 +48,26 @@
 
 
 	<div id="main">
-<div id="cartItemList">
-
-			<table>
-				<tr>
-					<th>カートの中身</th>
-					<td>合計<s:property value="session.cartItemDTO.itemPrice" />円</td>
-					<td>アイテム数<s:property value="session.cartItemDTO.itemStack" /></td>
-				</tr>
-			</table>
-
-			<s:iterator value="session.cartItemInfoList" status="idx">
 
 
+
+
+
+			<s:if test="session.loginFlg">
 				<table>
 					<tr>
-						<th>商品名</th>
-						<td><s:property value="itemName" /></td>
-						<th>価格</th>
-						<td><s:property value="itemPrice" /></td>
-						<th>在庫数</th>
-						<td><s:property value="itemStock" /></td>
-						<th>注文数</th>
-						<td><s:property value="cartItemStack" /></td>
-
+						<s:form action="HowToBuyAction"><s:submit value="購入" /></s:form>
 					</tr>
 				</table>
+			</s:if>
+			<s:else>
+			</s:else>
 
 
 
-			</s:iterator>
-			<s:form action="PaymentCompleteAction"><s:submit value="購入" /></s:form>
-</div>
+
+
+
 
 	</div>
 

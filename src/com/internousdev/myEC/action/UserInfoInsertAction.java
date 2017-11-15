@@ -17,6 +17,7 @@ public class UserInfoInsertAction extends ActionSupport implements SessionAware{
 	public LoginDTO loginDTO = new LoginDTO();
 	public LoginDAO loginDAO = new LoginDAO();
 
+
 	private String result;
 
 	public String execute(){
@@ -41,7 +42,17 @@ public class UserInfoInsertAction extends ActionSupport implements SessionAware{
 
 		session.put("loginUser",loginDTO);
 
-		result = SUCCESS;
+		switch((String)session.get("pageTransition")){
+
+		case "cart":
+			result = "gotoPayment";
+			break;
+
+		default :
+			result = "gotoMypage";
+			break;
+
+		}
 
 		return result;
 	}

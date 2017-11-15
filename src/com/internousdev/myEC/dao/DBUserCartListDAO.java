@@ -53,13 +53,12 @@ public class DBUserCartListDAO implements Serializable{
 	}
 
 
-	public void insertCartData(ArrayList<CartItemDTO> cart, int userId){
+	public void insertCartData(CartItemDTO cartItemDTO, int userId){
 		try{
 			DBConnector dbConnector = new DBConnector();
 			Connection connection = dbConnector.getConnection();
 
-			for(CartItemDTO cartItemDTO : cart){
-				String sql = "INSERT INTO cartitem_info ( user_id, item_id, item_count, update_date ) VALUE ( ?, ?, ?, ? )";
+				String sql = "INSERT INTO cartitem_info( user_id, item_id, item_count, update_date ) VALUE ( ?, ?, ?, ? )";
 
 				PreparedStatement preparedStatement = connection.prepareStatement(sql);
 				preparedStatement.setInt(1, userId);
@@ -67,7 +66,7 @@ public class DBUserCartListDAO implements Serializable{
 				preparedStatement.setInt(3, cartItemDTO.getItemCount());
 				preparedStatement.setString(4, dateUtil.getDate());
 				preparedStatement.execute();
-			}
+
 			connection.close();
 
 		}catch(SQLException e){
@@ -75,12 +74,12 @@ public class DBUserCartListDAO implements Serializable{
 		}
 	}
 
-	public void updateCartData(ArrayList<CartItemDTO> cart, int userId){
+	public void updateCartData(CartItemDTO cartItemDTO, int userId){
 
 		try{
 			DBConnector dbConnector = new DBConnector();
 			Connection connection = dbConnector.getConnection();
-			for(CartItemDTO cartItemDTO : cart){
+
 
 
 
@@ -92,7 +91,7 @@ public class DBUserCartListDAO implements Serializable{
 				preparedStatement.setInt(3, cartItemDTO.getItemId());
 				preparedStatement.executeUpdate();
 
-			}
+
 
 			connection.close();
 

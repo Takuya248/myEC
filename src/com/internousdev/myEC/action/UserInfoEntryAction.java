@@ -9,11 +9,14 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class UserInfoEntryAction extends ActionSupport implements SessionAware{
 
+
+	public String pageFlg;
 	public String newLoginId;
 	public String newPassword;
 	public String newUserName;
 	public String newPhoneNumber;
 	public String newMailAddress;
+	public String newAddress;
 
 	public Map<String, Object> session;
 
@@ -93,6 +96,28 @@ public class UserInfoEntryAction extends ActionSupport implements SessionAware{
 	public void setCheckFlg(boolean checkFlg) {
 		this.checkFlg = checkFlg;
 	}
+
+
+	public String getNewAddress() {
+		return newAddress;
+	}
+
+
+	public void setNewAddress(String newAddress) {
+		this.newAddress = newAddress;
+	}
+
+
+	public String getPageFlg() {
+		return pageFlg;
+	}
+
+
+	public void setPageFlg(String pageFlg) {
+		this.pageFlg = pageFlg;
+	}
+
+
 
 
 }

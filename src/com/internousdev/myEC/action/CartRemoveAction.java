@@ -54,10 +54,10 @@ public class CartRemoveAction extends ActionSupport implements SessionAware{
 			itemInfoList = getCartItemInfoList.getItemInfo(cart);
 			cartInfoDTO = cartItemCount.itemCount(itemInfoList);
 
-
-			dbUserCartListDAO.updateCartData(cart, loginDTO.getId());
+for(CartItemDTO cartItemDTO : cart){
+			dbUserCartListDAO.updateCartData(cartItemDTO, loginDTO.getId());
 			session.put("cart", cart);
-
+}
 
 		}else{
 			cart = (ArrayList<CartItemDTO>)session.get("cart");

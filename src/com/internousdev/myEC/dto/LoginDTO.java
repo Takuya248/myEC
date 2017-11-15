@@ -8,7 +8,6 @@ public class LoginDTO {
 	private String userName;
 	private String mailAddress;
 	private String phoneNumber;
-	private String address;
 	private String regiDate;
 	private boolean loginFlg = false;
 
@@ -77,12 +76,6 @@ public class LoginDTO {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public String getAddress() {
-		return address;
-	}
 
-	public void setAddress(String address) {
-		this.address = address;
-	}
 
 }

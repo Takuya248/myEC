@@ -47,7 +47,8 @@
 		</action>
 
 		<action name="UserInfoInsertAction" class="com.internousdev.myEC.action.UserInfoInsertAction" method="execute">
-			<result name="success">mypage.jsp</result>
+			<result name="gotoMypage">mypage.jsp</result>
+			<result name="gotoPayment" type="redirectAction">SettlementAction</result>
 		</action>
 
 		<action name="UserInfoSelectAction" class="com.internousdev.myEC.action.UserInfoSelectAction" method="execute">
@@ -79,14 +80,15 @@
 			<result name="success">cart.jsp</result>
 		</action>
 
-		<action name="PaymentAction" class="com.internousdev.myEC.action.PaymentAction" method="execute">
-			<result name="success">payment.jsp</result>
+		<action name="HowToBuyAction" class="com.internousdev.myEC.action.HowToBuyAction" method="execute">
+			<result name="login">loginUserAddressSelect.jsp</result>
+			<result name="regi">userCreate.jsp</result>
+			<result name="notregi">addresEdit.jsp</result>
 		</action>
 
-		<action name="PaymentCompleteAction" class="com.internousdev.myEC.action.PaymentCompleteAction" method="execute">
-			<result name="success">mypage.jsp</result>
+		<action name="SettlementAction" class="com.internousdev.myEC.action.SettlementAction" method="execute">
+			<result name="success">settlementSelect.jsp</result>
 		</action>
-
 
 	</package>
 </struts>
