@@ -30,8 +30,21 @@
 
 		<div id="form">
 
-			<s:form action="AddressEditConfirmAction">
+			<s:form action="GuestUserInfoConfirmAction">
 				<table>
+
+					<tr>
+						<td>名前</td>
+						<td><s:textfield name="userName" /></td>
+					</tr>
+					<tr>
+						<td>メールアドレス</td>
+						<td><s:textfield name="mailAddress" /></td>
+					</tr>
+					<tr>
+						<td>電話番号</td>
+						<td><s:textfield name="phoneNumber" /></td>
+					</tr>
 					<tr>
 						<td>都道府県</td>
 						<td><s:textfield name="state" /></td>

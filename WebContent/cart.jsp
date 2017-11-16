@@ -105,7 +105,7 @@ int price = 0;
 				<tr><td><a href='<s:url action="ItemListPageAction" />'>商品リスト</a></td></tr>
 			<s:if test="session.loginFlg">
 					<tr>
-						<s:form action="HowToBuyAction"><s:submit value="購入" /></s:form>
+						<s:form action="UserAddressSelectAction"><s:submit value="購入" /></s:form>
 					</tr>
 			</s:if>
 			<s:else>

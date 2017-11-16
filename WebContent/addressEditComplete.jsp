@@ -12,7 +12,7 @@
 <meta http-equiv="imagetoolbar" content="no" />
 <meta name="description" content="" />
 <meta name="keywords" content="" />
-<title>住所登録画面</title>
+<title>住所登録</title>
 
 <link href="css/main.css" rel="stylesheet" type="text/css">
 </head>
@@ -26,39 +26,8 @@
 	<div id="main">
 
 
+完了
 
-
-		<div id="form">
-
-			<s:form action="AddressEditConfirmAction">
-				<table>
-					<tr>
-						<td>都道府県</td>
-						<td><s:textfield name="state" /></td>
-					</tr>
-					<tr>
-						<td>市区町村</td>
-						<td><s:textfield name="city" /></td>
-					</tr>
-					<tr>
-						<td>番地</td>
-						<td><s:textfield name="street" /></td>
-					</tr>
-					<tr>
-						<td>建物</td>
-						<td><s:textfield name="building" /></td>
-					</tr>
-					<tr>
-						<td>郵便番号</td>
-						<td><s:textfield name="zipCode" /></td>
-					</tr>
-
-
-				</table>
-				<s:submit value="入力内容確認" />
-
-			</s:form>
-		</div>
 
 
 	</div>

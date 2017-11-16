@@ -49,37 +49,11 @@
 
 	<div id="main">
 
-<div id="cartItemList">
+		<s:form action="PaymentConfirmAction">
 
-			<table>
-				<tr>
-					<th>カートの中身</th>
-					<td>合計<s:property value="cartInfoDTO.totalPrice" />円</td>
-					<td>アイテム数<s:property value="cartInfoDTO.totalItemStack" /></td>
-				</tr>
-			</table>
+			<input type="radio" name="howToPay" value="card">クレジットカード<input name="text" type="text" value="" onkeydown="return key_down(event.keyCode)" style="ime-mode: disabled;">
 
-			<s:iterator value="itemInfoList" status="idx">
-
-
-				<table>
-					<tr>
-						<th>商品名</th>
-						<td><s:property value="itemName" /></td>
-						<th>価格</th>
-						<td><s:property value="itemPrice" /></td>
-						<th>在庫数</th>
-						<td><s:property value="itemStock" /></td>
-						<th>注文数</th>
-						<td><s:property value="cartItemStack" /></td>
-					</tr>
-				</table>
-
-
-
-			</s:iterator>
-
-			</div>
+		</s:form>
 
 	</div>
 
@@ -93,7 +67,8 @@
 		<p>footer</p>
     </footer>
 
-
+<!--------------  jsファイル  -------------->
+	<script type="text/javascript" src="script.js"></script>
 
 </body>
 </html>

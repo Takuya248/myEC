@@ -42,7 +42,7 @@ public class LoginAction extends ActionSupport implements SessionAware{
 		String result = SUCCESS;
 
 
-
+		session.put("userId", loginDTO.getId());
 		session.put("loginId", loginDTO.getLoginId());
 		session.put("loginPassword", loginDTO.getLoginPassword());
 		session.put("userName", loginDTO.getUserName());

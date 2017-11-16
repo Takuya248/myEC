@@ -46,6 +46,7 @@ public class UserInfoInsertAction extends ActionSupport implements SessionAware{
 
 		case "cart":
 			result = "gotoPayment";
+			session.put("pageTransition", "settlement");
 			break;
 
 		default :
