@@ -51,8 +51,9 @@
 
 		<s:form action="PaymentConfirmAction">
 
-			<input type="radio" name="howToPay" value="card">クレジットカード<input name="text" type="text" value="" onkeydown="return key_down(event.keyCode)" style="ime-mode: disabled;">
-
+			<input type="radio" name="howToPay" value="card">クレジットカード<input name="card" id="card" class="txt" type="text" maxlength="12" pattern="\d*" onblur="num_only(this)" style="ime-mode: disabled;">
+			<input type="radio" name="howToPay" value="cash">代引き
+			<input type="radio" name="howToPay" value="conveni">コンビ払い
 		</s:form>
 
 	</div>

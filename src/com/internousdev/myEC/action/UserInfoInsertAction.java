@@ -18,10 +18,10 @@ public class UserInfoInsertAction extends ActionSupport implements SessionAware{
 	public LoginDAO loginDAO = new LoginDAO();
 
 
-	private String result;
 
 	public String execute(){
 
+		String result = "gotoMypage";
 		UserInfoInsertDAO userInfoInsertDAO = new UserInfoInsertDAO();
 
 		userInfoInsertDAO.infoInsert(session.get("newLoginId").toString(), session.get("newPassword").toString(), session.get("newUserName").toString(), session.get("newPhoneNumber").toString(), session.get("newMailAddress").toString());
@@ -42,16 +42,10 @@ public class UserInfoInsertAction extends ActionSupport implements SessionAware{
 
 		session.put("loginUser",loginDTO);
 
-		switch((String)session.get("pageTransition")){
+		if((String)session.get("pageTransition") == "cart"){
 
-		case "cart":
 			result = "gotoPayment";
 			session.put("pageTransition", "settlement");
-			break;
-
-		default :
-			result = "gotoMypage";
-			break;
 
 		}
 

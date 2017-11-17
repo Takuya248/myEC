@@ -5,18 +5,17 @@ import java.util.Map;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.internousdev.myEC.dao.GetUserAddressInfoDAO;
-import com.internousdev.myEC.dao.PaymentUserInfoDAO;
 import com.internousdev.myEC.dao.UserInfoDAO;
 import com.internousdev.myEC.dto.PaymentUserInfoDTO;
 import com.internousdev.myEC.dto.UserAddressDTO;
 import com.internousdev.myEC.dto.UserInfoDTO;
 import com.opensymphony.xwork2.ActionSupport;
 
-public class PaymentCompleteAction extends ActionSupport implements SessionAware{
+public class PaymentConfirmAction extends ActionSupport implements SessionAware{
 
-	public Map<String, Object> session;
 	public PaymentUserInfoDTO paymentUserInfoDTO = new PaymentUserInfoDTO();
-	public PaymentUserInfoDAO paymentUserInfoDAO = new PaymentUserInfoDAO();
+	public String howToPay;
+	public Map<String, Object> session;
 
 	public String execute(){
 
@@ -37,20 +36,26 @@ public class PaymentCompleteAction extends ActionSupport implements SessionAware
 			paymentUserInfoDTO.setStreet(userAddressDTO.getStreet());
 			paymentUserInfoDTO.setBuilding(userAddressDTO.getBuilding());
 			paymentUserInfoDTO.setZipCode(userAddressDTO.getZipCode());
-			paymentUserInfoDTO.setSelectedPayment((String)session.get("howToPay"));
+			paymentUserInfoDTO.setSelectedPayment(howToPay);
 
-			paymentUserInfoDAO.insertInfo(paymentUserInfoDTO);
+			session.put("howToPay", howToPay);
+
 
 
 		}else{
 
-			paymentUserInfoDAO.insertInfo((PaymentUserInfoDTO)session.get("guetUserInfo"));
+			paymentUserInfoDTO = (PaymentUserInfoDTO)session.get("guetUserInfo");
 
+			paymentUserInfoDTO.setUserId((int)Math.random() * 1000);
+			paymentUserInfoDTO.setCartId((int)Math.random() * 1000);
+			paymentUserInfoDTO.setSelectedPayment(howToPay);
 
-
+			session.put("guestUserInfo", paymentUserInfoDTO);
 		}
 
+
 		String result = SUCCESS;
+
 		return result;
 
 	}
@@ -61,6 +66,22 @@ public class PaymentCompleteAction extends ActionSupport implements SessionAware
 
 	public void setSession(Map<String, Object> session) {
 		this.session = session;
+	}
+
+	public PaymentUserInfoDTO getPaymentUserInfoDTO() {
+		return paymentUserInfoDTO;
+	}
+
+	public void setPaymentUserInfoDTO(PaymentUserInfoDTO paymentUserInfoDTO) {
+		this.paymentUserInfoDTO = paymentUserInfoDTO;
+	}
+
+	public String getHowToPay() {
+		return howToPay;
+	}
+
+	public void setHowToPay(String howToPay) {
+		this.howToPay = howToPay;
 	}
 
 

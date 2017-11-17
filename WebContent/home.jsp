@@ -49,8 +49,7 @@
 
 	<div id="main">
 		<table>
-			<tr><td><a href='<s:url action="ItemListPageAction" />'>商品一覧へ
-			</a><input name="innum" id="card" class="txt" type="text" maxlength="12" pattern="\d*" onblur="num_only(this);num_check2(this)" style="ime-mode: disabled;">==$0</td></tr>
+			<tr><td><a href='<s:url action="ItemListPageAction" />'>商品一覧へ</a></td></tr>
 		</table>
 	</div>
 

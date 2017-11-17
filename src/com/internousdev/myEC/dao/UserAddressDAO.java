@@ -8,7 +8,7 @@ import com.internousdev.myEC.dto.UserAddressDTO;
 import com.internousdev.myEC.util.DBConnector;
 import com.internousdev.myEC.util.DateUtil;
 
-public class UserAddresDAO {
+public class UserAddressDAO {
 
 	public void insertDB(UserAddressDTO userAddressDTO){
 

@@ -83,7 +83,7 @@
 		<action name="HowToBuyAction" class="com.internousdev.myEC.action.HowToBuyAction" method="execute">
 			<result name="login">loginUserAddressSelect.jsp</result>
 			<result name="regi">userCreate.jsp</result>
-			<result name="notregi">addressEdit.jsp</result>
+			<result name="notregi">guestUserInfoInsert.jsp</result>
 		</action>
 
 		<action name="SettlementAction" class="com.internousdev.myEC.action.SettlementAction" method="execute">
@@ -106,6 +106,18 @@
 		<action name="UserAddressSelectAction" class="com.internousdev.myEC.action.UserAddressSelectAction" method="execute">
 			<result name="exists">settlementSelect.jsp</result>
 			<result name="notExists">addressEdit.jsp</result>
+		</action>
+
+		<action name="GuestUserInfoConfirmAction" class="com.internousdev.myEC.action.GuestUserInfoConfirmAction" method="execute">
+			<result name="success">guestUserInfoInsertComplete.jsp</result>
+		</action>
+
+		<action name="GuestUserInfoCompleteAction" class="com.internousdev.myEC.action.GuestUserInfoCompleteAction" method="execute">
+			<result name="success">settlementSelect.jsp</result>
+		</action>
+
+		<action name="PaymentConfirmAction" class="com.internousdev.myEC.action.PaymentConfirmAction" method="execute">
+			<result name="success">paymentComplete.jsp</result>
 		</action>
 
 	</package>

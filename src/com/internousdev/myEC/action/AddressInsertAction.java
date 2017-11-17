@@ -4,13 +4,13 @@ import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
 
-import com.internousdev.myEC.dao.UserAddresDAO;
+import com.internousdev.myEC.dao.UserAddressDAO;
 import com.internousdev.myEC.dto.UserAddressDTO;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class AddressInsertAction extends ActionSupport implements SessionAware{
 
-	public UserAddresDAO userAddresDAO = new UserAddresDAO();
+	public UserAddressDAO userAddresDAO = new UserAddressDAO();
 
 	public Map<String, Object> session;
 
