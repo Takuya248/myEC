@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="s" uri="/struts-tags" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <%@ taglib prefix="s" uri="/struts-tags" %>
 
 <!DOCTYPE html>
 
@@ -47,6 +48,7 @@
 
 	<div id="main">
 
+購入完了しました
 
 	<div class="userInfoTable">
 		<table>
@@ -74,8 +76,9 @@
 		</table>
 	</div>
 		<div class="itemInfoTable">
+			<table>
 				<s:iterator value="itemInfoList">
-					<table>
+
 						<tr>
 							<th>商品名</th>
 							<td><s:property value="itemName" /></td>
@@ -84,11 +87,12 @@
 							<th>在庫数</th>
 							<td><s:property value="cartItemStock" /></td>
 						</tr>
-					</table>
-			</s:iterator>
+
+				</s:iterator>
+			</table>
 		</div>
 
-		<a href='<s:url action="PaymentCompleteAction" />'><button>購入確定</button></a>
+		<a href='<s:url action="HomeAction" />'><button>購入確定</button></a>
 </div>
 
 

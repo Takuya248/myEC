@@ -6,7 +6,7 @@ import java.util.Map;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.internousdev.myEC.dao.DBUserCartListDAO;
-import com.internousdev.myEC.dao.GetCartItemInfoList;
+import com.internousdev.myEC.dao.GetCartItemInfoListDAO;
 import com.internousdev.myEC.dto.CartInfoDTO;
 import com.internousdev.myEC.dto.CartItemDTO;
 import com.internousdev.myEC.dto.ItemInfoDTO;
@@ -18,7 +18,7 @@ public class PaymentAction extends ActionSupport implements SessionAware{
 
 	public DBUserCartListDAO dbUserCartListDAO = new DBUserCartListDAO();
 	public CartItemCount cartItemCount = new CartItemCount();
-	public GetCartItemInfoList getCartItemInfoList = new GetCartItemInfoList();
+	public GetCartItemInfoListDAO getCartItemInfoList = new GetCartItemInfoListDAO();
 
 
 	public CartInfoDTO cartInfoDTO = new CartInfoDTO();

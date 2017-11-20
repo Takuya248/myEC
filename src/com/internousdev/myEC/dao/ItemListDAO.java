@@ -14,26 +14,26 @@ public class ItemListDAO{
 	public ArrayList<ItemInfoDTO> getItemInfo(String category){
 
 		DBConnector dbConnector = new DBConnector();
-		Connection conn = dbConnector.getConnection();
+		Connection connection = dbConnector.getConnection();
 		ArrayList<ItemInfoDTO> itemList = new ArrayList<ItemInfoDTO>();
 
 		try{
 			String sql = "SELECT * FROM item_info WHERE category_id = ?";
 
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, category);
-			ResultSet rs = ps.executeQuery();
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setString(1, category);
+			ResultSet resultSet = preparedStatement.executeQuery();
 
-			while(rs.next()){
+			while(resultSet.next()){
 				ItemInfoDTO itemInfoDTO = new ItemInfoDTO();
 
 
 
-				itemInfoDTO.setItemId(rs.getInt("id"));
-				itemInfoDTO.setCategoryId(rs.getString("category_id"));
-				itemInfoDTO.setItemName(rs.getString("item_name"));
-				itemInfoDTO.setItemPrice(rs.getInt("item_price"));
-				itemInfoDTO.setItemStock(rs.getInt("item_stock"));
+				itemInfoDTO.setItemId(resultSet.getInt("id"));
+				itemInfoDTO.setCategoryId(resultSet.getString("category_id"));
+				itemInfoDTO.setItemName(resultSet.getString("item_name"));
+				itemInfoDTO.setItemPrice(resultSet.getInt("item_price"));
+				itemInfoDTO.setItemStock(resultSet.getInt("item_stock"));
 
 				itemList.add(itemInfoDTO);
 			}

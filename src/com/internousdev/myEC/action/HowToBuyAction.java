@@ -4,6 +4,7 @@ import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
 
+import com.internousdev.myEC.dao.UserInfoDAO;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class HowToBuyAction extends ActionSupport implements SessionAware{
@@ -17,7 +18,14 @@ public class HowToBuyAction extends ActionSupport implements SessionAware{
 
 		if(session.containsKey("loginUser")){
 
-			result = "login";
+			UserInfoDAO userInfoDAO = new UserInfoDAO();
+
+
+
+			if(userInfoDAO.getAddressFlg((int)session.get("userId"))){
+				result = "gotoAddInsert";
+			}
+			result = "gotoPay";
 
 		}else{
 			switch(select){

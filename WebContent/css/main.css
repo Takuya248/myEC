@@ -54,6 +54,7 @@ header #login{
 	flex-grow: 1;
 	justify-content: center;
 	align-items: center;
+	flex-direction: column;
 }
 
 #first{
@@ -113,6 +114,16 @@ header #login{
 
 #itemInfoValueOdd{
 
+}
+
+.userInfoTable{
+	display: flex;
+	flex-direction: row;
+}
+
+.itemInfoTable{
+	display: flex;
+	flex-direction: row;
 }
 
 

@@ -1,18 +1,17 @@
 package com.internousdev.myEC.dto;
 
 public class PaymentUserInfoDTO {
-	private int userId;
-	private int cartId;
-	private String UserName;
-	private String UserMailAddress;
-	private String UserPhoneNumber;
-	private String state;
-	private String city;
-	private String street;
-	private String building;
-	private int zipCode;
-	public String selectedPayment;
-	private String RegistrationDate;
+	private int userId = 0;
+	private String UserName = "";
+	private String UserMailAddress = "";
+	private String UserPhoneNumber = "";
+	private String state = "";
+	private String city = "";
+	private String street = "";
+	private String building = "";
+	private int zipCode = 0;
+	public String selectedPayment = "";
+	private String RegistrationDate = "";
 
 
 	public int getUserId() {
@@ -21,12 +20,7 @@ public class PaymentUserInfoDTO {
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
-	public int getCartId() {
-		return cartId;
-	}
-	public void setCartId(int cartId) {
-		this.cartId = cartId;
-	}
+
 	public String getUserName() {
 		return UserName;
 	}

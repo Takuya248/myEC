@@ -10,7 +10,7 @@ import com.internousdev.myEC.dto.CartItemDTO;
 import com.internousdev.myEC.dto.ItemInfoDTO;
 import com.internousdev.myEC.util.DBConnector;
 
-public class GetCartItemInfoList {
+public class GetCartItemInfoListDAO {
 
 	public ArrayList<ItemInfoDTO> getItemInfo(ArrayList<CartItemDTO> cart){
 

@@ -66,6 +66,31 @@ public class UserInfoDAO implements SessionAware{
 	}
 
 
+	public boolean getAddressFlg(int userId){
+
+		boolean addressRegiFlg = false;
+
+		String sql = "SELECT addres_regi_flag FROM user_info WHERE user_id = ?";
+
+		try{
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1, userId);
+			ResultSet resultSet = preparedStatement.executeQuery();
+
+			if(resultSet.next()){
+				addressRegiFlg = resultSet.getBoolean("address_regi_flag");
+			}
+
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return addressRegiFlg;
+	}
+
+
+
+
+
 	public void setSession(Map<String, Object> session) {
 		this.session = session;
 	}

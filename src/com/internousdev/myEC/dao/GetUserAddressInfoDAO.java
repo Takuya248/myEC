@@ -18,7 +18,7 @@ public class GetUserAddressInfoDAO {
 
 		try{
 
-			String sql = "SELECT * FROM user_address WHERE user_id = ?";
+			String sql = "SELECT * FROM user_info WHERE user_id = ?";
 
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, userId);

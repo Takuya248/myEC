@@ -49,12 +49,13 @@
 
 	<div id="main">
 
-		<s:form action="PaymentConfirmAction">
+		<form action="PaymentConfirmAction" method="POST">
 
-			<input type="radio" name="howToPay" value="card">クレジットカード<input name="card" id="card" class="txt" type="text" maxlength="12" pattern="\d*" onblur="num_only(this)" style="ime-mode: disabled;">
-			<input type="radio" name="howToPay" value="cash">代引き
-			<input type="radio" name="howToPay" value="conveni">コンビ払い
-		</s:form>
+			<input type="radio" name="howToPay" value="card" />クレジットカード<input name="card" id="card" value="" class="txt" type="text" maxlength="12" pattern="\d*" onblur="num_only(this)" style="ime-mode: disabled;" />
+			<input type="radio" name="howToPay" value="cash" />代引き
+			<input type="radio" name="howToPay" value="conveni" />コンビ払い
+			<input type="submit" value="決定" />
+		</form>
 
 	</div>
 

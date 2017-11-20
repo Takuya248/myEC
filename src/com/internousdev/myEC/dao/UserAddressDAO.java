@@ -18,16 +18,16 @@ public class UserAddressDAO {
 
 		try{
 
-			String sql = "INSERT INTO user_address(user_id, state, city, street, building, zip_code, insert_date )VALUES(?,?,?,?,?,?,?)";
-
+			String sql = "UPDATE user_info SET state = ?, city = ?, street = ?, building = ?, zip_code = ?, update_date = ? WHERE user_id = ?";
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setInt(1, userAddressDTO.getUserId());
-			preparedStatement.setString(2, userAddressDTO.getState());
-			preparedStatement.setString(3, userAddressDTO.getCity());
-			preparedStatement.setString(4, userAddressDTO.getStreet());
-			preparedStatement.setString(5, userAddressDTO.getBuilding());
-			preparedStatement.setInt(6, userAddressDTO.getZipCode());
-			preparedStatement.setString(7, dateUtil.getDate());
+
+			preparedStatement.setString(1, userAddressDTO.getState());
+			preparedStatement.setString(2, userAddressDTO.getCity());
+			preparedStatement.setString(3, userAddressDTO.getStreet());
+			preparedStatement.setString(4, userAddressDTO.getBuilding());
+			preparedStatement.setInt(5, userAddressDTO.getZipCode());
+			preparedStatement.setString(6, dateUtil.getDate());
+			preparedStatement.setInt(7, userAddressDTO.getUserId());
 			preparedStatement.execute();
 
 		}catch(SQLException e){

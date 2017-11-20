@@ -1,7 +1,6 @@
 package com.internousdev.myEC.dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -12,30 +11,29 @@ import com.internousdev.myEC.util.DateUtil;
 
 public class PaymentCompletedCartDAO {
 
-	public void insetCartInfo(ArrayList<CartItemDTO> cart){
+	public void insetCartInfo(int userId, ArrayList<CartItemDTO> cart, String howToPay){
 
 		DBConnector dbConnector = new DBConnector();
 		Connection connection = dbConnector.getConnection();
 		DateUtil dateUtil = new DateUtil();
+		try{
+			for(CartItemDTO cartItemDTO : cart){
 
-		for(CartItemDTO cartItemDTO : cart){
-				try{
+				String sql = "INSERT INTO order_list (user_id, item_id, item_count, select_payment, insert_date ) VALUES (?,?,?,?,?)";
 
+				PreparedStatement preparedStatement = connection.prepareStatement(sql);
+				preparedStatement.setInt(1, userId );
+				preparedStatement.setInt(2, cartItemDTO.getItemId());
+				preparedStatement.setInt(3, cartItemDTO.getItemCount());
+				preparedStatement.setString(4, howToPay);
+				preparedStatement.setString(5, dateUtil.getDate());
 
-					String sql = "INSERT INTO comfirmed_cart (guestuser_id, cart_id, item_id, item_count, insert_date ) VALUE (?,?,?,?,?)";
+				preparedStatement.execute();
+			}
 
-					PreparedStatement preparedStatement = connection.prepareStatement(sql);
-					preparedStatement.setInt(1, cartItemDTO.);
-					preparedStatement.setInt(2, cartItemDTO);
-					preparedStatement.setInt(3, cartItemDTO);
-					preparedStatement.setInt(4, cartItemDTO);
-					preparedStatement.setString(5, dateUtil.getDate());
-				}
-				}catch(SQLException e){
-					e.printStackTrace();
+		}catch(SQLException e){
+			e.printStackTrace();
 
-				}
-
+		}
 	}
-
 }

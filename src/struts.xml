@@ -104,8 +104,9 @@
 		</action>
 
 		<action name="UserAddressSelectAction" class="com.internousdev.myEC.action.UserAddressSelectAction" method="execute">
-			<result name="exists">settlementSelect.jsp</result>
-			<result name="notExists">addressEdit.jsp</result>
+			<result name="gotoAddInsert">addressEdit.jsp</result>
+			<result name="gotoPayment" type="redirectAction">PaymentConfirmAction</result>
+			<result name="error">home.jsp</result>
 		</action>
 
 		<action name="GuestUserInfoConfirmAction" class="com.internousdev.myEC.action.GuestUserInfoConfirmAction" method="execute">
@@ -118,6 +119,10 @@
 
 		<action name="PaymentConfirmAction" class="com.internousdev.myEC.action.PaymentConfirmAction" method="execute">
 			<result name="success">paymentComplete.jsp</result>
+		</action>
+
+		<action name="PaymentCompleteAction" class="com.internousdev.myEC.action.PaymentCompleteAction" method="execute">
+			<result name="success">paymentSuccess.jsp</result>
 		</action>
 
 	</package>
