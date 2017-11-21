@@ -13,25 +13,24 @@ import com.internousdev.myEC.util.DBConnector;
 public class UserInfoDAO implements SessionAware{
 
 	public Map<String,Object> session;
-	private UserInfoDTO userInfoDTO = new UserInfoDTO();
 	public DBConnector dbConnector = new DBConnector();
 	public Connection connection = dbConnector.getConnection();
 
-	public UserInfoDTO getUserInfo(){
+	public UserInfoDTO getUserInfo(int userId){
 
-		String sql = "SELECT * FROM user_info where login_id = ? AND login_pass = ?";
+		UserInfoDTO userInfoDTO = new UserInfoDTO();
+
+		String sql = "SELECT login_id, user_name, mail_add, insert_date FROM user_info WHERE user_id = ?";
 
 		try{
 			PreparedStatement ps = connection.prepareStatement(sql);
-			ps.setString(1, session.get("loginId").toString());
-			ps.setString(2, session.get("loginPassword").toString());
+			ps.setInt(1, userId);
 			ResultSet rs = ps.executeQuery();
 
 			if(rs.next()){
 				userInfoDTO.setUserName(rs.getString("user_name"));
 				userInfoDTO.setLoginId(rs.getString("login_id"));
 				userInfoDTO.setUserMailAddress(rs.getString("mail_add"));
-				userInfoDTO.setUserPhoneNumber(rs.getString("phone_number"));
 				userInfoDTO.setRegistrationDate(rs.getString("insert_date"));
 			}
 
@@ -45,12 +44,13 @@ public class UserInfoDAO implements SessionAware{
 
 	public UserInfoDTO getPaymentUserInfo(int userId){
 
+		UserInfoDTO userInfoDTO = new UserInfoDTO();
+
 		String sql = "SELECT * FROM user_info where user_id = ?";
 
 		try{
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setString(1, session.get("loginId").toString());
-			preparedStatement.setString(2, session.get("loginPassword").toString());
+			preparedStatement.setInt(1, userId);
 			ResultSet resultSet = preparedStatement.executeQuery();
 
 			if(resultSet.next()){

@@ -4,43 +4,33 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import com.internousdev.myEC.dto.UserInfoDTO;
 import com.internousdev.myEC.util.DBConnector;
 import com.internousdev.myEC.util.DateUtil;
 
 public class UserInfoUpdateDAO {
 
-	public UserInfoDTO userInfoDTO = new UserInfoDTO();
-	private DBConnector db = new DBConnector();
-	private Connection conn = db.getConnection();
-	public DateUtil dateUtil = new DateUtil();
+	public void userInfoUpdate(String dbUpdateField, String newValue, int userId){
 
-	public int num = 0;
+		DBConnector dbConnector = new DBConnector();
+		Connection connection = dbConnector.getConnection();
+		DateUtil dateUtil = new DateUtil();
 
-
-	public int userInfoUpdate(String dbUpdateField, String newValue, String loginId, String loginPassword){
-
-		System.out.println(dbUpdateField+newValue);
 
 		try{
 
-			String sql = "UPDATE user_info SET " + dbUpdateField + " = ? , updeted_date = ? WHERE login_id = ? AND login_pass = ?";
+			String sql = "UPDATE user_info SET ? = ? , updeted_date = ? WHERE user_id = ?";
 
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, newValue);
-			ps.setString(2, dateUtil.getDate());
-			ps.setString(3, loginId);
-			ps.setString(4, loginPassword);
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setString(1, dbUpdateField);
+			preparedStatement.setString(2, newValue);
+			preparedStatement.setString(3, dateUtil.getDate());
+			preparedStatement.setInt(4, userId);
 
-			num = ps.executeUpdate();
-
-			System.out.println(num);
-
+			preparedStatement.executeUpdate();
 
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
-		return num;
 	}
 
 }

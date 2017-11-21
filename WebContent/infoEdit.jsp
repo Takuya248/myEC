@@ -44,6 +44,7 @@
 			<tr><td>変更後の<s:property value="fieldName" /></td><td><s:textfield name="newValue" /></td></tr>
 			<s:if test="checkFlg"><tr><td></td><td><div id="idCheck">※使用されています</div></td></tr></s:if>
 		</table>
+		<s:hidden name="updateField" value="%{updateField}" />
 		<s:submit value="決定" />
 		</s:form>
 	</div>

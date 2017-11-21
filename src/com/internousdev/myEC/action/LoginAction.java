@@ -20,43 +20,38 @@ public class LoginAction extends ActionSupport implements SessionAware{
 
 	public DBUserCartListDAO dbUserCartListDAO = new DBUserCartListDAO();
 
-
+	public int userId;
 	public String loginId;
 	public String loginPassword;
-	public String loginPasswordSc;
 
 
 
 	@SuppressWarnings("unchecked")
 	public String execute(){
 
+		String result;
+
 		if(session.containsKey("loginFlg")){
 
-			loginId = (String)session.get("loginId");
-			loginPassword = (String)session.get("loginPassword");
+			userId = ((LoginDTO)session.get("loginUser")).getUserId();
+			loginId = ((LoginDTO)session.get("loginUser")).getLoginId();
+
+
+			result = SUCCESS;
+
+		}else{
+			loginDTO = loginDAO.getLoginUserInfo(loginId,loginPassword);
+
+			session.put("userId", loginDTO.getId());
+			session.put("loginId", loginDTO.getLoginId());
+			session.put("loginFlg", loginDTO.getLoginFlg());
+
+			session.put("loginUser",loginDTO);
+
 
 		}
 
-		loginDTO = loginDAO.getLoginUserInfo(loginId,loginPassword);
-
-		String result = SUCCESS;
-
-
-		session.put("userId", loginDTO.getId());
-		session.put("loginId", loginDTO.getLoginId());
-		session.put("loginPassword", loginDTO.getLoginPassword());
-		session.put("userName", loginDTO.getUserName());
-		session.put("mailAddress", loginDTO.getMailAddress());
-		session.put("phoneNumber", loginDTO.getPhoneNumber());
-		session.put("regiDate", loginDTO.getRegiDate());
-		session.put("loginFlg", loginDTO.getLoginFlg());
-
-		session.put("loginUser",loginDTO);
-
-
 		if((boolean)session.get("loginFlg")){
-
-			//loginPasswordSc = ((String)session.get("loginPassword")).replaceAll(".","*");
 
 			if(session.containsKey("cart")){
 				ArrayList<CartItemDTO> sessionCart = new ArrayList<CartItemDTO>();
@@ -84,6 +79,9 @@ public class LoginAction extends ActionSupport implements SessionAware{
 					}
 				}
 			}
+
+			result = SUCCESS;
+
 		}else{
 			result = ERROR;
 
@@ -117,14 +115,5 @@ public class LoginAction extends ActionSupport implements SessionAware{
 	public void setSession(Map<String,Object> session){
 		this.session = session;
 	}
-
-	public String getLoginPasswordSc() {
-		return loginPasswordSc;
-	}
-
-	public void setLoginPasswordSc(String loginPasswordSc) {
-		this.loginPasswordSc = loginPasswordSc;
-	}
-
 
 }

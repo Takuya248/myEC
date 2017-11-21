@@ -3,6 +3,7 @@ package com.internousdev.myEC.dto;
 public class UserAddressDTO {
 
 	private int userId;
+	private String phoneNumber;
 	private String state;
 	private String city;
 	private String street;
@@ -47,6 +48,12 @@ public class UserAddressDTO {
 	}
 	public void setUserId(int userId) {
 		this.userId = userId;
+	}
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 
 

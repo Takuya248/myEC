@@ -4,6 +4,7 @@ import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
 
+import com.internousdev.myEC.dto.UserCreateDTO;
 import com.internousdev.myEC.util.DoubleCheck;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -14,9 +15,9 @@ public class UserInfoEntryAction extends ActionSupport implements SessionAware{
 	public String newLoginId;
 	public String newPassword;
 	public String newUserName;
-	public String newPhoneNumber;
 	public String newMailAddress;
-	public String newAddress;
+
+	public UserCreateDTO userCreateDTO = new UserCreateDTO();
 
 	public Map<String, Object> session;
 
@@ -37,16 +38,16 @@ public class UserInfoEntryAction extends ActionSupport implements SessionAware{
 
 		}else{
 
-			session.put("newLoginId", newLoginId);
-			session.put("newPassword", newPassword);
-			session.put("newUserName", newUserName);
-			session.put("newPhoneNumber", newPhoneNumber);
-			session.put("newMailAddress", newMailAddress);
+			userCreateDTO.setLoginId(newLoginId);
+			userCreateDTO.setPassword(newPassword);
+			userCreateDTO.setUserName(newUserName);
+			userCreateDTO.setMailAddress(newMailAddress);
 
-			if(!(newLoginId.equals("")) && !(newPassword.equals("")) && !(newUserName.equals("")) && !(newPhoneNumber.equals("")) && !(newMailAddress.equals(""))){
-				result = SUCCESS;
-			}else{
+
+			if(newLoginId == "" && newPassword == "" && newUserName == "" && newMailAddress == ""){
 				result = ERROR;
+			}else{
+				result = SUCCESS;
 			}
 		}
 		return result;
@@ -74,12 +75,7 @@ public class UserInfoEntryAction extends ActionSupport implements SessionAware{
 	public void setNewUserName(String newUserName) {
 		this.newUserName = newUserName;
 	}
-	public String getNewPhoneNumber() {
-		return newPhoneNumber;
-	}
-	public void setNewPhoneNumber(String newPhoneNumber) {
-		this.newPhoneNumber = newPhoneNumber;
-	}
+
 	public String getNewMailAddress() {
 		return newMailAddress;
 	}
@@ -98,14 +94,6 @@ public class UserInfoEntryAction extends ActionSupport implements SessionAware{
 	}
 
 
-	public String getNewAddress() {
-		return newAddress;
-	}
-
-
-	public void setNewAddress(String newAddress) {
-		this.newAddress = newAddress;
-	}
 
 
 	public String getPageFlg() {
@@ -115,6 +103,16 @@ public class UserInfoEntryAction extends ActionSupport implements SessionAware{
 
 	public void setPageFlg(String pageFlg) {
 		this.pageFlg = pageFlg;
+	}
+
+
+	public UserCreateDTO getUserCreateDTO() {
+		return userCreateDTO;
+	}
+
+
+	public void setUserCreateDTO(UserCreateDTO userCreateDTO) {
+		this.userCreateDTO = userCreateDTO;
 	}
 
 

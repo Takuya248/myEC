@@ -48,6 +48,7 @@
 
 		<action name="UserInfoInsertAction" class="com.internousdev.myEC.action.UserInfoInsertAction" method="execute">
 			<result name="gotoMypage">mypage.jsp</result>
+			<result name="return">userCreate.jsp</result>
 			<result name="gotoPayment" type="redirectAction">AddressAction</result>
 		</action>
 
@@ -124,6 +125,8 @@
 		<action name="PaymentCompleteAction" class="com.internousdev.myEC.action.PaymentCompleteAction" method="execute">
 			<result name="success">paymentSuccess.jsp</result>
 		</action>
+
+
 
 	</package>
 </struts>

@@ -38,7 +38,7 @@
 
 	<div id="main">
 		<table>
-			<tr><td><s:property value='session.get("newValue")' /></td></tr>
+			<tr><td><s:property value='newValue' /></td></tr>
 			<tr><td><s:form><button formaction="MypageAction">戻る</button></s:form></td></tr>
 		</table>
 	</div>

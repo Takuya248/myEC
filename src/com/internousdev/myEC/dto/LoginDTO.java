@@ -4,21 +4,10 @@ public class LoginDTO {
 
 	private int userId;
 	private String loginId;
-	private String loginPassword;
-	private String userName;
-	private String mailAddress;
-	private String phoneNumber;
-	private String regiDate;
 	private boolean loginFlg = false;
 
 
-	public String getRegiDate() {
-		return regiDate;
-	}
 
-	public void setRegiDate(String regiDate) {
-		this.regiDate = regiDate;
-	}
 
 	public void setLoginId(String loginId){
 		this.loginId = loginId;
@@ -28,28 +17,13 @@ public class LoginDTO {
 		return loginId;
 	}
 
-	public void setLoginPassword(String loginPassword){
-		this.loginPassword = loginPassword;
-	}
+
 	public int getId() {
 		return userId;
 	}
 
 	public void setId(int userId) {
 		this.userId = userId;
-	}
-
-	public String getLoginPassword() {
-		return loginPassword;
-	}
-
-
-	public void setUserName(String userName){
-		this.userName = userName;
-	}
-
-	public String getUserName(){
-		return userName;
 	}
 
 	public void setLoginFlg(boolean loginFlg){
@@ -60,22 +34,13 @@ public class LoginDTO {
 		return loginFlg;
 	}
 
-	public String getMailAddress() {
-		return mailAddress;
+	public int getUserId() {
+		return userId;
 	}
 
-	public void setMailAddress(String mailAddress) {
-		this.mailAddress = mailAddress;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
-
-	public String getPhoneNumber() {
-		return phoneNumber;
-	}
-
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
-
 
 
 }

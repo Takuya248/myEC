@@ -9,17 +9,14 @@ import com.internousdev.myEC.util.DBConnector;
 
 public class LoginDAO {
 
-	private LoginDTO loginDTO = new LoginDTO();
-
-
-
 	public LoginDTO getLoginUserInfo(String loginId,String loginPassword){
 
 		DBConnector dbConnector = new DBConnector();
 		Connection connection = dbConnector.getConnection();
 
-		String sql = "SELECT * FROM user_info where login_id = ? AND login_pass = ?";
-		//String sql = "SELECT login_id , CONVERT(AES_DECRYPT(UNHEX(login_pass),'test') USING utf8) as login_pass FROM user_info where login_id = ? AND login_pass = HEX(AES_ENCRYPT( ? ,'test'))";
+		 LoginDTO loginDTO = new LoginDTO();
+
+		String sql = "SELECT user_id, login_id FROM user_info WHERE login_id = ? AND login_pass = ?";
 
 		try{
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -30,13 +27,9 @@ public class LoginDAO {
 			if(resultSet.next()){
 				loginDTO.setId(resultSet.getInt("user_id"));
 				loginDTO.setLoginId(resultSet.getString("login_id"));
-				loginDTO.setLoginPassword(resultSet.getString("login_pass"));
-				loginDTO.setUserName(resultSet.getString("user_name"));
-				loginDTO.setMailAddress(resultSet.getString("mail_add"));
-				loginDTO.setPhoneNumber(resultSet.getString("phone_number"));
-				loginDTO.setRegiDate(resultSet.getString("insert_date"));
 				loginDTO.setLoginFlg(true);
 			}
+
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -45,8 +38,34 @@ public class LoginDAO {
 
 
 	}
-	public LoginDTO getLoginDTO(){
+
+	public LoginDTO getLoginUserInfo(int userId){
+
+		DBConnector dbConnector = new DBConnector();
+		Connection connection = dbConnector.getConnection();
+
+		 LoginDTO loginDTO = new LoginDTO();
+
+		String sql = "SELECT user_id, login_id FROM user_info WHERE user_id = ?";
+
+		try{
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1, userId);
+			ResultSet resultSet = preparedStatement.executeQuery();
+
+			if(resultSet.next()){
+				loginDTO.setId(resultSet.getInt("user_id"));
+				loginDTO.setLoginId(resultSet.getString("login_id"));
+				loginDTO.setLoginFlg(true);
+			}
+
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+
 		return loginDTO;
+
+
 	}
 
 }

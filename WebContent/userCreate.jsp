@@ -54,11 +54,6 @@
 						<td>メールアドレス</td>
 						<td><s:textfield name="newMailAddress" /></td>
 					</tr>
-					<tr>
-						<td>電話番号</td>
-						<td><s:textfield name="newPhoneNumber" /></td>
-					</tr>
-
 				</table>
 				<s:submit value="入力内容確認" />
 

@@ -27,13 +27,6 @@ public class MypageAction extends ActionSupport implements SessionAware{
 		if((boolean)session.get("loginFlg")){
 			result = SUCCESS;
 
-			session.put("loginId", loginDTO.getLoginId());
-			session.put("loginPassword", loginDTO.getLoginPassword());
-			session.put("userName", loginDTO.getUserName());
-			session.put("mailAddress", loginDTO.getMailAddress());
-			session.put("phoneNumber", loginDTO.getPhoneNumber());
-			session.put("regiDate", loginDTO.getRegiDate());
-
 		}else{
 			result = ERROR;
 		}

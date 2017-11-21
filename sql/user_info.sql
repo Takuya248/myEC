@@ -6,15 +6,15 @@ user_id int not null primary key auto_increment,
 login_id varchar(32) unique,
 login_pass varchar(32),
 user_name varchar(32),
-phone_number varchar(32),
 mail_add varchar(32),
+phone_number varchar(32),
 state varchar(16),
 city varchar(16),
 street varchar(32),
 building varchar(64),
 zip_code int(8),
-insert_date datetime,
-updeted_date datetime,
+insert_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+updeted_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
 addres_regi_flag bit(1) not null default b'0'
 );
 

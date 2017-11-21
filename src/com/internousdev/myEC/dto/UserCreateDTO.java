@@ -5,7 +5,6 @@ public class UserCreateDTO {
 	private String loginId;
 	private String password;
 	private String userName;
-	private String phoneNumber;
 	private String mailAddress;
 
 
@@ -28,12 +27,7 @@ public class UserCreateDTO {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	public String getPhoneNumber() {
-		return phoneNumber;
-	}
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
+
 	public String getMailAddress() {
 		return mailAddress;
 	}

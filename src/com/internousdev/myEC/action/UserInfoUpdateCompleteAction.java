@@ -4,6 +4,7 @@ import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
 
+import com.internousdev.myEC.dao.LoginDAO;
 import com.internousdev.myEC.dao.UserInfoUpdateDAO;
 import com.internousdev.myEC.dto.LoginDTO;
 import com.internousdev.myEC.util.DoubleCheck;
@@ -12,13 +13,11 @@ import com.opensymphony.xwork2.ActionSupport;
 public class UserInfoUpdateCompleteAction extends ActionSupport implements SessionAware{
 
 
-	public UserInfoUpdateDAO userInfoUpdateDAO = new UserInfoUpdateDAO();
 	public Map<String, Object> session;
 
-	public LoginDTO loginDTO = new LoginDTO();
 
-	private DoubleCheck doubleCheck = new DoubleCheck();
 
+	public String updateField;
 	public String newValue;
 	public boolean checkFlg;
 
@@ -27,13 +26,17 @@ public class UserInfoUpdateCompleteAction extends ActionSupport implements Sessi
 
 
 	public String execute(){
+		LoginDTO loginDTO = new LoginDTO();
+		LoginDAO loginDAO = new LoginDAO();
+
+		DoubleCheck doubleCheck = new DoubleCheck();
+		UserInfoUpdateDAO userInfoUpdateDAO = new UserInfoUpdateDAO();
 
 		String result = null;
 
-		loginDTO = (LoginDTO)session.get("loginUser");
 
-
-		if(session.get("updateField").equals("login_id")){
+		switch(updateField){
+		case "login_id":
 
 			checkFlg = doubleCheck.idDoubleCheck(newValue);
 
@@ -45,68 +48,59 @@ public class UserInfoUpdateCompleteAction extends ActionSupport implements Sessi
 
 				session.put("newValue", newValue);
 
-				loginDTO.setLoginId(newValue);
-
-				int succ = userInfoUpdateDAO.userInfoUpdate((String)session.get("updateField"), (String)session.get("newValue"), (String)session.get("loginId"), (String)session.get("loginPassword"));
+				userInfoUpdateDAO.userInfoUpdate(updateField, newValue, ((LoginDTO)session.get("loginUser")).getUserId());
 				session.put("loginId", newValue);
 
-				System.out.println(succ);
 			}
 
-		}else{
-			switch((String)session.get("updateField")){
+			break;
 
-			case "login_pass":
-				result = SUCCESS;
+		case "login_pass":
+			result = SUCCESS;
 
-				session.put("newValue", newValue);
+			session.put("newValue", newValue);
 
-				loginDTO.setLoginPassword(newValue);
+			userInfoUpdateDAO.userInfoUpdate(updateField, newValue, ((LoginDTO)session.get("loginUser")).getUserId());
+			session.put("loginPassword", newValue);
 
-				userInfoUpdateDAO.userInfoUpdate((String)session.get("updateField"), (String)session.get("newValue"), (String)session.get("loginId"), (String)session.get("loginPassword"));
-				session.put("loginPassword", newValue);
+			break;
 
-				break;
+		case "user_name":
+			result = SUCCESS;
 
-			case "user_name":
-				result = SUCCESS;
+			session.put("newValue", newValue);
 
-				session.put("newValue", newValue);
 
-				loginDTO.setUserName(newValue);
+			userInfoUpdateDAO.userInfoUpdate(updateField, newValue, ((LoginDTO)session.get("loginUser")).getUserId());
+			session.put("userNmae", newValue);
 
-				userInfoUpdateDAO.userInfoUpdate((String)session.get("updateField"), (String)session.get("newValue"), (String)session.get("loginId"), (String)session.get("loginPassword"));
-				session.put("userNmae", newValue);
+			break;
 
-				break;
+		case "mail_add":
+			result = SUCCESS;
 
-			case "mail_add":
-				result = SUCCESS;
+			session.put("newValue", newValue);
 
-				session.put("newValue", newValue);
 
-				loginDTO.setMailAddress(newValue);
+			userInfoUpdateDAO.userInfoUpdate(updateField, newValue, ((LoginDTO)session.get("loginUser")).getUserId());
+			session.put("mailAddress", newValue);
 
-				userInfoUpdateDAO.userInfoUpdate((String)session.get("updateField"), (String)session.get("newValue"), (String)session.get("loginId"), (String)session.get("loginPassword"));
-				session.put("mailAddress", newValue);
+			break;
 
-				break;
+		case "phone_number":
+			result = SUCCESS;
 
-			case "phone_number":
-				result = SUCCESS;
+			session.put("newValue", newValue);
 
-				session.put("newValue", newValue);
 
-				loginDTO.setPhoneNumber(newValue);
+			userInfoUpdateDAO.userInfoUpdate(updateField, newValue, ((LoginDTO)session.get("loginUser")).getUserId());
+			session.put("phoneNumber", newValue);
 
-				userInfoUpdateDAO.userInfoUpdate((String)session.get("updateField"), (String)session.get("newValue"), (String)session.get("loginId"), (String)session.get("loginPassword"));
-				session.put("phoneNumber", newValue);
+			break;
 
-				break;
-
-			}
 		}
 
+		loginDTO = loginDAO.getLoginUserInfo(((LoginDTO)session.get("loginUser")).getUserId());
 		session.put("loginUser", loginDTO);
 
 		return result;

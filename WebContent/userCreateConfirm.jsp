@@ -39,36 +39,32 @@
 
 	<div id="main">
 		<div id="confirm">
-			<div id="userInfo">
-				<table>
-					<tr>
-						<th>ユーザー名：</th>
-						<td><s:property value='session.get("newLoginId")' /></td>
-					</tr>
-					<tr>
-						<th>パスワード：</th>
-						<td><s:property value='session.get("newPassword")' /></td>
-					</tr>
-					<tr>
-						<th>名前：</th>
-						<td><s:property value='session.get("newUserName")' /></td>
-					</tr>
-					<tr>
-						<th>メールアドレス：</th>
-						<td><s:property value='session.get("newMailAddress")' /></td>
-					</tr>
-					<tr>
-						<th>電話番号：</th>
-						<td><s:property value='session.get("newPhoneNumber")' /></td>
-					</tr>
-				</table>
-			</div>
 
+				<div id="userInfo">
+				<s:form action="UserInfoInsertAction">
+					<table>
+						<tr>
+							<th>ユーザー名：</th>
+							<td><input type="hidden" name="loginId" value=<s:property value='userCreateDTO.loginId' /> /><s:property value='userCreateDTO.loginId' /></td>
+						</tr>
+						<tr>
+							<th>パスワード：</th>
+							<td><s:hidden name="loginPassword" value=<s:property value='userCreateDTO.password' /> /><s:property value='userCreateDTO.password' /></td>
+						</tr>
+						<tr>
+							<th>名前：</th>
+							<td><s:hidden name="userName" value=<s:property value='userCreateDTO.userName' /> /><s:property value='userCreateDTO.userName' /></td>
+						</tr>
+						<tr>
+							<th>メールアドレス：</th>
+							<td><s:hidden name="mailAddress" value=<s:property value='userCreateDTO.mailAddress' /> /><s:property value='userCreateDTO.mailAddress' /></td>
+						</tr>
+					</table>
+					<button type="submit" name="submit" value="confirm">登録</button>
+					<button type="submit" name="submit" value="return">再入力</button>
+				</s:form>
+				</div>
 
-			<div class="confirm">
-			<a href='<s:url action="UserInfoInsertAction" />'><button type="submit" value="confirm">登録</button></a>
-				<a href='<s:url action="UserCreateAction" />'><button type="submit" value="return">再入力</button></a>
-			</div>
 		</div>
 	</div>
 

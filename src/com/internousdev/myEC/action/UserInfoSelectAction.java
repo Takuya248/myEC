@@ -4,55 +4,67 @@ import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
 
+import com.internousdev.myEC.dao.UserAddressDAO;
+import com.internousdev.myEC.dao.UserInfoDAO;
 import com.internousdev.myEC.dto.LoginDTO;
+import com.internousdev.myEC.dto.UserAddressDTO;
+import com.internousdev.myEC.dto.UserInfoDTO;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class UserInfoSelectAction extends ActionSupport implements SessionAware{
 
 	public LoginDTO loginDTO = new LoginDTO();
-	public String updateField;
-	public Map<String, Object> session;
+	public UserInfoDTO userInfoDTO = new UserInfoDTO();
+	public UserAddressDTO userAddressDTO = new UserAddressDTO();
 
+	public String updateField;
 	public String oldValue;
 	public String fieldName;
+
+	public Map<String, Object> session;
+
 
 
 	public String execute(){
 		String result = SUCCESS;
 
-		loginDTO = (LoginDTO)session.get("loginUser");
+		UserInfoDAO userInfoDAO = new UserInfoDAO();
+		UserAddressDAO userAddressDAO = new UserAddressDAO();
+
+		userInfoDTO = userInfoDAO.getUserInfo(((LoginDTO)session.get("loginUser")).getId());
+		userAddressDTO = userAddressDAO.getUserAddress(((LoginDTO)session.get("loginUser")).getId());
 
 		switch(updateField){
 
 		case "login_id":
 			fieldName = "ログインID";
-			oldValue = loginDTO.getLoginId();
+			oldValue = userInfoDTO.getLoginId();
 			break;
 
 		case "login_pass":
 			fieldName = "ログインパスワード";
-			oldValue = loginDTO.getLoginPassword();
+			//oldValue =
 			break;
 
 		case "user_name":
 			fieldName = "名前";
-			oldValue = loginDTO.getUserName();
+			oldValue = userInfoDTO.getUserName();
 			break;
 
 		case "mail_add":
 			fieldName = "メールアドレス";
-			oldValue = loginDTO.getMailAddress();
+			oldValue = userInfoDTO.getUserMailAddress();
 			break;
 
 		case "phone_number":
 			fieldName = "電話番号";
-			oldValue = loginDTO.getPhoneNumber();
+			oldValue = userAddressDTO.getPhoneNumber();
 			break;
-
+		case "address":
+			fieldName = "住所";
+			oldValue = userAddressDTO.getState() + " " + userAddressDTO.getCity() + " " + userAddressDTO.getStreet() + " " + userAddressDTO.getBuilding() + " " + userAddressDTO.getZipCode();
+			break;
 		}
-
-		session.put("oldValue", oldValue);
-		session.put("updateField", updateField);
 
 		return result;
 	}
