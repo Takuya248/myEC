@@ -2,13 +2,14 @@ package com.internousdev.myEC.dto;
 
 public class UserAddressDTO {
 
-	private int userId;
-	private String phoneNumber;
-	private String state;
-	private String city;
-	private String street;
-	private String building;
-	private int zipCode;
+	private int userId = 0;
+	private String phoneNumber = "";
+	private String state = "";
+	private String city = "";
+	private String street = "";
+	private String building = "";
+	private int zipCode = 0;
+	private boolean addressRegiFlg = false;
 
 
 
@@ -54,6 +55,12 @@ public class UserAddressDTO {
 	}
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
+	}
+	public boolean isAddressRegiFlg() {
+		return addressRegiFlg;
+	}
+	public void setAddressRegiFlg(boolean addressRegiFlg) {
+		this.addressRegiFlg = addressRegiFlg;
 	}
 
 

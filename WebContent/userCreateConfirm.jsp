@@ -38,8 +38,6 @@
 
 
 	<div id="main">
-		<div id="confirm">
-
 				<div id="userInfo">
 				<s:form action="UserInfoInsertAction">
 					<table>
@@ -49,15 +47,15 @@
 						</tr>
 						<tr>
 							<th>パスワード：</th>
-							<td><s:hidden name="loginPassword" value=<s:property value='userCreateDTO.password' /> /><s:property value='userCreateDTO.password' /></td>
+							<td><input type="hidden" name="loginPassword" value=<s:property value="userCreateDTO.password" /> /><s:property value='userCreateDTO.password' /></td>
 						</tr>
 						<tr>
 							<th>名前：</th>
-							<td><s:hidden name="userName" value=<s:property value='userCreateDTO.userName' /> /><s:property value='userCreateDTO.userName' /></td>
+							<td><input type="hidden" name="userName" value=<s:property value="userCreateDTO.userName" /> /><s:property value='userCreateDTO.userName' /></td>
 						</tr>
 						<tr>
 							<th>メールアドレス：</th>
-							<td><s:hidden name="mailAddress" value=<s:property value='userCreateDTO.mailAddress' /> /><s:property value='userCreateDTO.mailAddress' /></td>
+							<td><input type="hidden" name="mailAddress" value=<s:property value="userCreateDTO.mailAddress" /> /><s:property value='userCreateDTO.mailAddress' /></td>
 						</tr>
 					</table>
 					<button type="submit" name="submit" value="confirm">登録</button>
@@ -66,7 +64,6 @@
 				</div>
 
 		</div>
-	</div>
 
 	<!--------------  フッタ  -------------->
 

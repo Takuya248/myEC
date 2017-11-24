@@ -11,6 +11,7 @@
 	<package name="com.internousdev.myEC.action" extends="struts-default">
 
 
+
 		<action name="HomeAction" class="com.internousdev.myEC.action.HomeAction" method="execute">
 			<result name="success">home.jsp</result>
 		</action>
@@ -54,10 +55,12 @@
 
 		<action name="UserInfoSelectAction" class="com.internousdev.myEC.action.UserInfoSelectAction" method="execute">
 			<result name="success">infoEdit.jsp</result>
+			<result name="address">addressUpdate.jsp</result>
 		</action>
 
 		<action name="UserInfoUpdateAction" class="com.internousdev.myEC.action.UserInfoUpdateAction" method="execute">
 			<result name="success">userInfoUpdateComplete.jsp</result>
+
 		</action>
 
 		<action name="UserInfoUpdateCompleteAction" class="com.internousdev.myEC.action.UserInfoUpdateCompleteAction" method="execute">
@@ -110,6 +113,10 @@
 			<result name="error">home.jsp</result>
 		</action>
 
+		<action name="UserAddressUpdateAction" class="com.internousdev.myEC.action.UserAddressUpdateAction" method="execute">
+			<result name="success">userInfoUpdateComplete.jsp</result>
+		</action>
+
 		<action name="GuestUserInfoConfirmAction" class="com.internousdev.myEC.action.GuestUserInfoConfirmAction" method="execute">
 			<result name="success">guestUserInfoInsertComplete.jsp</result>
 		</action>
@@ -125,6 +132,12 @@
 		<action name="PaymentCompleteAction" class="com.internousdev.myEC.action.PaymentCompleteAction" method="execute">
 			<result name="success">paymentSuccess.jsp</result>
 		</action>
+
+		<action name="LogoutAction" class="com.internousdev.myEC.action.LogoutAction" method="execute">
+			<result name="success">home.jsp</result>
+		</action>
+
+
 
 
 

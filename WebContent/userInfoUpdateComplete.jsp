@@ -37,8 +37,8 @@
 
 
 	<div id="main">
+	更新完了
 		<table>
-			<tr><td><s:property value='newValue' /></td></tr>
 			<tr><td><s:form><button formaction="MypageAction">戻る</button></s:form></td></tr>
 		</table>
 	</div>

@@ -56,7 +56,6 @@ public class UserInfoDAO implements SessionAware{
 			if(resultSet.next()){
 				userInfoDTO.setUserName(resultSet.getString("user_name"));
 				userInfoDTO.setUserMailAddress(resultSet.getString("mail_add"));
-				userInfoDTO.setUserPhoneNumber(resultSet.getString("phone_number"));
 			}
 
 		}catch(Exception e){

@@ -5,7 +5,6 @@ public class UserInfoDTO {
 	private String UserName;
 	private String LoginId;
 	private String UserMailAddress;
-	private String UserPhoneNumber;
 	private String RegistrationDate;
 
 
@@ -22,12 +21,7 @@ public class UserInfoDTO {
 	public void setUserMailAddress(String userMailAddress) {
 		UserMailAddress = userMailAddress;
 	}
-	public String getUserPhoneNumber() {
-		return UserPhoneNumber;
-	}
-	public void setUserPhoneNumber(String userPhoneNumber) {
-		UserPhoneNumber = userPhoneNumber;
-	}
+
 	public String getRegistrationDate() {
 		return RegistrationDate;
 	}

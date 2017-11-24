@@ -77,11 +77,11 @@
 				</tr>
 				<tr>
 					<th>住所：</th>
-					<s:if test="userAddressDTO.state == null || userAddressDTO.city == null || userAddressDTO.street == null || userAddressDTO.building == null || userAddressDTO.zipCode == 0">
-						<td>設定なし</td>
+					<s:if test='userAddressDTO.addressRegiFlg'>
+						<td><s:property value='userAddressDTO.state + " " + userAddressDTO.city + " " + userAddressDTO.street + " " + userAddressDTO.building' /><br><s:property value='userAddressDTO.zipCode' /></td>
 					</s:if>
 					<s:else>
-						<td><s:property value='userAddressDTO.state + " " + userAddressDTO.city + " " + userAddressDTO.street + " " + userAddressDTO.building' /><br><s:property value='userAddressDTO.zipCode' /></td>
+						<td>設定なし</td>
 					</s:else>
 					<td><button type="submit" name="updateField" value="address">編集</button></td>
 				</tr>

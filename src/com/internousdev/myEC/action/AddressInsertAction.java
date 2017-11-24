@@ -23,7 +23,7 @@ public class AddressInsertAction extends ActionSupport implements SessionAware{
 
 		if((boolean)session.get("loginFlg")){
 			userAddressDTO.setUserId((int)session.get("userId"));
-			userAddresDAO.insertDB(userAddressDTO);
+			userAddresDAO.insertAddress(userAddressDTO);
 
 		}
 

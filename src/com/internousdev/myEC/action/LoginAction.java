@@ -13,10 +13,11 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class LoginAction extends ActionSupport implements SessionAware{
 
-	public Map<String,Object> session;
+	public Map<String, Object> session;
 
 	private LoginDTO loginDTO = new LoginDTO();
 	public LoginDAO loginDAO = new LoginDAO();
+
 
 	public DBUserCartListDAO dbUserCartListDAO = new DBUserCartListDAO();
 
@@ -31,7 +32,7 @@ public class LoginAction extends ActionSupport implements SessionAware{
 
 		String result;
 
-		if(session.containsKey("loginFlg")){
+		if(session.containsKey("loginUser")){
 
 			userId = ((LoginDTO)session.get("loginUser")).getUserId();
 			loginId = ((LoginDTO)session.get("loginUser")).getLoginId();
@@ -42,16 +43,11 @@ public class LoginAction extends ActionSupport implements SessionAware{
 		}else{
 			loginDTO = loginDAO.getLoginUserInfo(loginId,loginPassword);
 
-			session.put("userId", loginDTO.getId());
-			session.put("loginId", loginDTO.getLoginId());
-			session.put("loginFlg", loginDTO.getLoginFlg());
-
 			session.put("loginUser",loginDTO);
-
 
 		}
 
-		if((boolean)session.get("loginFlg")){
+		if(loginDTO.getLoginFlg()){
 
 			if(session.containsKey("cart")){
 				ArrayList<CartItemDTO> sessionCart = new ArrayList<CartItemDTO>();
@@ -89,7 +85,6 @@ public class LoginAction extends ActionSupport implements SessionAware{
 
 
 
-		System.out.println(session.get("loginFlg"));
 		return result;
 	}
 
@@ -115,5 +110,9 @@ public class LoginAction extends ActionSupport implements SessionAware{
 	public void setSession(Map<String,Object> session){
 		this.session = session;
 	}
+
+
+
+
 
 }

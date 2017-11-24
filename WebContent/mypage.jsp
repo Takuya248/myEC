@@ -48,7 +48,7 @@
 			<table>
 				<tr>
 					<th>ユーザー名：</th>
-					<td><s:property value='session.get("loginId")' />さんのマイページ</td>
+					<td><s:property value='session.loginUser.loginId' />さんのマイページ</td>
 				</tr>
 
 

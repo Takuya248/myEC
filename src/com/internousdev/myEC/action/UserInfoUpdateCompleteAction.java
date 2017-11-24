@@ -46,10 +46,9 @@ public class UserInfoUpdateCompleteAction extends ActionSupport implements Sessi
 			}else{
 				result = SUCCESS;
 
-				session.put("newValue", newValue);
-
 				userInfoUpdateDAO.userInfoUpdate(updateField, newValue, ((LoginDTO)session.get("loginUser")).getUserId());
-				session.put("loginId", newValue);
+				((LoginDTO)session.get("loginUser")).setLoginId(newValue);
+
 
 			}
 
@@ -57,8 +56,6 @@ public class UserInfoUpdateCompleteAction extends ActionSupport implements Sessi
 
 		case "login_pass":
 			result = SUCCESS;
-
-			session.put("newValue", newValue);
 
 			userInfoUpdateDAO.userInfoUpdate(updateField, newValue, ((LoginDTO)session.get("loginUser")).getUserId());
 			session.put("loginPassword", newValue);
@@ -68,33 +65,15 @@ public class UserInfoUpdateCompleteAction extends ActionSupport implements Sessi
 		case "user_name":
 			result = SUCCESS;
 
-			session.put("newValue", newValue);
-
-
 			userInfoUpdateDAO.userInfoUpdate(updateField, newValue, ((LoginDTO)session.get("loginUser")).getUserId());
-			session.put("userNmae", newValue);
+
 
 			break;
 
 		case "mail_add":
 			result = SUCCESS;
 
-			session.put("newValue", newValue);
-
-
 			userInfoUpdateDAO.userInfoUpdate(updateField, newValue, ((LoginDTO)session.get("loginUser")).getUserId());
-			session.put("mailAddress", newValue);
-
-			break;
-
-		case "phone_number":
-			result = SUCCESS;
-
-			session.put("newValue", newValue);
-
-
-			userInfoUpdateDAO.userInfoUpdate(updateField, newValue, ((LoginDTO)session.get("loginUser")).getUserId());
-			session.put("phoneNumber", newValue);
 
 			break;
 

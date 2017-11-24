@@ -43,7 +43,7 @@ public class UserInfoSelectAction extends ActionSupport implements SessionAware{
 
 		case "login_pass":
 			fieldName = "ログインパスワード";
-			//oldValue =
+			
 			break;
 
 		case "user_name":
@@ -63,6 +63,8 @@ public class UserInfoSelectAction extends ActionSupport implements SessionAware{
 		case "address":
 			fieldName = "住所";
 			oldValue = userAddressDTO.getState() + " " + userAddressDTO.getCity() + " " + userAddressDTO.getStreet() + " " + userAddressDTO.getBuilding() + " " + userAddressDTO.getZipCode();
+
+			result = "address";
 			break;
 		}
 

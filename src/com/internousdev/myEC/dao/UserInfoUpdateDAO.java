@@ -18,7 +18,7 @@ public class UserInfoUpdateDAO {
 
 		try{
 
-			String sql = "UPDATE user_info SET ? = ? , updeted_date = ? WHERE user_id = ?";
+			String sql = "UPDATE user_info SET ? = ?, update_date = ? WHERE user_id = ?";
 
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setString(1, dbUpdateField);

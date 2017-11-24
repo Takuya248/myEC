@@ -12,6 +12,7 @@ public class AddressEditConfirmAction extends ActionSupport implements SessionAw
 	public Map<String, Object> session;
 	public UserAddressDTO userAddressDTO = new UserAddressDTO();
 
+	public String phoneNumber;
 	public String state;
 	public String city;
 	public String street;
@@ -22,13 +23,12 @@ public class AddressEditConfirmAction extends ActionSupport implements SessionAw
 
 
 
+		userAddressDTO.setState(phoneNumber);
 		userAddressDTO.setState(state);
 		userAddressDTO.setCity(city);
 		userAddressDTO.setStreet(street);
 		userAddressDTO.setBuilding(building);
 		userAddressDTO.setZipCode(Integer.parseInt(zipCode));
-
-		session.put("userAddress", userAddressDTO);
 
 		String result = SUCCESS;
 		return result;

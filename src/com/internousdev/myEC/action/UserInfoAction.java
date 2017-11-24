@@ -25,14 +25,18 @@ public class UserInfoAction extends ActionSupport implements SessionAware{
 
 		String result = ERROR;
 
-		if(((LoginDTO)session.get("loginUser")).getLoginFlg()){
+		loginDTO = (LoginDTO)session.get("loginUser");
+
+		if(loginDTO.getLoginFlg()){
 			result = SUCCESS;
 
 			UserInfoDAO userInfoDAO = new UserInfoDAO();
 			UserAddressDAO userAddressDAO = new UserAddressDAO();
 
-			userInfoDTO = userInfoDAO.getUserInfo(((LoginDTO)session.get("loginUser")).getId());
-			userAddressDTO = userAddressDAO.getUserAddress(((LoginDTO)session.get("loginUser")).getId());
+			userInfoDTO = userInfoDAO.getUserInfo(loginDTO.getId());
+			userAddressDTO = userAddressDAO.getUserAddress(loginDTO.getId());
+
+
 
 
 		}

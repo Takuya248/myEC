@@ -42,6 +42,10 @@
 			<div id="userInfo">
 				<table>
 					<tr>
+						<th>電話番号</th>
+						<td><s:property value='phoneNumber' /></td>
+					</tr>
+					<tr>
 						<th>都道府県</th>
 						<td><s:property value='state' /></td>
 					</tr>

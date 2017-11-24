@@ -30,7 +30,7 @@
 
 		<div id="form">
 
-			<s:form action="AddressEditConfirmAction">
+			<s:form action="UserAddressUpdateAction">
 				<table>
 					<tr>
 						<td>電話番号</td>

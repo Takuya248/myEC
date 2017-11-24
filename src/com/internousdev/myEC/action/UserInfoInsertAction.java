@@ -29,9 +29,10 @@ public class UserInfoInsertAction extends ActionSupport implements SessionAware{
 
 		UserInfoInsertDAO userInfoInsertDAO = new UserInfoInsertDAO();
 
+
 		//遷移先分岐
 		switch(submit){
-		case "confim":
+		case "confirm":
 
 			result = "gotoMypage";
 			userInfoInsertDAO.infoInsert(loginId, loginPassword, userName, mailAddress);
@@ -47,7 +48,12 @@ public class UserInfoInsertAction extends ActionSupport implements SessionAware{
 			break;
 
 		case "return":
+			result = "return";
+			break;
 
+
+
+		default :
 			result = "return";
 			break;
 

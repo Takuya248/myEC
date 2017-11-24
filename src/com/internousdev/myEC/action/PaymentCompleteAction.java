@@ -60,7 +60,7 @@ public class PaymentCompleteAction extends ActionSupport implements SessionAware
 			paymentUserInfoDTO.setUserId((int)session.get("userId"));
 			paymentUserInfoDTO.setUserName(userInfoDTO.getUserName());
 			paymentUserInfoDTO.setUserMailAddress(userInfoDTO.getUserMailAddress());
-			paymentUserInfoDTO.setUserPhoneNumber(userInfoDTO.getUserPhoneNumber());
+			paymentUserInfoDTO.setUserPhoneNumber(userAddressDTO.getPhoneNumber());
 			paymentUserInfoDTO.setState(userAddressDTO.getState());
 			paymentUserInfoDTO.setCity(userAddressDTO.getCity());
 			paymentUserInfoDTO.setStreet(userAddressDTO.getStreet());
