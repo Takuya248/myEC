@@ -71,6 +71,25 @@ public class UserAddressDAO {
 
 	}
 
+	public void updatePhoneNumber(String phoneNumber, int userId){
+
+		DBConnector dbConnector = new DBConnector();
+		Connection connection = dbConnector.getConnection();
+
+		try{
+
+			String sql = "UPDATE user_info SET phone_number = ? WHERE user_id = ?";
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setString(1, phoneNumber);
+			preparedStatement.setInt(2, userId);
+			preparedStatement.execute();
+
+		}catch(SQLException e){
+			e.printStackTrace();
+
+		}
+	}
+
 
 	public UserAddressDTO getUserAddress(int userId){
 

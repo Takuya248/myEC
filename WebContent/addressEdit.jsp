@@ -54,7 +54,7 @@
 					</tr>
 					<tr>
 						<td>郵便番号</td>
-						<td><s:textfield name="zipCode" /></td>
+						<td><s:textfield name="zipCode" min="7" max="7" /></td>
 					</tr>
 
 

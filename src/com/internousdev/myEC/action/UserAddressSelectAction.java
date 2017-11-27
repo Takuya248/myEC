@@ -5,6 +5,7 @@ import java.util.Map;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.internousdev.myEC.dao.UserInfoDAO;
+import com.internousdev.myEC.dto.LoginDTO;
 import com.internousdev.myEC.dto.UserAddressDTO;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -18,10 +19,11 @@ public class UserAddressSelectAction extends ActionSupport implements SessionAwa
 
 		UserInfoDAO userInfoDAO = new UserInfoDAO();
 
-		if(userInfoDAO.getAddressFlg((int)session.get("userId"))){
-			result = "gotoAddInsert";
-		}else{
+		if(userInfoDAO.getAddressFlg(((LoginDTO)session.get("loginUser")).getId())){
 			result = "gotoPayment";
+
+		}else{
+			result = "gotoAddInsert";
 		}
 
 

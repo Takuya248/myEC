@@ -30,6 +30,8 @@ public class AddressEditConfirmAction extends ActionSupport implements SessionAw
 		userAddressDTO.setBuilding(building);
 		userAddressDTO.setZipCode(Integer.parseInt(zipCode));
 
+		session.put("userAddressDTO", userAddressDTO);
+
 		String result = SUCCESS;
 		return result;
 

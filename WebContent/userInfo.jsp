@@ -55,11 +55,7 @@
 					<td><s:property value='userInfoDTO.loginId' /></td>
                     <td><button type="submit" name="updateField" value="login_id">編集</button></td>
 				</tr>
-				<tr>
-					<th>パスワード：</th>
-					<td><s:property value='userInfoDTO.' /></td>
-					<td><button type="submit" name="updateField" value="login_pass">編集</button></td>
-				</tr>
+
 				<tr>
 					<th>名前：</th>
 					<td><s:property value='userInfoDTO.userName' /></td>
@@ -87,7 +83,7 @@
 				</tr>
 				<tr>
 					<th>登録日：</th>
-					<td><s:property value='session.get("regiDate")' /></td>
+					<td><s:property value='userInfoDTO.RegistrationDate' /></td>
 				</tr>
 
 			</table>

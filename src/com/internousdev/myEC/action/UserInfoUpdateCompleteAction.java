@@ -5,6 +5,7 @@ import java.util.Map;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.internousdev.myEC.dao.LoginDAO;
+import com.internousdev.myEC.dao.UserAddressDAO;
 import com.internousdev.myEC.dao.UserInfoUpdateDAO;
 import com.internousdev.myEC.dto.LoginDTO;
 import com.internousdev.myEC.util.DoubleCheck;
@@ -31,6 +32,7 @@ public class UserInfoUpdateCompleteAction extends ActionSupport implements Sessi
 
 		DoubleCheck doubleCheck = new DoubleCheck();
 		UserInfoUpdateDAO userInfoUpdateDAO = new UserInfoUpdateDAO();
+		UserAddressDAO userAddressDAO = new UserAddressDAO();
 
 		String result = null;
 
@@ -49,17 +51,7 @@ public class UserInfoUpdateCompleteAction extends ActionSupport implements Sessi
 				userInfoUpdateDAO.userInfoUpdate(updateField, newValue, ((LoginDTO)session.get("loginUser")).getUserId());
 				((LoginDTO)session.get("loginUser")).setLoginId(newValue);
 
-
 			}
-
-			break;
-
-		case "login_pass":
-			result = SUCCESS;
-
-			userInfoUpdateDAO.userInfoUpdate(updateField, newValue, ((LoginDTO)session.get("loginUser")).getUserId());
-			session.put("loginPassword", newValue);
-
 			break;
 
 		case "user_name":
@@ -74,6 +66,13 @@ public class UserInfoUpdateCompleteAction extends ActionSupport implements Sessi
 			result = SUCCESS;
 
 			userInfoUpdateDAO.userInfoUpdate(updateField, newValue, ((LoginDTO)session.get("loginUser")).getUserId());
+
+			break;
+
+		case "phone_number":
+			result = SUCCESS;
+
+			userAddressDAO.updatePhoneNumber(newValue, ((LoginDTO)session.get("loginUser")).getUserId());
 
 			break;
 

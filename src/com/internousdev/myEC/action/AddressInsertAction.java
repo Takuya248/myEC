@@ -5,6 +5,7 @@ import java.util.Map;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.internousdev.myEC.dao.UserAddressDAO;
+import com.internousdev.myEC.dto.LoginDTO;
 import com.internousdev.myEC.dto.UserAddressDTO;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -16,15 +17,15 @@ public class AddressInsertAction extends ActionSupport implements SessionAware{
 
 	public String execute(){
 		String result = ERROR;
-
 		UserAddressDTO userAddressDTO = new UserAddressDTO();
 
 		userAddressDTO = (UserAddressDTO)session.get("userAddressDTO");
 
-		if((boolean)session.get("loginFlg")){
-			userAddressDTO.setUserId((int)session.get("userId"));
+		if(session.containsKey("loginUser")){
+			if(((LoginDTO)session.get("loginUser")).getLoginFlg()){
+			userAddressDTO.setUserId(((LoginDTO)session.get("loginUser")).getId());
 			userAddresDAO.insertAddress(userAddressDTO);
-
+			}
 		}
 
 		switch((String)session.get("pageTransition")){
@@ -46,5 +47,7 @@ public class AddressInsertAction extends ActionSupport implements SessionAware{
 	public void setSession(Map<String, Object> session) {
 		this.session = session;
 	}
+
+
 
 }

@@ -41,10 +41,7 @@ public class UserInfoSelectAction extends ActionSupport implements SessionAware{
 			oldValue = userInfoDTO.getLoginId();
 			break;
 
-		case "login_pass":
-			fieldName = "ログインパスワード";
-			
-			break;
+
 
 		case "user_name":
 			fieldName = "名前";

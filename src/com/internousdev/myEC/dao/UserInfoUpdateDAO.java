@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import com.internousdev.myEC.util.DBConnector;
-import com.internousdev.myEC.util.DateUtil;
 
 public class UserInfoUpdateDAO {
 
@@ -13,18 +12,15 @@ public class UserInfoUpdateDAO {
 
 		DBConnector dbConnector = new DBConnector();
 		Connection connection = dbConnector.getConnection();
-		DateUtil dateUtil = new DateUtil();
 
 
 		try{
 
-			String sql = "UPDATE user_info SET ? = ?, update_date = ? WHERE user_id = ?";
+			String sql = "UPDATE user_info SET " + dbUpdateField + " = ? WHERE user_id = ?";
 
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setString(1, dbUpdateField);
-			preparedStatement.setString(2, newValue);
-			preparedStatement.setString(3, dateUtil.getDate());
-			preparedStatement.setInt(4, userId);
+			preparedStatement.setString(1, newValue);
+			preparedStatement.setInt(2, userId);
 
 			preparedStatement.executeUpdate();
 

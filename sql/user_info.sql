@@ -13,8 +13,8 @@ city varchar(16),
 street varchar(32),
 building varchar(64),
 zip_code int(8),
-insert_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-update_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+insert_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+update_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 address_regi_flag bit(1) not null default b'0'
 );
 

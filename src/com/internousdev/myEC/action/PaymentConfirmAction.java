@@ -11,6 +11,7 @@ import com.internousdev.myEC.dao.GetUserAddressInfoDAO;
 import com.internousdev.myEC.dao.UserInfoDAO;
 import com.internousdev.myEC.dto.CartItemDTO;
 import com.internousdev.myEC.dto.ItemInfoDTO;
+import com.internousdev.myEC.dto.LoginDTO;
 import com.internousdev.myEC.dto.PaymentUserInfoDTO;
 import com.internousdev.myEC.dto.UserAddressDTO;
 import com.internousdev.myEC.dto.UserInfoDTO;
@@ -34,34 +35,35 @@ public class PaymentConfirmAction extends ActionSupport implements SessionAware{
 	@SuppressWarnings("unchecked")
 	public String execute(){
 
-		if(session.containsKey("loginFlg")){
-			UserInfoDAO userInfoDAO = new UserInfoDAO();
-			GetUserAddressInfoDAO getUserAddressInfoDAO = new GetUserAddressInfoDAO();
+		if(session.containsKey("loginUser")){
+			if(((LoginDTO)session.get("loginUser")).getLoginFlg()){
+				UserInfoDAO userInfoDAO = new UserInfoDAO();
+				GetUserAddressInfoDAO getUserAddressInfoDAO = new GetUserAddressInfoDAO();
 
-			UserInfoDTO userInfoDTO = userInfoDAO.getPaymentUserInfo((int)session.get("userId"));
-			UserAddressDTO userAddressDTO = getUserAddressInfoDAO.getAddressInfo((int)session.get("userId"));
+				UserInfoDTO userInfoDTO = userInfoDAO.getPaymentUserInfo(((LoginDTO)session.get("loginUser")).getId());
+				UserAddressDTO userAddressDTO = getUserAddressInfoDAO.getAddressInfo(((LoginDTO)session.get("loginUser")).getId());
 
-			paymentUserInfoDTO.setUserId((int)session.get("userId"));
-			paymentUserInfoDTO.setUserName(userInfoDTO.getUserName());
-			paymentUserInfoDTO.setUserMailAddress(userInfoDTO.getUserMailAddress());
-			paymentUserInfoDTO.setUserPhoneNumber(userAddressDTO.getPhoneNumber());
-			paymentUserInfoDTO.setState(userAddressDTO.getState());
-			paymentUserInfoDTO.setCity(userAddressDTO.getCity());
-			paymentUserInfoDTO.setStreet(userAddressDTO.getStreet());
-			paymentUserInfoDTO.setBuilding(userAddressDTO.getBuilding());
-			paymentUserInfoDTO.setZipCode(userAddressDTO.getZipCode());
-			paymentUserInfoDTO.setSelectedPayment(howToPay);
+				paymentUserInfoDTO.setUserId(((LoginDTO)session.get("loginUser")).getId());
+				paymentUserInfoDTO.setUserName(userInfoDTO.getUserName());
+				paymentUserInfoDTO.setUserMailAddress(userInfoDTO.getUserMailAddress());
+				paymentUserInfoDTO.setUserPhoneNumber(userAddressDTO.getPhoneNumber());
+				paymentUserInfoDTO.setState(userAddressDTO.getState());
+				paymentUserInfoDTO.setCity(userAddressDTO.getCity());
+				paymentUserInfoDTO.setStreet(userAddressDTO.getStreet());
+				paymentUserInfoDTO.setBuilding(userAddressDTO.getBuilding());
+				paymentUserInfoDTO.setZipCode(userAddressDTO.getZipCode());
+				paymentUserInfoDTO.setSelectedPayment(howToPay);
 
-			session.put("howToPay", howToPay);
-			if(howToPay == "card"){
+				session.put("howToPay", howToPay);
+				if(howToPay == "card"){
 
-				System.out.println(card);
+					System.out.println(card);
 
+				}
+
+				cart = dbUserCartListDAO.getDBCartList(((LoginDTO)session.get("loginUser")).getId());
+				itemInfoList = getCartItemInfoListDAO.getItemInfo(cart);
 			}
-
-			cart = dbUserCartListDAO.getDBCartList((int)session.get("userId"));
-			itemInfoList = getCartItemInfoListDAO.getItemInfo(cart);
-
 
 		}else{
 

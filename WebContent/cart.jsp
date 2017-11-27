@@ -44,7 +44,7 @@ int price = 0;
 		</div>
 
 		<div id="login">
-			<s:if test='session.get("loginFlg") == true'>
+			<s:if test='session.loginUser.loginFlg'>
 				<a href='<s:url action="MypageAction" />'>マイページ</a>
 			</s:if>
 			<s:else>
@@ -103,7 +103,7 @@ int price = 0;
 
 				<table>
 				<tr><td><a href='<s:url action="ItemListPageAction" />'>商品リスト</a></td></tr>
-			<s:if test="session.loginFlg">
+			<s:if test="session.loginUser.loginFlg">
 					<tr>
 						<s:form action="UserAddressSelectAction"><s:submit value="購入" /></s:form>
 					</tr>
