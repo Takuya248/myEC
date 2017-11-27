@@ -84,11 +84,19 @@
 							<td><s:property value="itemName" /></td>
 							<th>価格</th>
 							<td><s:property value="itemPrice" /></td>
-							<th>在庫数</th>
-							<td><s:property value="cartItemStock" /></td>
+							<th>注文数</th>
+							<td><s:property value="cartItemStack" /></td>
 						</tr>
 
 				</s:iterator>
+			</table>
+
+			<table>
+				<tr>
+					<th>カートの中身</th>
+					<td>合計<s:property value="cartInfoDTO.totalPrice" />円</td>
+					<td>アイテム数<s:property value="cartInfoDTO.totalItemStack" /></td>
+				</tr>
 			</table>
 		</div>
 

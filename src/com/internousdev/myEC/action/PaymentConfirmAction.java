@@ -9,23 +9,26 @@ import com.internousdev.myEC.dao.DBUserCartListDAO;
 import com.internousdev.myEC.dao.GetCartItemInfoListDAO;
 import com.internousdev.myEC.dao.GetUserAddressInfoDAO;
 import com.internousdev.myEC.dao.UserInfoDAO;
+import com.internousdev.myEC.dto.CartInfoDTO;
 import com.internousdev.myEC.dto.CartItemDTO;
 import com.internousdev.myEC.dto.ItemInfoDTO;
 import com.internousdev.myEC.dto.LoginDTO;
 import com.internousdev.myEC.dto.PaymentUserInfoDTO;
 import com.internousdev.myEC.dto.UserAddressDTO;
 import com.internousdev.myEC.dto.UserInfoDTO;
+import com.internousdev.myEC.util.CartItemCount;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class PaymentConfirmAction extends ActionSupport implements SessionAware{
 
-	public GetCartItemInfoListDAO getCartItemInfoListDAO = new GetCartItemInfoListDAO();
+	public CartItemCount cartItemCount = new CartItemCount();
 
+	public GetCartItemInfoListDAO getCartItemInfoListDAO = new GetCartItemInfoListDAO();
+	public DBUserCartListDAO dbUserCartListDAO = new DBUserCartListDAO();
 
 	public PaymentUserInfoDTO paymentUserInfoDTO = new PaymentUserInfoDTO();
-	public DBUserCartListDAO dbUserCartListDAO = new DBUserCartListDAO();
+	public CartInfoDTO cartInfoDTO = new CartInfoDTO();
 	public ArrayList<CartItemDTO> cart = new ArrayList<CartItemDTO>();
-
 	public ArrayList<ItemInfoDTO> itemInfoList = new ArrayList<ItemInfoDTO>();
 	public String howToPay;
 	public String card;
@@ -62,7 +65,7 @@ public class PaymentConfirmAction extends ActionSupport implements SessionAware{
 				}
 
 				cart = dbUserCartListDAO.getDBCartList(((LoginDTO)session.get("loginUser")).getId());
-				itemInfoList = getCartItemInfoListDAO.getItemInfo(cart);
+
 			}
 
 		}else{
@@ -82,9 +85,10 @@ public class PaymentConfirmAction extends ActionSupport implements SessionAware{
 
 			}
 			cart = (ArrayList<CartItemDTO>)session.get("cart");
-			itemInfoList = getCartItemInfoListDAO.getItemInfo(cart);
 		}
 
+		itemInfoList = getCartItemInfoListDAO.getItemInfo(cart);
+		cartInfoDTO = cartItemCount.itemCount(itemInfoList);
 
 		String result = SUCCESS;
 
@@ -130,6 +134,14 @@ public class PaymentConfirmAction extends ActionSupport implements SessionAware{
 
 	public void setItemInfoList(ArrayList<ItemInfoDTO> itemInfoList) {
 		this.itemInfoList = itemInfoList;
+	}
+
+	public CartInfoDTO getCartInfoDTO() {
+		return cartInfoDTO;
+	}
+
+	public void setCartInfoDTO(CartInfoDTO cartInfoDTO) {
+		this.cartInfoDTO = cartInfoDTO;
 	}
 
 

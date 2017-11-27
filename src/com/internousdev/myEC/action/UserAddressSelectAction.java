@@ -24,6 +24,8 @@ public class UserAddressSelectAction extends ActionSupport implements SessionAwa
 
 		}else{
 			result = "gotoAddInsert";
+
+			session.put("pageTransition", "addSelect");
 		}
 
 

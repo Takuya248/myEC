@@ -18,7 +18,6 @@ public class AddressInsertAction extends ActionSupport implements SessionAware{
 	public String execute(){
 		String result = ERROR;
 		UserAddressDTO userAddressDTO = new UserAddressDTO();
-
 		userAddressDTO = (UserAddressDTO)session.get("userAddressDTO");
 
 		if(session.containsKey("loginUser")){
@@ -28,8 +27,9 @@ public class AddressInsertAction extends ActionSupport implements SessionAware{
 			}
 		}
 
-		switch((String)session.get("pageTransition")){
-		case "settlement":
+		String pageTransition = (String)session.get("pageTransition");
+		switch(pageTransition){
+		case "addSelect":
 			result = "gotoPayment";
 			break;
 		default :

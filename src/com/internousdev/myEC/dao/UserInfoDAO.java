@@ -69,7 +69,7 @@ public class UserInfoDAO implements SessionAware{
 
 		boolean addressRegiFlg = false;
 
-		String sql = "SELECT addres_regi_flag FROM user_info WHERE user_id = ?";
+		String sql = "SELECT address_regi_flag FROM user_info WHERE user_id = ?";
 
 		try{
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);

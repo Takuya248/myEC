@@ -31,9 +31,9 @@
 		</div>
 
 		<div id="login">
-			<s:if test='session.get("loginFlg") == true'>
+			<s:if test='session.loginUser.loginFlg'>
 				<a href='<s:url action="MypageAction" />'>マイページ</a>
-				<a href='<s:url action="CartAction" />'>カート</a>
+				<a href='<s:url action="LogoutAction" />'>ログアウト</a>
 			</s:if>
 			<s:else>
 				<a href='<s:url action="LoginPageAction" />'>Login</a>

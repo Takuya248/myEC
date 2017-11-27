@@ -109,7 +109,7 @@
 
 		<action name="UserAddressSelectAction" class="com.internousdev.myEC.action.UserAddressSelectAction" method="execute">
 			<result name="gotoAddInsert">addressEdit.jsp</result>
-			<result name="gotoPayment" type="redirectAction">PaymentConfirmAction</result>
+			<result name="gotoPayment">settlementSelect.jsp</result>
 			<result name="error">home.jsp</result>
 		</action>
 

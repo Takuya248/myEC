@@ -14,6 +14,7 @@ import com.internousdev.myEC.dao.PaymentGuestuserInfoDAO;
 import com.internousdev.myEC.dao.UserInfoDAO;
 import com.internousdev.myEC.dto.CartItemDTO;
 import com.internousdev.myEC.dto.ItemInfoDTO;
+import com.internousdev.myEC.dto.LoginDTO;
 import com.internousdev.myEC.dto.PaymentUserInfoDTO;
 import com.internousdev.myEC.dto.UserAddressDTO;
 import com.internousdev.myEC.dto.UserInfoDTO;
@@ -42,33 +43,35 @@ public class PaymentCompleteAction extends ActionSupport implements SessionAware
 	@SuppressWarnings("unchecked")
 	public String execute(){
 
-		int userId;
+		int userId = 0;
 
 
-		if(session.containsKey("loginFlg")){
+		if(session.containsKey("loginUser")){
+			if(((LoginDTO)session.get("loginUser")).getLoginFlg()){
 
-			userId = (int)session.get("userId");
+				userId = ((LoginDTO)session.get("loginUser")).getId();
 
-			paymentCompletedCartDAO.insetCartInfo(userId, dbUserCartListDAO.getDBCartList(userId),(String)session.get("howToPay"));
+				paymentCompletedCartDAO.insetCartInfo(userId, dbUserCartListDAO.getDBCartList(userId),(String)session.get("howToPay"));
 
-			UserInfoDAO userInfoDAO = new UserInfoDAO();
-			GetUserAddressInfoDAO getUserAddressInfoDAO = new GetUserAddressInfoDAO();
+				UserInfoDAO userInfoDAO = new UserInfoDAO();
+				GetUserAddressInfoDAO getUserAddressInfoDAO = new GetUserAddressInfoDAO();
 
-			UserInfoDTO userInfoDTO = userInfoDAO.getPaymentUserInfo((int)session.get("userId"));
-			UserAddressDTO userAddressDTO = getUserAddressInfoDAO.getAddressInfo((int)session.get("userId"));
+				UserInfoDTO userInfoDTO = userInfoDAO.getPaymentUserInfo(userId);
+				UserAddressDTO userAddressDTO = getUserAddressInfoDAO.getAddressInfo(userId);
 
-			paymentUserInfoDTO.setUserId((int)session.get("userId"));
-			paymentUserInfoDTO.setUserName(userInfoDTO.getUserName());
-			paymentUserInfoDTO.setUserMailAddress(userInfoDTO.getUserMailAddress());
-			paymentUserInfoDTO.setUserPhoneNumber(userAddressDTO.getPhoneNumber());
-			paymentUserInfoDTO.setState(userAddressDTO.getState());
-			paymentUserInfoDTO.setCity(userAddressDTO.getCity());
-			paymentUserInfoDTO.setStreet(userAddressDTO.getStreet());
-			paymentUserInfoDTO.setBuilding(userAddressDTO.getBuilding());
-			paymentUserInfoDTO.setZipCode(userAddressDTO.getZipCode());
-			paymentUserInfoDTO.setSelectedPayment((String)session.get("howToPay"));
+				paymentUserInfoDTO.setUserId(userId);
+				paymentUserInfoDTO.setUserName(userInfoDTO.getUserName());
+				paymentUserInfoDTO.setUserMailAddress(userInfoDTO.getUserMailAddress());
+				paymentUserInfoDTO.setUserPhoneNumber(userAddressDTO.getPhoneNumber());
+				paymentUserInfoDTO.setState(userAddressDTO.getState());
+				paymentUserInfoDTO.setCity(userAddressDTO.getCity());
+				paymentUserInfoDTO.setStreet(userAddressDTO.getStreet());
+				paymentUserInfoDTO.setBuilding(userAddressDTO.getBuilding());
+				paymentUserInfoDTO.setZipCode(userAddressDTO.getZipCode());
+				paymentUserInfoDTO.setSelectedPayment((String)session.get("howToPay"));
 
-
+				orderList = dbUserCartListDAO.getDBCartList(userId);
+			}
 
 		}else{
 			paymentUserInfoDTO = (PaymentUserInfoDTO)session.get("guestUserInfo");
@@ -77,9 +80,10 @@ public class PaymentCompleteAction extends ActionSupport implements SessionAware
 
 			paymentGuestuserInfoDAO.insertInfo(paymentUserInfoDTO);
 			paymentCompletedCartDAO.insetCartInfo(userId, (ArrayList<CartItemDTO>)session.get("cart"), (String)session.get("howToPay"));
+
+			orderList = getOrderListDAO.getOrderList(userId);
 		}
 
-		orderList = getOrderListDAO.getOrderList(userId);
 		itemInfoList = getCartItemInfoListDAO.getItemInfo(orderList);
 
 

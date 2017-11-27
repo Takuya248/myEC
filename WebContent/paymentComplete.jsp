@@ -74,18 +74,28 @@
 		</table>
 	</div>
 		<div class="itemInfoTable">
-				<s:iterator value="itemInfoList">
+
 					<table>
-						<tr>
-							<th>商品名</th>
-							<td><s:property value="itemName" /></td>
-							<th>価格</th>
-							<td><s:property value="itemPrice" /></td>
-							<th>在庫数</th>
-							<td><s:property value="cartItemStock" /></td>
-						</tr>
+						<s:iterator value="itemInfoList">
+							<tr>
+								<th>商品名</th>
+								<td><s:property value="itemName" /></td>
+								<th>価格</th>
+								<td><s:property value="itemPrice" /></td>
+								<th>注文数</th>
+								<td><s:property value="cartItemStack" /></td>
+							</tr>
+						</s:iterator>
 					</table>
-			</s:iterator>
+
+					<table>
+				<tr>
+					<th>カートの中身</th>
+					<td>合計<s:property value="cartInfoDTO.totalPrice" />円</td>
+					<td>アイテム数<s:property value="cartInfoDTO.totalItemStack" /></td>
+				</tr>
+			</table>
+
 		</div>
 
 		<a href='<s:url action="PaymentCompleteAction" />'><button>購入確定</button></a>
