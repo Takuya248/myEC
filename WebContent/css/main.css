@@ -126,5 +126,40 @@ header #login{
 	flex-direction: row;
 }
 
+.accordion label {
+	display: block;
+	margin: 5px 0px;
+	padding: 0.5em 1em;
+	background-color: #e0e0ff;
+	border-radius: 0.5em;
+	cursor: pointer;
+}
 
+.accordionbox input+label div {
+	opacity: 0;
+	padding: 0px 0px;
+	height: 0px;
+	font-weight: 100;
+	overflow: hidden;
+}
 
+.accordionbox input:checked+label div {
+	opacity: 1;
+	padding: 5px 0px;
+	height: auto;
+	font-weight: 700;
+}
+
+.accordionbox div {
+	transition: all 0.3s ease-out 0s;
+}
+
+#cardInfo{
+    width: auto;
+
+}
+
+#cardInfo select{
+	height: 26px;
+     line-height: 26px;
+}
