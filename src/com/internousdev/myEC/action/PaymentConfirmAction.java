@@ -58,11 +58,6 @@ public class PaymentConfirmAction extends ActionSupport implements SessionAware{
 				paymentUserInfoDTO.setSelectedPayment(howToPay);
 
 				session.put("howToPay", howToPay);
-				if(howToPay == "card"){
-
-					System.out.println(card);
-
-				}
 
 				cart = dbUserCartListDAO.getDBCartList(((LoginDTO)session.get("loginUser")).getId());
 

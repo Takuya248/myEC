@@ -11,7 +11,7 @@ import com.internousdev.myEC.util.DateUtil;
 
 public class PaymentCompletedCartDAO {
 
-	public void insetCartInfo(int userId, ArrayList<CartItemDTO> cart, String howToPay){
+	public void insetCartInfo(int userId, int orderId, ArrayList<CartItemDTO> cart, String howToPay){
 
 		DBConnector dbConnector = new DBConnector();
 		Connection connection = dbConnector.getConnection();
@@ -19,14 +19,15 @@ public class PaymentCompletedCartDAO {
 		try{
 			for(CartItemDTO cartItemDTO : cart){
 
-				String sql = "INSERT INTO order_list (user_id, item_id, item_count, select_payment, insert_date ) VALUES (?,?,?,?,?)";
+				String sql = "INSERT INTO order_list (user_id, order_id, item_id, item_count, select_payment, insert_date ) VALUES (?,?,?,?,?,?)";
 
 				PreparedStatement preparedStatement = connection.prepareStatement(sql);
-				preparedStatement.setInt(1, userId );
-				preparedStatement.setInt(2, cartItemDTO.getItemId());
-				preparedStatement.setInt(3, cartItemDTO.getItemCount());
-				preparedStatement.setString(4, howToPay);
-				preparedStatement.setString(5, dateUtil.getDate());
+				preparedStatement.setInt(1, userId);
+				preparedStatement.setInt(2, orderId);
+				preparedStatement.setInt(3, cartItemDTO.getItemId());
+				preparedStatement.setInt(4, cartItemDTO.getItemCount());
+				preparedStatement.setString(5, howToPay);
+				preparedStatement.setString(6, dateUtil.getDate());
 
 				preparedStatement.execute();
 			}

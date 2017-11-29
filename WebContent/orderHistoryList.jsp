@@ -1,10 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
-<%@ taglib prefix="s" uri="/struts-tags" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
 
 
 <!DOCTYPE html>
+
 <html>
+
 <head>
 <meta charset="utf-8">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -13,17 +15,18 @@
 <meta http-equiv="imagetoolbar" content="no" />
 <meta name="description" content="" />
 <meta name="keywords" content="" />
-<title>Mypage画面</title>
+<title>Home画面</title>
 
 <link href="css/main.css" rel="stylesheet" type="text/css">
+
 </head>
+
 <body>
-
-
+	<!--------------  ヘッダ  -------------->
 
 	<header>
 
-		<div id="logo"><a href='<s:url action="HomeAction" />'>logo</a></div>
+		<div id="logo">header</div>
 
 
 		<div class="space">
@@ -41,28 +44,19 @@
 		</div>
 	</header>
 
+
 	<!--------------  メイン  -------------->
 
+
 	<div id="main">
-		<div id="mypageUserInfo">
-			<table>
+
+		<table id="orderList">
+			<s:iterator value="orderHistoryList">
 				<tr>
-					<th>ユーザー名：</th>
-					<td><s:property value='session.loginUser.loginId' />さんのマイページ</td>
+					<th>注文番号</th><td><s:property value="orderId" /></td><th>注文日</th><td><s:property value="insertDate" /></td>
 				</tr>
-
-
-
-
-			</table>
-		</div>
-
-		<div id="mypageMenu">
-			<ul>
-                <li><a href='<s:url action="UserInfoAction" />'>ユーザー登録情報</a></li>
-                <li><a href='<s:url action="OrderHistoryListAction" />'>購入履歴</a></li>
-			</ul>
-		</div>
+			</s:iterator>
+		</table>
 
 	</div>
 
@@ -72,7 +66,10 @@
 
 	<footer>
 		<p>footer</p>
-	</footer>
+    </footer>
 
+
+	<!--------------  jsファイル  -------------->
+	<script type="text/javascript" src="script.js"></script>
 </body>
 </html>

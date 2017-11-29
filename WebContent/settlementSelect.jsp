@@ -57,12 +57,12 @@
 		<div class="accordionbox">
 			<s:form action="PaymentConfirmAction">
 			<div>
-				<input type="radio" name="howToPay" id="cardAccordion" checked>
-				<label for="cardAccordion">クレジットカード
+				<input type="radio" name="howToPay" id="card" value="card" checked>
+				<label for="card">クレジットカード
 					<div>
 						<table id="cardInfo">
 							<tr><th>名義</th><td><input type="text" name="cardName" pattern="^[A-Za-z]+$"></td></tr>
-							<tr><th>カード番号</th><td><input name="card" id="card" class="txt" type="text" minlength="12" maxlength="12" pattern="\d*" onblur="num_only1(this)" /></td></tr>
+							<tr><th>カード番号</th><td><input name="card" id="cardNum" class="txt" type="text" minlength="12" maxlength="12" pattern="\d*" onblur="num_only1(this)" /></td></tr>
 							<tr>
 								<th>有効期限</th>
 								<td>
@@ -98,8 +98,8 @@
 			</div>
 
 			<div>
-				<input type="radio" name="howToPay" id="cashAccordion">
-				<label for="cashAccordion">代引き</label>
+				<input type="radio" name="howToPay" id="cash" value="cash">
+				<label for="cash">代引き</label>
 			</div>
 			<s:submit value="決定" />
 			</s:form>

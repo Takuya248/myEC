@@ -51,7 +51,7 @@ public class PaymentCompleteAction extends ActionSupport implements SessionAware
 
 				userId = ((LoginDTO)session.get("loginUser")).getId();
 
-				paymentCompletedCartDAO.insetCartInfo(userId, dbUserCartListDAO.getDBCartList(userId),(String)session.get("howToPay"));
+				paymentCompletedCartDAO.insetCartInfo(userId, (int)(Math.random() * 1000), dbUserCartListDAO.getDBCartList(userId), (String)session.get("howToPay"));
 
 				UserInfoDAO userInfoDAO = new UserInfoDAO();
 				GetUserAddressInfoDAO getUserAddressInfoDAO = new GetUserAddressInfoDAO();
@@ -79,7 +79,7 @@ public class PaymentCompleteAction extends ActionSupport implements SessionAware
 			userId  = paymentUserInfoDTO.getUserId();
 
 			paymentGuestuserInfoDAO.insertInfo(paymentUserInfoDTO);
-			paymentCompletedCartDAO.insetCartInfo(userId, (ArrayList<CartItemDTO>)session.get("cart"), (String)session.get("howToPay"));
+			paymentCompletedCartDAO.insetCartInfo(userId, (int)(Math.random() * 1000), (ArrayList<CartItemDTO>)session.get("cart"), (String)session.get("howToPay"));
 
 			orderList = getOrderListDAO.getOrderList(userId);
 		}

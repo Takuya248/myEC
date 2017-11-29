@@ -137,7 +137,9 @@
 			<result name="success">home.jsp</result>
 		</action>
 
-
+		<action name="OrderHistoryListAction" class="com.internousdev.myEC.action.OrderHistoryListAction" method="execute">
+			<result name="success">orderHistoryList.jsp</result>
+		</action>
 
 
 

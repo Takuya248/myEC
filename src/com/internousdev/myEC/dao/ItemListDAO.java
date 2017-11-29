@@ -38,6 +38,8 @@ public class ItemListDAO{
 				itemList.add(itemInfoDTO);
 			}
 
+			connection.close();
+
 		}catch(SQLException e){
 			e.printStackTrace();
 

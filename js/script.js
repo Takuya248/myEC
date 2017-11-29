@@ -1,7 +1,7 @@
 function num_only1(str){
 var wnum = str.value;
 // 数値以外の入力消去
-document.getElementById("card").value=wnum.replace(/[^\d-.]/g,'');
+document.getElementById("cardNum").value=wnum.replace(/[^\d-.]/g,'');
 return(str);
 }
 
