@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.internousdev.myEC.dao.DBUserCartListDAO;
+import com.internousdev.myEC.dao.DeleteDBCartDateDAO;
 import com.internousdev.myEC.dao.GetCartItemInfoListDAO;
 import com.internousdev.myEC.dao.GetOrderListDAO;
 import com.internousdev.myEC.dao.GetUserAddressInfoDAO;
@@ -43,6 +44,8 @@ public class PaymentCompleteAction extends ActionSupport implements SessionAware
 	@SuppressWarnings("unchecked")
 	public String execute(){
 
+		DeleteDBCartDateDAO deleteDBCartDateDAO = new DeleteDBCartDateDAO();
+
 		int userId = 0;
 
 
@@ -71,6 +74,8 @@ public class PaymentCompleteAction extends ActionSupport implements SessionAware
 				paymentUserInfoDTO.setSelectedPayment((String)session.get("howToPay"));
 
 				orderList = dbUserCartListDAO.getDBCartList(userId);
+
+				deleteDBCartDateDAO.deleteDBCartdata(userId);
 			}
 
 		}else{
@@ -82,6 +87,8 @@ public class PaymentCompleteAction extends ActionSupport implements SessionAware
 			paymentCompletedCartDAO.insetCartInfo(userId, (int)(Math.random() * 1000), (ArrayList<CartItemDTO>)session.get("cart"), (String)session.get("howToPay"));
 
 			orderList = getOrderListDAO.getOrderList(userId);
+
+			session.remove("cart");
 		}
 
 		itemInfoList = getCartItemInfoListDAO.getItemInfo(orderList);

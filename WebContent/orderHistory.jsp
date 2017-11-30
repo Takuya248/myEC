@@ -32,14 +32,16 @@
 			<!-- スペース -->
 		</div>
 
-		<div id="login">
-			<s:if test='session.loginUser.loginFlg'>
-				<a href='<s:url action="MypageAction" />'>マイページ</a>
-				<a href='<s:url action="LogoutAction" />'>ログアウト</a>
-			</s:if>
-			<s:else>
-				<a href='<s:url action="LoginPageAction" />'>Login</a>
-			</s:else>
+		<div class="menuList">
+			<ul>
+				<s:if test='session.loginUser.loginFlg'>
+					<li><a href='<s:url action="MypageAction" />'>マイページ</a></li>
+					<li><a href='<s:url action="LogoutAction" />'>ログアウト</a></li>
+				</s:if>
+				<s:else>
+					<li><a href='<s:url action="LoginPageAction" />'>Login</a></li>
+				</s:else>
+			</ul>
 		</div>
 	</header>
 
@@ -60,12 +62,10 @@
 							<th>注文数</th><td><s:property value="itemCount" /></td>
 							<th>購入日</th><td><s:property value="insertDate" /></td>
 							<th>決済方法</th><td><s:property value="selectPayment" /></td>
-
 						</tr>
-
-
 					</s:iterator>
 					</table>
+					<a href='<s:url action="OrderHistoryListAction" />'><button>戻る</button></a>
 				</td>
 			</tr>
 		</table>

@@ -32,11 +32,22 @@ public class OrderHistoryListAction extends ActionSupport implements SessionAwar
 			if(orderListDTO.getOrderId() == lastOrderId){
 
 				lastOrderId = orderListDTO.getOrderId();
+
+
 			}else{
 				orderHistoryList.add(orderListDTO);
 				lastOrderId = orderListDTO.getOrderId();
 			}
 
+		}
+
+		for(OrderListDTO orderListDTO: orderHistoryList){
+
+			String yyyy = orderListDTO.getInsertDate().substring(0, 4);
+			String mm = orderListDTO.getInsertDate().substring(4, 6);
+			String dd = orderListDTO.getInsertDate().substring(6, 8);
+
+			orderListDTO.setInsertDate(yyyy + "年" + mm + "月" + dd + "日");
 		}
 
 

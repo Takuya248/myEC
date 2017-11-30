@@ -25,6 +25,7 @@ public class GetUserAddressInfoDAO {
 			ResultSet resultSet = preparedStatement.executeQuery();
 
 			if(resultSet.next()){
+				userAddressDTO.setPhoneNumber(resultSet.getString("phone_number"));
 				userAddressDTO.setState(resultSet.getString("state"));
 				userAddressDTO.setCity(resultSet.getString("city"));
 				userAddressDTO.setStreet(resultSet.getString("street"));

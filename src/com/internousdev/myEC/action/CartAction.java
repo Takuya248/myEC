@@ -106,6 +106,7 @@ public class CartAction extends ActionSupport implements SessionAware{
 		itemInfoList = getCartItemInfoList.getItemInfo(cart);
 		cartInfoDTO = cartItemCount.itemCount(itemInfoList);
 
+
 		String result = SUCCESS;
 		return result;
 
@@ -163,6 +164,10 @@ public class CartAction extends ActionSupport implements SessionAware{
 	public void setItemInfoList(ArrayList<ItemInfoDTO> itemInfoList) {
 		this.itemInfoList = itemInfoList;
 	}
+
+
+
+
 
 
 }

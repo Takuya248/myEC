@@ -32,6 +32,11 @@ public class AddressInsertAction extends ActionSupport implements SessionAware{
 		case "addSelect":
 			result = "gotoPayment";
 			break;
+
+		case "cart":
+			result = "gotoPayment";
+			break;
+			
 		default :
 			result = SUCCESS;
 			break;

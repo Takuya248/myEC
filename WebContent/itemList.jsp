@@ -46,13 +46,29 @@
 
 
 	<div id="main">
-<div id="itemList">
 
 
+
+
+
+	<div id="itemList">
+		<form action="ItemListPageAction" method="POST">
+			カテゴリー検索
+			<select name="category">
+				<option value="all">全て</option>
+				<option value="rod">ロッド</option>
+				<option value="reel">リール</option>
+				<option value="lure">ルアー</option>
+				<option value="line">糸</option>
+			</select>
+			<input type="submit" value="決定" />
+		</form>
+		<div id="itemInfo">
 		<s:iterator value="itemInfoList" status="itemInfoListSt">
 
 			<s:if test="#itemInfoListSt.odd">
 				<div id="itemInfoValueOdd">
+
 					<table>
 						<tr>
 							<th>商品名</th>
@@ -77,14 +93,14 @@
 							<td><s:property value="itemPrice" /></td>
 							<th>在庫数</th>
 							<td><s:property value="itemStock" /></td>
-							<td><s:form action="CartAction"><s:hidden name="buyItemId" value="%{itemId}" /><s:submit value="カートに入れる" /></s:form></td>
+							<td><div><s:form action="CartAction"><s:hidden name="buyItemId" value="%{itemId}" /><s:submit value="カートに入れる" /></s:form></div></td>
 						</tr>
 					</table>
 				</div>
 			</s:else>
 
 		</s:iterator>
-
+		</div>
 </div>
 
 	</div>

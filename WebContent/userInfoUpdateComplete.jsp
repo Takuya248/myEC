@@ -30,6 +30,18 @@
 
 		<div class="space"><!-- スペース --></div>
 
+		<div class="menuList">
+			<ul>
+				<s:if test='session.loginUser.loginFlg'>
+					<li><a href='<s:url action="MypageAction" />'>マイページ</a></li>
+					<li><a href='<s:url action="LogoutAction" />'>ログアウト</a></li>
+				</s:if>
+				<s:else>
+					<li><a href='<s:url action="LoginPageAction" />'>Login</a></li>
+				</s:else>
+			</ul>
+		</div>
+
 	</header>
 
 

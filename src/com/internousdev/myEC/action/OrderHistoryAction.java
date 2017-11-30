@@ -14,6 +14,7 @@ import com.opensymphony.xwork2.ActionSupport;
 public class OrderHistoryAction extends ActionSupport implements SessionAware{
 
 	public Map<String, Object> session;
+	public String selectOrderId;
 
 	public ArrayList<OrderListDTO> orderItemInfoList = new ArrayList<OrderListDTO>();
 
@@ -24,7 +25,7 @@ public class OrderHistoryAction extends ActionSupport implements SessionAware{
 		GetOrderHistoryDAO getOrderHistoryDAO = new GetOrderHistoryDAO();
 		GetOrderItemInfoListDAO getOrderItemInfoListDAO = new GetOrderItemInfoListDAO();
 
-		orderList = getOrderHistoryDAO.getOrderList(((LoginDTO)session.get("loginUser")).getId());
+		orderList = getOrderHistoryDAO.getOrderInfo(((LoginDTO)session.get("loginUser")).getId(), Integer.parseInt(selectOrderId));
 		orderItemInfoList = getOrderItemInfoListDAO.getItemInfo(orderList);
 
 
@@ -54,6 +55,24 @@ public class OrderHistoryAction extends ActionSupport implements SessionAware{
 	public void setOrderItemInfoList(ArrayList<OrderListDTO> orderItemInfoList) {
 		this.orderItemInfoList = orderItemInfoList;
 	}
+
+
+
+
+	public String getSelectOrderId() {
+		return selectOrderId;
+	}
+
+
+
+
+	public void setSelectOrderId(String selectOrderId) {
+		this.selectOrderId = selectOrderId;
+	}
+
+
+
+
 
 
 

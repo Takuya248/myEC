@@ -43,8 +43,6 @@ header #logo{
 
 header #login{
 	margin-rihgt: auto;
-    width: 50px;
-    background-color: lightgrey;
 }
 
 
@@ -57,12 +55,111 @@ header #login{
 	flex-direction: column;
 }
 
-#first{
+.menuList{
+	width: 150px;
+	height: 50px;
+
+	background-color: lightgrey;
+}
+
+.menuList ul{
+	margin: 0;
+	padding: 0;
+	width: 150px;
+	height: auto;
+
+	list-style:none;
+}
+
+.menuList li{
+	width: auto;
+	height: auto;
+    background-color: lightgrey;
+}
+
+.menuList a{
+	width: 100%;
+	height: 100%;
+	color: black;
+
+	display: block;
+
+	text-decoration:none;
+}
+
+.menuList a :link{
+	color: black;
+	text-decoration:none;
+}
+
+.menuList a :visted{
+	color: black;
+	text-decoration:none;
+}
+
+.menuList a :hover{
+	color: black;
+	text-decoration:none;
+}
+
+.menuList a :active{
+	color: black;
+	text-decoration:none;
+}
+
+
+
+.menuList li:hover{
+	background-color: #80ffff;
+}
+
+#orderList ul{
+	list-style:none;
+}
+
+#orderList a{
+	width: 100%;
+	height: 100%;
+	color: black;
+
+	display: block;
+
+
+	text-decoration:none;
+}
+
+#orderList a :hover{
+	color: black;
+	text-decoration:none;
 
 }
 
-#second{
+#orderList a :link{
+	color: black;
+	text-decoration:none;
 
+}
+
+#orderList a :visited{
+	color: black;
+	text-decoration:none;
+
+}
+
+#orderList a :active{
+	color: black;
+	text-decoration:none;
+
+}
+
+#orderList :hover{
+	background-color: #80ffff;
+}
+
+
+.title{
+	font-weight: bold;
+	font-size: 13px;
 }
 
 
@@ -71,6 +168,17 @@ header #login{
     flex-direction: column;
 }
 
+#itemInfo tr th{
+	width: 70px;
+}
+
+#itemInfo tr td{
+	width: 130px;
+}
+
+#itemInfo tr td :last-child{
+	width: 110px;
+}
 
 #form ul{
 	list-style: none;
@@ -115,9 +223,6 @@ header #login{
 #itemInfoValueOdd{
 
 }
-
-
-
 
 
 
@@ -167,4 +272,11 @@ header #login{
 #cardInfo select{
 	height: 26px;
      line-height: 26px;
+}
+
+
+.orderList table{
+	width: 100px;
+	height: 300px;
+
 }

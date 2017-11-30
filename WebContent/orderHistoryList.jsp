@@ -33,14 +33,16 @@
 			<!-- スペース -->
 		</div>
 
-		<div id="login">
-			<s:if test='session.loginUser.loginFlg'>
-				<a href='<s:url action="MypageAction" />'>マイページ</a>
-				<a href='<s:url action="LogoutAction" />'>ログアウト</a>
-			</s:if>
-			<s:else>
-				<a href='<s:url action="LoginPageAction" />'>Login</a>
-			</s:else>
+		<div class="menuList">
+			<ul>
+				<s:if test='session.loginUser.loginFlg'>
+					<li><a href='<s:url action="MypageAction" />'>マイページ</a></li>
+					<li><a href='<s:url action="LogoutAction" />'>ログアウト</a></li>
+				</s:if>
+				<s:else>
+					<li><a href='<s:url action="LoginPageAction" />'>Login</a></li>
+				</s:else>
+			</ul>
 		</div>
 	</header>
 
@@ -51,10 +53,25 @@
 	<div id="main">
 
 		<table id="orderList">
-			<s:iterator value="orderHistoryList">
+			<thead>
 				<tr>
-					<th>注文番号</th><td><s:property value="orderId" /></td><th>注文日</th><td><s:property value="insertDate" /></td>
+					<th>購入履歴</th>
 				</tr>
+			</thead>
+			<s:iterator value="orderHistoryList">
+
+				<tbody>
+					<tr>
+						<td>
+						<s:form action="OrderHistoryAction">
+							注文番号:<s:property value="orderId" /><br>
+							注文日:<s:property value="insertDate" />
+							<s:hidden name="selectOrderId" value="%{orderId}" />
+							<s:submit value="詳細" />
+						</s:form>
+						</td>
+					</tr>
+				</tbody>
 			</s:iterator>
 		</table>
 

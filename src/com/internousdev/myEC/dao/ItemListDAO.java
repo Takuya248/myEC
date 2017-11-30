@@ -49,4 +49,42 @@ public class ItemListDAO{
 	}
 
 
+
+	public ArrayList<ItemInfoDTO> getItemInfo(){
+
+		DBConnector dbConnector = new DBConnector();
+		Connection connection = dbConnector.getConnection();
+		ArrayList<ItemInfoDTO> itemList = new ArrayList<ItemInfoDTO>();
+
+		try{
+			String sql = "SELECT * FROM item_info";
+
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			ResultSet resultSet = preparedStatement.executeQuery();
+
+			while(resultSet.next()){
+				ItemInfoDTO itemInfoDTO = new ItemInfoDTO();
+
+
+
+				itemInfoDTO.setItemId(resultSet.getInt("id"));
+				itemInfoDTO.setCategoryId(resultSet.getString("category_id"));
+				itemInfoDTO.setItemName(resultSet.getString("item_name"));
+				itemInfoDTO.setItemPrice(resultSet.getInt("item_price"));
+				itemInfoDTO.setItemStock(resultSet.getInt("item_stock"));
+
+				itemList.add(itemInfoDTO);
+			}
+
+			connection.close();
+
+		}catch(SQLException e){
+			e.printStackTrace();
+
+		}
+		return itemList;
+
+	}
+
+
 }

@@ -1,12 +1,15 @@
 package com.internousdev.myEC.action;
 
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
 
+import com.internousdev.myEC.dao.DBUserCartListDAO;
 import com.internousdev.myEC.dao.LoginDAO;
 import com.internousdev.myEC.dao.UserInfoInsertDAO;
+import com.internousdev.myEC.dto.CartItemDTO;
 import com.internousdev.myEC.dto.LoginDTO;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -23,6 +26,7 @@ public class UserInfoInsertAction extends ActionSupport implements SessionAware{
 	public String mailAddress;
 	public String submit;
 
+	@SuppressWarnings("unchecked")
 	public String execute(){
 
 		String result = "gotoMypage";
@@ -42,7 +46,36 @@ public class UserInfoInsertAction extends ActionSupport implements SessionAware{
 
 			if((String)session.get("pageTransition") == "cart"){
 				result = "gotoPayment";
-				session.put("pageTransition", "settlement");
+				session.put("pageTransition", "cart");
+
+				if(session.containsKey("cart")){
+					DBUserCartListDAO dbUserCartListDAO = new DBUserCartListDAO();
+					ArrayList<CartItemDTO> sessionCart = new ArrayList<CartItemDTO>();
+					ArrayList<CartItemDTO> dbCartList = null;
+
+					sessionCart = (ArrayList<CartItemDTO>)session.get("cart");
+					dbCartList = dbUserCartListDAO.getDBCartList(loginDTO.getId());
+
+					for(CartItemDTO sessionCartItemDTO : sessionCart){
+						boolean addResult = false;
+
+						for(CartItemDTO dbCartItemDTO : dbCartList){
+							if(sessionCartItemDTO.getItemId() == dbCartItemDTO.getItemId()){
+
+								dbCartItemDTO.setItemCount(dbCartItemDTO.getItemCount() + sessionCartItemDTO.getItemCount());
+								dbUserCartListDAO.updateCartData(dbCartItemDTO, loginDTO.getId());
+
+								addResult = true;
+							}
+						}
+
+						if(!addResult){
+							dbUserCartListDAO.insertCartData(sessionCartItemDTO, loginDTO.getId());
+
+						}
+					}
+				}
+
 			}
 
 			break;

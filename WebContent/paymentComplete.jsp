@@ -31,13 +31,16 @@
 			<!-- スペース -->
 		</div>
 
-		<div id="login">
-			<s:if test='session.get("loginFlg") == true'>
-				<a href='<s:url action="MypageAction" />'>マイページ</a>
-			</s:if>
-			<s:else>
-				<a href='<s:url action="LoginPageAction" />'>Login</a>
-			</s:else>
+		<div class="menuList">
+			<ul>
+				<s:if test='session.loginUser.loginFlg'>
+					<li><a href='<s:url action="MypageAction" />'>マイページ</a></li>
+					<li><a href='<s:url action="LogoutAction" />'>ログアウト</a></li>
+				</s:if>
+				<s:else>
+					<li><a href='<s:url action="LoginPageAction" />'>Login</a></li>
+				</s:else>
+			</ul>
 		</div>
 	</header>
 　
@@ -74,7 +77,7 @@
 		</table>
 	</div>
 		<div class="itemInfoTable">
-
+			カートの中身
 					<table>
 						<s:iterator value="itemInfoList">
 							<tr>
@@ -86,11 +89,9 @@
 								<td><s:property value="cartItemStack" /></td>
 							</tr>
 						</s:iterator>
-					</table>
 
-					<table>
+
 				<tr>
-					<th>カートの中身</th>
 					<td>合計<s:property value="cartInfoDTO.totalPrice" />円</td>
 					<td>アイテム数<s:property value="cartInfoDTO.totalItemStack" /></td>
 				</tr>

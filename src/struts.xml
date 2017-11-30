@@ -141,6 +141,10 @@
 			<result name="success">orderHistoryList.jsp</result>
 		</action>
 
+		<action name="OrderHistoryAction" class="com.internousdev.myEC.action.OrderHistoryAction" method="execute">
+			<result name="success">orderHistory.jsp</result>
+		</action>
+
 
 
 	</package>

@@ -23,13 +23,23 @@ public class ItemListPageAction extends ActionSupport implements SessionAware{
 
 		ArrayList<ItemInfoDTO> itemDTOList = new ArrayList<ItemInfoDTO>();
 
-		category="rod";
-		itemDTOList = itemListDAO.getItemInfo(category);
 
-		for(ItemInfoDTO  itemInfoDTO : itemDTOList){
-			itemInfoList.add(itemInfoDTO);
+		if(category.equals("all")){
+			itemDTOList = itemListDAO.getItemInfo();
 
+			for(ItemInfoDTO  itemInfoDTO : itemDTOList){
+				itemInfoList.add(itemInfoDTO);
+			}
+
+		}else{
+			itemDTOList = itemListDAO.getItemInfo(category);
+
+			for(ItemInfoDTO  itemInfoDTO : itemDTOList){
+				itemInfoList.add(itemInfoDTO);
+			}
 		}
+
+
 
 	String result = SUCCESS;
 
